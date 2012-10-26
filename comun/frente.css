@@ -1,0 +1,133 @@
+/*
+	COLORES
+	Naranja fuerte: #D50C08
+	Marron titulo h2: #5C1D01
+	Naranja Tabla: #5C1D01
+	Naranja suave fondo: #FEFFF1
+	Azul 1: #131DA9
+	--
+    RESET
+*/
+* { margin: 0; padding: 0; }
+.clear { clear: both; }
+img, a img { border: none; }
+input { outline: 0; }
+/*
+    STRUCTURE
+*/
+body { font: 14px/1.1 Helvetica, Sans-Serif;  }
+#page-wrap { width: 780px; margin: 6px auto 50px; position: relative; }
+hr { height: 1px; background: #ccc; clear: both; margin: 20px 0; border: none; display: block; }
+#contenedor-de-lote {padding-top: 25px;}
+/*
+    CARTELERA
+*/
+#logocartelera {height: 250px; margin-top: 6px;margin: 0; background-image: url(../images/logocartelera.jpg);}
+#bipher {float: right; position: relative; width: 270px; padding: 5px; padding-right: 0; -moz-border-radius: 10px; -webkit-border-radius: 10px; margin-top: 10px; margin-right: 10px;}
+#subastaahora {text-align: center; border: 5px solid #5CBE00; background-color: #FFFFFF; padding: 10px 10px 10px 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; position: relative; display: block; margin-top: 10px;}
+#buscalote {width: 270px; float: left; position: relative; margin-top: 10px; text-align: center; }
+#buscaloteinterior {padding: 10px; border: 0px solid #D50C08; background-color: #FFF ; -moz-border-radius: 10px; -webkit-border-radius: 10px;}
+#proximosremates {width: 480px; float: right; position: relative; margin-top: 10px; text-align: center; }
+#proximorematetitulo {width: 480px; height: 20px; background-image: url(../images/proximosremates.png); background-repeat: no-repeat;}
+#subastapasada {text-align: left; border: 2px solid #008F7D; background-color: #F3F6FB; padding: 10px 20px 10px 50px; -moz-border-radius: 10px; -webkit-border-radius: 10px; display: block; position: relative; margin-top: 10px;}
+#botonfiltrarlotes {}
+#botonfiltrarlotes2 {}
+/*
+Si bipher fuera semitransparente
+#bipher {opacity: 0.5;}
+#bipher {filter: alpha(opacity=50);}
+	CLASES
+*/
+.logotipo {height: 70px; width: 270px;}
+.verlotes {float: left; height: 70px;}
+.sinborde {border: none;}
+.desplazarpoco {padding-left: 5px;}
+.izquierda {float: left;}
+.derecha {float: right;}
+.centrado {text-align: center;}
+.vercatalogo {font-size: 1.2em; align: right; padding-right: 0px;}
+.sindecorar {font-size: 1.2em; color: black; border-bottom: none;}
+.fechagrande {float: right; font-size: 20px; font-weight: 800; color: #D50C08; border-bottom: none; text-align: center; width: 110px;}
+.button { background: url(../images/button-bg.png) repeat-x; -moz-border-radius: 5px; padding: 6px 12px; border: none; color: white; cursor: pointer; text-shadow: 0 1px 1px #666; -webkit-border-radius: 5px; -webkit-box-shadow: 0 1px 3px #999; font: bold 16px Helvetica; margin-top: 8px;}
+.button:hover { background-position: bottom left; }
+.red { background: red; color: white; font-size: 12px; padding: 3px; }
+.avisos {width: 270px; border: 1px solid black; margin-top: 10px;}
+.despublicado {width: 96%; border: 2px solid #5CBE00; background-color: #F2FEF2; padding: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; float: left; position: relative; margin-top: 10px; text-align: center;}
+.televisado {width: 96%; border: 1px solid #008F7D; background-color: #F3F6FB; padding: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; float: right; position: relative; margin-top: 10px; text-align: center;}
+/*
+    TYPOGRAPHY
+*/
+a  { text-decoration: none; color: #900; border-bottom: 1px dotted #900; outline: none; }
+h1 { font: bold 34px Helvetica, Sans-Serif; margin: 0 0 8px 0; }
+h2 { font: bold 18px Helvetica, Sans-Serif; margin: 0 0 0 0; color: #5C1D01;} /*Marron*/
+h3 { font: bold 14px Helvetica, Sans-Serif; margin: 0 0 6px 0; color: #5C1D01;}
+p { margin: 0 0 6px 0; font: 16px/1.3 Helvetica, Sans-Serif;} 
+/*
+    HEADER
+*/
+#header { height: 68px; position: relative; }
+#header h1 { position: absolute; top: 0; left: 0; z-index: 2; text-indent: -9999px; overflow: hidden; }
+#header h1 a { display: block; text-indent: -9999px; width: 200px; height: 38px; border: none; }
+#control { width: 500px; float: right; padding: 10px 237px 0 0; text-align: right; }
+/*
+    TABLA
+*/
+table.ensayo {border: 1px solid #ccc; width: 100%; margin-top: 0;}
+table.ensayo tbody tr.principal th {font: bold .9em/1.5em Tahoma, Arial, sans-serif; color: #fff; background: #DC4503; text-align: left; padding: 5px; border: 0;}
+table.ensayo tbody tr.etapas th {font: bold .9em/1.5em Tahoma, Arial, sans-serif; color: #fff; background: #DC4503; text-align: left; padding: 2px; border-top: 1px solid #eee;}
+table.ensayo tbody td {font: .9em/1.5em Tahoma, Arial, sans-serif; color: #000; background: #fff; text-align: left; padding: 2px; border-top: 1px dotted #eee; }
+table.ensayo tbody th {font: bold .9em/1.5em Tahoma, Arial, sans-serif; color: #DC4503; background: #FEFFF1; text-align: center; padding: 2px; border-top: 1px solid #eee; }
+/*
+    FOTOS Y OBJETOS
+*/
+#fotos {padding-top: 60px; width: 360px; float: left;}
+ul#galeria {overflow: hidden; zoom: 1; list-style: none;}
+ul#galeria li {width: 180px; height: 130px; float: left;}
+ul#galeria li img {width: 160px; height: 120px;}
+ul#galeria li a {border-bottom: none;}
+#datalote {float: left; border: 0px solid #008F7D; background-color: #F3F6FB; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 10px; margin-top: 22px;}
+#datalote ul {list-style-type: square; font: 16px/1.3 Helvetica, Sans-Serif; display: inline;}
+#datalote ul li {width: 370px; margin-left: 22px;}
+#mapa {float: left; border: 1px solid #008F7D; margin-left: 18px;}
+#videolote {float: left; border: 1px solid #008F7D;}
+#certificador {text-align: right;}
+#certificador p {}
+#certificador img {}
+#datosubasta { width: 400px; }
+.guarda {background: url(../images/guarda.png) no-repeat top;}
+/*
+    LISTS
+*/
+.tabular { list-style-type: square; margin-left: 4em;font: 16px/1.3 Helvetica, Sans-Serif; display: inline; position: relative;} 
+/*
+    FORM STUFF
+*/
+.selec {width: 200px;}
+label { background: #999; color: white; padding: 3px;}
+select {width: 240px; position: relative; margin-top: 6px;}
+input[type="text"], input[type="password"] { width: 324px; border: 3px solid #999; font-size: 18px; padding: 7px; display: block; }                   
+#add-new input[type="text"] { width: 532px; float: left; margin: 0 10px 0 69px; }
+#add-new input[type="text"]:focus { border-color: #73B8BF; }
+#add-new input[type="submit"] { padding: 10px 12px; }
+ul#list li span input[style] { width: 90% !important; }
+/*
+    MESSAGING
+*/
+.message { padding: 10px; margin: 0 0 10px 0; width: 607px; }
+.good { background: #9ff5b6; }
+.bad { color: #ef0040; }
+/*
+    SIDEBAR
+*/
+#ribbon { position: absolute; right: 0; width: 125px; padding: 60px 30px 0 47px; height: 756px; top: -6px; background: url(../images/ribbon-bg.png) no-repeat; }
+#ribbon h4 { text-align: center; font: italic 20px Baskerville, Georgia, Serif; margin: 0 0 5px 0; }
+#ribbon ul { list-style: none; }
+#ribbon ul li { background: rgb(0,0,0); background: rgba(0,0,0,0.5); color: white; padding: 5px; margin: 0 0 5px 0; font-size: 12px; }
+/*
+	AUTOCOMPLETAR
+*/
+#autocompleteLocalidad
+#divat
+div.autocompletar {position: absolute; width: 250px; background-color: white; border: 1px solid #888; margin: 0; padding: 0; }
+div.autocompletar ul {list-style-type: none; margin: 0; padding: 0;}
+div.autocompletar ul li {list-style-type: none; display: block; margin: 0; padding: 2px; height: 24px; cursor: pointer; }
