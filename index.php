@@ -4,27 +4,27 @@ include_once 'inc/class.publico.inc.php';
 htmlDoc();
 ?>
 <html <?php xm();?>>
-<head>    
+<head>
 <?php headPublico();?>
 </head>
 <body>
     <div id="page-wrap">
         <div class="clear"></div>
         <div id="logocartelera">
-            <div id="bipher" class="centrado">    
+            <div id="bipher" class="centrado">
     <form method="post" action="res-lotes.php" id="filtrarlotes">
                 <div>
-        <input type="hidden" name="action" value="ver" />        
+        <input type="hidden" name="action" value="ver" />
         <?php include 'comun/categorias-select.php'; ?>
-            <br/>     
+            <br/>
         <select id="provincia" name="provincia">
             <option>Cargando...</option>
         </select>
-            <br/>       
+            <br/>
         <select id="municipio" name="municipio">
             <option>Seleccione una Localidad</option>
         </select>
-            <br />          
+            <br />
         <select id="radio" name="radio">
             <option value="150">Buscar en 150 km de radio</option>
             <option value="250">Buscar en 250 km de radio</option>
@@ -52,7 +52,7 @@ comienzan LOS BANNERS DE PUBLICIDAD
 </div>
 <!-- Comienza la columna de Próximos remates -->
         <div id="proximosremates">
-<?php 
+<?php
 $ca2 = new BipherPublico($db);
 $ca2->ventaCatalogo(2);
 $ca1 = new BipherPublico($db);
