@@ -1,6 +1,7 @@
 <?php
 include_once 'comun/publico.php';
 //include_once 'inc/class.publico.inc.php';
+//comentario
 ?>
 <html>
 <head>
