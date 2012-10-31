@@ -1,14 +1,14 @@
 <?php
 /**
- * Interacción de los usuarios con la aplicacion
+ * Interacción de los usuarios públicos con la aplicacion
  */
 class BipherPublico
 {
-    /** 
+    /**
     * The database object
     * @var object
     */
-    private $_db;    
+    private $_db;
     /**
     * Chequea un database object y lo crea si no lo encuentra
     * @param object $db
@@ -16,7 +16,7 @@ class BipherPublico
     */
     public function __construct($db=NULL)
     {
-        if(is_object($db)) 
+        if(is_object($db))
         {
             $this->_db = $db;
         }
@@ -31,23 +31,23 @@ class BipherPublico
 */
     public function listaRemates()
     {
-        $sql = "SELECT remate_id, fecha_re, organizador, status_re FROM remates WHERE fecha_re > DATE_ADD(CURDATE(), INTERVAL -300 DAY) ORDER BY fecha_re DESC;";    
+        $sql = "SELECT remate_id, fecha_re, organizador, status_re FROM remates WHERE fecha_re > DATE_ADD(CURDATE(), INTERVAL -300 DAY) ORDER BY fecha_re DESC;";
     try {
         $stmt = $this->_db->prepare($sql);
-        $stmt->execute();        
+        $stmt->execute();
         echo '<table class="ensayo" summary="Remates de hacienda cargados en Bipher" cellspacing="0">';
-        echo '<tbody>'; 
+        echo '<tbody>';
         echo '<tr class="principal">';
-        echo '<th>ID</th><th>Fecha</th><th>Organizador</th><th>&Aacute;mbito de Publicaci&oacute;n</th><th></th><th></th><th></th><th></th>';   
+        echo '<th>ID</th><th>Fecha</th><th>Organizador</th><th>&Aacute;mbito de Publicaci&oacute;n</th><th></th><th></th><th></th><th></th>';
         echo '</tr>';
-        echo '<tr>';        
+        echo '<tr>';
         while($row = $stmt->fetch()) {
             $rid = $row['remate_id'];
             $fecha = $row['fecha_re'];
             $orga = $row['organizador'];
-            $stat = $row['status_re'];                
+            $stat = $row['status_re'];
             echo "<tr>";
-            echo "<td>" .$rid."</td>";          
+            echo "<td>" .$rid."</td>";
             echo "<td>" .$fecha."</td>";
             echo "<td>" .$orga."</td>";
             echo "<td>" .$stat."</td>";
@@ -55,14 +55,14 @@ class BipherPublico
             echo '<td><a href="eliminaremate.php?subasta='.$rid.'">Borrar</a></td>';
             echo '<td><a href="c-editar.php?subasta='.$rid.'">Cat&aacute;logo</a></td>';
             echo '<td><a href="nuevolote.php?subasta='.$rid.'&lote=nuevo">Lotes</a></td>';
-            echo "</tr>";               
+            echo "</tr>";
         }
-        echo "<table>";        
-        $stmt->closeCursor();       
+        echo "<table>";
+        $stmt->closeCursor();
     }
     catch(PDOException $e)
         {
-            print_r($e->getMessage());        
+            print_r($e->getMessage());
         }
     }
 /*
@@ -84,21 +84,21 @@ class BipherPublico
             $stmt->execute();
             foreach ($stmt as $row) {
                 $long = $row['longitud'];
-                $lato = $row['latitud'];                            
+                $lato = $row['latitud'];
                 echo '<ul class="tabular"><li>Punto de Referencia: <strong>' .$row['localidad'].'</strong></li>';
                 echo '<li>Categor&iacute;a buscada: <strong>'.$row['categoria'].'</strong></li>';
                 if ($radio == 4000) {
-                    echo '<li>Radio de b&uacute;squeda: <strong>Todo el pa&iacute;s</strong></li>';             
+                    echo '<li>Radio de b&uacute;squeda: <strong>Todo el pa&iacute;s</strong></li>';
                 } else {
-                    echo '<li>Radio de b&uacute;squeda: <strong>'.$radio.' km.</strong></li>';    
-                }               
+                    echo '<li>Radio de b&uacute;squeda: <strong>'.$radio.' km.</strong></li>';
+                }
                 echo '</ul>';
-            }            
+            }
             $stmt->closeCursor();
         }
         catch(PDOException $e)
         {
-            return $e->getMessage();        
+            return $e->getMessage();
         }
         //recuperar localidades en km de radio
         switch($radio) {
@@ -116,9 +116,9 @@ class BipherPublico
             break;
             default:
         $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE localidad_lo = localidad_id AND categoria_lo = :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
-            break;               
-        }        
-            $stmt = $this->_db->prepare($sql); 
+            break;
+        }
+            $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
             $stmt->execute();
             $recuperarTodos = $stmt->fetchAll();
@@ -130,26 +130,26 @@ class BipherPublico
             } else {
                 $stmt->execute();
                 echo '<table class="ensayo" summary="Lotes de hacienda comercializados durante estos 60 dias" cellspacing="0">';
-                echo '<tbody>'; 
+                echo '<tbody>';
                 echo '<tr class="principal">';
-                echo '<th>Fecha</th><th>Origen</th><th>Organizador</th><th>Raza</th><th>Peso</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio</th><th></th>';   
+                echo '<th>Fecha</th><th>Origen</th><th>Organizador</th><th>Raza</th><th>Peso</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio</th><th></th>';
                 echo '</tr>';
-                echo '<tr>';            
+                echo '<tr>';
                     foreach ($stmt as $v) {
                         $lid = $v['lote_id'];
-                        echo '<td>'.darVueltaFecha($v['fecha_lo']).'</td><td>'.$v['localidad'].'</td><td>'.$v['organizador'].'</td><td>'.$v['raza'].'</td><td>'.$v['peso'].'</td><th>'.'$ '.$v['precio'].'</th><td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';              
-                        echo '</tr>';                   
+                        echo '<td>'.darVueltaFecha($v['fecha_lo']).'</td><td>'.$v['localidad'].'</td><td>'.$v['organizador'].'</td><td>'.$v['raza'].'</td><td>'.$v['peso'].'</td><th>'.'$ '.$v['precio'].'</th><td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
+                        echo '</tr>';
                     }
                 echo '</tbody>';
-                echo '</table>';    
+                echo '</table>';
                 $stmt->closeCursor();
             }
     }
 /*
- *Cargar la info de proximos remates y mostrarla en la cartelera 
+ *Cargar la info de proximos remates y mostrarla en la cartelera
  *según su ambito de publicacion y su fecha.
- *Recibe como parametros: un entero que es el ambito, y usa CURDATE() 
-*/  
+ *Recibe como parametros: un entero que es el ambito, y usa CURDATE()
+*/
     public function ventaCatalogo($ambito) {
         switch($ambito) {
             //Solo Buscador (Remates Pasados)
@@ -160,7 +160,7 @@ class BipherPublico
             case 1:
                 $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC";
             break;
-            //Catalogo Publicado (Destacado) 
+            //Catalogo Publicado (Destacado)
             case 2:
                 $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC LIMIT 3";
             break;
@@ -171,8 +171,8 @@ class BipherPublico
             //Por default solo el buscador
             default:
                 $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 5";
-            break;          
-        }        
+            break;
+        }
         try {
             $stmt = $this->_db->prepare($sql);
             $stmt->bindParam(':ambito', $ambito, PDO::PARAM_INT);
@@ -182,18 +182,18 @@ class BipherPublico
             $totalRegistros = count($recuperarTodos);
             if($totalRegistros>0) {
                 $stmt->execute();
-                while($row = $stmt->fetch()) { 
+                while($row = $stmt->fetch()) {
                 echo $this->formatearVenta($row, $ambito);
                 }
             $stmt->closeCursor();
             } else {
                 $stmt->closeCursor();
-            }           
+            }
         }
         catch(PDOException $e)
         {
-            return FALSE;       
-        }       
+            return FALSE;
+        }
     }
 /*
 *  FORMATEAR LAS VENTAS DE LA CARTELERA
@@ -210,7 +210,7 @@ class BipherPublico
         $car = $row['cardinal_re'];
         $inf = $row['informes_re'];
         $salto = '<br />';
-        
+
         switch($ambito)
             {
             //Solo Buscador
@@ -232,7 +232,7 @@ class BipherPublico
                 $abre = '<div class="televisado">';
                 $venta = '<p><strong>'.$nom.'</strong></p>';
                 $venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.' hs</div>';
-                $venta = $venta.'<div class="verlotes"><a class="sinborde" href="p-catalogo.php?subasta='.$rid.'"><img src="images/verlotes.png" alt="Logo de '.$org.'" /></a></div>';                
+                $venta = $venta.'<div class="verlotes"><a class="sinborde" href="p-catalogo.php?subasta='.$rid.'"><img src="images/verlotes.png" alt="Logo de '.$org.'" /></a></div>';
                 $venta = $venta.'<div class="logotipo izquierda"><a class="sinborde" href="p-catalogo.php?subasta='.$rid.'"><img src="'.$log.'" alt="Logo de '.$org.'" /></a></div>';
                 $venta = $venta.'<div class="clear"></div>';
                 $venta = $venta.'<p>Organiza: <strong>'.$org.'</strong></p>';
@@ -261,7 +261,7 @@ class BipherPublico
                 $venta = $venta.'<div id="datosubasta" class="izquierda"><p><strong>'.$nom.'</strong></p>';
                 $venta = $venta.'<p>Son '.$car.' lotes a la venta. '.$met.'.</p>';
                 $venta = $venta.'<p>Informes: '.$inf.'</p></div>';
-                
+
                 $venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.'hs.</div>';
                 $cierra = '</div>';
             break;
@@ -283,10 +283,10 @@ class BipherPublico
             break;
             }
         return $abre.$venta.$cierra;
-    }    
+    }
 /*
  * Mostrar los detalles de un lote
- * @param lid : un entero que es el id del lote 
+ * @param lid : un entero que es el id del lote
  * @return : una lista con los datos del lote
  */
     public function detallesLote($idLote)
@@ -319,14 +319,14 @@ class BipherPublico
                     echo '<li class="lysta">Plazo: <strong>'.$w['plazo'].'</strong></li>';
 //                  echo '<br></br>';
                     echo '<li class="lysta">Observaciones: <strong>'.$w['notas'].'</strong></li>';
-                    echo '</ul>';   
-                    echo '<br></br>';   
+                    echo '</ul>';
+                    echo '<br></br>';
             }
         }
         catch(PDOException $e) {
             return $e->getMessage();
-        }  
-    }    
-// FIN DE LA CLASE    
+        }
+    }
+// FIN DE LA CLASE
 }
 ?>

@@ -19,6 +19,13 @@ long_line_column=72
 
 [files]
 current_page=0
+FILE_NAME_0=150;PHP;0;16;1;1;1;/var/www/bipher/login.php;0;4
+FILE_NAME_1=3019;PHP;0;16;1;1;1;/var/www/bipher/comun/funciones.php;0;4
+FILE_NAME_2=575;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
+FILE_NAME_3=571;PHP;0;16;1;1;1;/var/www/bipher/inc/class.usuarios.inc.php;0;4
+FILE_NAME_4=851;PHP;0;16;1;1;1;/var/www/bipher/comun/abre-body-usuario.php;0;4
+FILE_NAME_5=1546;PHP;0;16;1;1;1;/var/www/bipher/comun/cierra-body-usuario.php;0;4
+FILE_NAME_6=49;PHP;0;16;1;1;1;/var/www/bipher/inc/class.hacienda.inc.php;0;4
 
 [VTE]
 last_dir=/var/www/bipher

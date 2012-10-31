@@ -1,0 +1,13 @@
+	<form method="post" action="login.php" name="loginform" id="loginform">
+		<div>
+			<input type="text" name="username" />
+			<label for="username">Email</label>
+				<br /><br />
+			<input type="password" name="password" />
+			<label for="password">Contraseña</label>
+				<br /><br />
+			<input type="submit" name="login" id="login" value="Iniciar sesión" class="button" />
+		</div>
+	</form>
+	<p>&nbsp;</p>
+	<p><a href="password.php">Olvidó su contraseña?</a></p>

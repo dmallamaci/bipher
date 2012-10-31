@@ -13,10 +13,11 @@
 img, a img { border: none; }
 input { outline: 0; }
 /*
-    STRUCTURE
+    STRUCTURE#25A5CF
 */
 body { font: 14px/1.1 Helvetica, Sans-Serif;  }
 #page-wrap { width: 780px; margin: 6px auto 50px; position: relative; }
+#page-wrap-ancho { width: 96%; margin: 6px auto 50px; position: relative; }
 hr { height: 1px; background: #ccc; clear: both; margin: 20px 0; border: none; display: block; }
 #contenedor-de-lote {padding-top: 25px;}
 /*
@@ -61,7 +62,7 @@ a  { text-decoration: none; color: #900; border-bottom: 1px dotted #900; outline
 h1 { font: bold 34px Helvetica, Sans-Serif; margin: 0 0 8px 0; }
 h2 { font: bold 18px Helvetica, Sans-Serif; margin: 0 0 0 0; color: #5C1D01;} /*Marron*/
 h3 { font: bold 14px Helvetica, Sans-Serif; margin: 0 0 6px 0; color: #5C1D01;}
-p { margin: 0 0 6px 0; font: 16px/1.3 Helvetica, Sans-Serif;} 
+p { margin: 0 0 6px 0; font: 16px/1.3 Helvetica, Sans-Serif;}
 /*
     HEADER
 */
@@ -98,14 +99,14 @@ ul#galeria li a {border-bottom: none;}
 /*
     LISTS
 */
-.tabular { list-style-type: square; margin-left: 4em;font: 16px/1.3 Helvetica, Sans-Serif; display: inline; position: relative;} 
+.tabular { list-style-type: square; margin-left: 4em;font: 16px/1.3 Helvetica, Sans-Serif; display: inline; position: relative;}
 /*
     FORM STUFF
 */
 .selec {width: 200px;}
 label { background: #999; color: white; padding: 3px;}
 select {width: 240px; position: relative; margin-top: 6px;}
-input[type="text"], input[type="password"] { width: 324px; border: 3px solid #999; font-size: 18px; padding: 7px; display: block; }                   
+input[type="text"], input[type="password"] { width: 324px; border: 3px solid #999; font-size: 18px; padding: 7px; display: block; }
 #add-new input[type="text"] { width: 532px; float: left; margin: 0 10px 0 69px; }
 #add-new input[type="text"]:focus { border-color: #73B8BF; }
 #add-new input[type="submit"] { padding: 10px 12px; }
