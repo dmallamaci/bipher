@@ -1,5 +1,6 @@
 <?php
 include_once 'comun/privado.php';
+$rid = $_GET['subasta'];
 htmlDoc();
 ?>
 <html <?php xm();?>>
@@ -9,20 +10,19 @@ htmlDoc();
 <body>
 <?php include_once 'comun/abre-body-usuario.php';?>
 <?php if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['username'])): ?>
-<!-- COMIENZAN HERRAMIENTAS PARA EL OPERADOR -->
-	<p><a href="nuevo-remate.php" class="button">Agregar un Remate</a>&nbsp;<a href="nuevo-municipio.php" class="button">Agregar una Localidad</a></p>
-			<br />
-<!--	BOTONES COMENTADOS
-		<p><a href="c-lista.php" class="button">Vacio - Lista de Cat&aacute;logos</a>&nbsp;<a href="c-lista.php" class="button">Boton vacio</a></p>
-			<br />
--->
-		<h2>Últimos remates agregados</h2>
-<?php
-	include_once 'inc/class.hacienda.inc.php';
-	$listarem = new BipherHacienda($db);
-	$listarem->listaRemates();
-?>
-<!-- FIN HERRAMIENTAS DEL OPERADOR -->
+<!-- ACCIONES CON HACIENDA -->
+<h2>Eliminar un remate.</h2>
+	<div class='message bad'>Se borrará el Remate <?php echo '# '.$rid; ?> y TODOS los Lotes que contiene.</div>
+	<form method="post" action="db-interaccion/hacienda.php" id="eliminar-remate-form">
+		<div>
+		<input type="hidden" name="action" value="eliminar-remate" />
+		<input type="hidden" name="remate" id="remate" value="<?php echo $rid; ?>" />
+		<input type="submit" name="borraremate"	id="borraremate" value="Borrar el Remate y los Lotes" class="button" />
+		<label class="blanco"><a class="button" href="login.php">Volver a la lista</a></label>
+		<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
+		</div>
+	</form>
+<!-- FIN DE ACCIONES CON HACIENDA -->
 <?php
 	elseif(!empty($_POST['username']) && !empty($_POST['password'])):
 		include_once 'inc/class.usuarios.inc.php';

@@ -18,14 +18,15 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=150;PHP;0;16;1;1;1;/var/www/bipher/login.php;0;4
-FILE_NAME_1=3019;PHP;0;16;1;1;1;/var/www/bipher/comun/funciones.php;0;4
-FILE_NAME_2=575;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
-FILE_NAME_3=571;PHP;0;16;1;1;1;/var/www/bipher/inc/class.usuarios.inc.php;0;4
-FILE_NAME_4=851;PHP;0;16;1;1;1;/var/www/bipher/comun/abre-body-usuario.php;0;4
-FILE_NAME_5=1546;PHP;0;16;1;1;1;/var/www/bipher/comun/cierra-body-usuario.php;0;4
-FILE_NAME_6=49;PHP;0;16;1;1;1;/var/www/bipher/inc/class.hacienda.inc.php;0;4
+current_page=4
+FILE_NAME_0=1439;PHP;0;16;1;1;1;/var/www/bipher/login.php;0;4
+FILE_NAME_1=0;PHP;0;16;1;1;1;/var/www/bipher/index.php;0;4
+FILE_NAME_2=2264;PHP;0;16;1;1;1;/var/www/bipher/nuevo-remate.php;0;4
+FILE_NAME_3=1452;PHP;0;16;1;1;1;/var/www/bipher/db-interaccion/hacienda.php;0;4
+FILE_NAME_4=8666;PHP;0;16;1;1;1;/var/www/bipher/inc/class.hacienda.inc.php;0;4
+FILE_NAME_5=287;PHP;0;16;1;1;1;/var/www/bipher/crear-directorio.php;0;4
+FILE_NAME_6=0;PHP;0;16;1;1;1;/var/www/bipher/comun/privado.php;0;4
+FILE_NAME_7=579;PHP;0;16;1;1;1;/var/www/bipher/eliminar-remate.php;0;4
 
 [VTE]
 last_dir=/var/www/bipher

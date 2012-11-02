@@ -51,10 +51,10 @@ class BipherPublico
             echo "<td>" .$fecha."</td>";
             echo "<td>" .$orga."</td>";
             echo "<td>" .$stat."</td>";
-            echo '<td><a href="editaremate.php?subasta='.$rid.'">Editar</a></td>';
-            echo '<td><a href="eliminaremate.php?subasta='.$rid.'">Borrar</a></td>';
-            echo '<td><a href="c-editar.php?subasta='.$rid.'">Cat&aacute;logo</a></td>';
-            echo '<td><a href="nuevolote.php?subasta='.$rid.'&lote=nuevo">Lotes</a></td>';
+            echo '<td><a href="editar-remate.php?subasta='.$rid.'">Editar</a></td>';
+            echo '<td><a href="eliminar-remate.php?subasta='.$rid.'">Borrar</a></td>';
+            echo '<td><a href="c-editar.php?subasta='.$rid.'">Catálogo</a></td>';
+            echo '<td><a href="nuevo-lote.php?subasta='.$rid.'&lote=nuevo">Lotes</a></td>';
             echo "</tr>";
         }
         echo "<table>";

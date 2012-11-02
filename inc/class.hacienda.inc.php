@@ -49,7 +49,6 @@ class BipherHacienda
 			$stmt->bindParam(':stat', $stat, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
-
 		}
 		catch(PDOException $e)
 		{
@@ -164,10 +163,10 @@ class BipherHacienda
 			echo "<td>" .darVueltaFecha($fecha)."</td>";
 			echo "<td>" .$orga."</td>";
 			echo "<td>" .ambitoDePublicacion($stat)."</td>";
-			echo '<td><a href="editaremate.php?subasta='.$rid.'">Editar</a></td>';
-			echo '<td><a href="eliminaremate.php?subasta='.$rid.'">Borrar</a></td>';
-			echo '<td><a href="c-editar.php?subasta='.$rid.'">Cat&aacute;logo</a></td>';
-			echo '<td><a href="nuevolote.php?subasta='.$rid.'&lote=nuevo">Lotes</a></td>';
+			echo '<td><a href="editar-remate.php?subasta='.$rid.'">Editar</a></td>';
+			echo '<td><a href="eliminar-remate.php?subasta='.$rid.'">Borrar</a></td>';
+			echo '<td><a href="c-editar.php?subasta='.$rid.'">Catálogo</a></td>';
+			echo '<td><a href="nuevo-lote.php?subasta='.$rid.'&lote=nuevo">Lotes</a></td>';
 			echo "</tr>";
 		}
 		echo "<table>";
@@ -288,28 +287,27 @@ class BipherHacienda
 			$stmt->bindParam(':rid', $rid, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
-
 		}
 		catch(PDOException $e)
 			{
 				die($e->getMessage());
 			}
-
 		// ahora elimino el remate
-
-		$osql  ="DELETE FROM remates WHERE remate_id=:rid";
+		$sql  ="DELETE FROM remates WHERE remate_id=:rid";
 		try
 		{
-			$stmt = $this->_db->prepare($osql);
+			$stmt = $this->_db->prepare($sql);
 			$stmt->bindParam(':rid', $rid, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
-
 		}
 		catch(PDOException $e)
 			{
 				die($e->getMessage());
 			}
+		// Ahora elimino el directorio del remate con todo su contenido.
+//		$ruta = '../images/'.$rid;
+//		eliminarDirectorio($ruta);
 	}
 
 /*
@@ -547,7 +545,35 @@ class BipherHacienda
 		$sql = "SELECT MAX(remate_id) AS dire FROM remates";
 		foreach($this->_db->query($sql) as $row);
 		$carpeta = $row['dire'];
-		mkdir('images/'.$carpeta, 0775);
+		mkdir('../images/'.$carpeta, 0775);
+	}
+/*
+ *	Eliminar el directorio del remate y su contenido
+ */
+	public function eliminarDirectorio($tmp_path)
+	{
+	  if(!is_writeable($tmp_path) && is_dir($tmp_path)){chmod($tmp_path,0777);}
+		$handle = opendir($tmp_path);
+	  while($tmp=readdir($handle)){
+		if($tmp!='..' && $tmp!='.' && $tmp!=''){
+			 if(is_writeable($tmp_path.DS.$tmp) && is_file($tmp_path.DS.$tmp)){
+					 unlink($tmp_path.DS.$tmp);
+			 }elseif(!is_writeable($tmp_path.DS.$tmp) && is_file($tmp_path.DS.$tmp)){
+				 chmod($tmp_path.DS.$tmp,0666);
+				 unlink($tmp_path.DS.$tmp);
+			 }
+			 if(is_writeable($tmp_path.DS.$tmp) && is_dir($tmp_path.DS.$tmp)){
+					delete_folder($tmp_path.DS.$tmp);
+			 }elseif(!is_writeable($tmp_path.DS.$tmp) && is_dir($tmp_path.DS.$tmp)){
+					chmod($tmp_path.DS.$tmp,0777);
+					delete_folder($tmp_path.DS.$tmp);
+			 }
+		}
+	  }
+	  closedir($handle);
+	  rmdir($tmp_path);
+	  if(!is_dir($tmp_path)){return true;}
+	  else{return false;}
 	}
 }
 ?>
