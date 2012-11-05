@@ -50,7 +50,7 @@ if ( $_POST['token'] == $_SESSION['token']
 			$directorio->eliminarDirectorio($ruta);
 			header("Location: ../login.php");
 			break;
-		case 'eliminalote':
+		case 'eliminar-lote':
 			$status = $haciendaObj->eliminaLote(); //OK
 			$ri = $_POST['remate'];
 			$ch = "borrado";

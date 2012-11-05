@@ -211,7 +211,7 @@ class BipherHacienda
 			echo "<td>" .$prv."</td>";
 			echo "<td>" .decirCategoria($kat)."</td>";
 			echo '<td><a href="editar-lote.php?lote='.$lid.'">Editar</a></td>';
-			echo '<td><a href="borrar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
+			echo '<td><a href="eliminar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
 			echo "</tr>";
 		}
 		echo "</table>";
@@ -312,7 +312,6 @@ class BipherHacienda
 		$reid = $_POST['remate'];
 		$leid = $_POST['lote_id'];
 		$orde = $_POST['orden_lo'];
-
 		$sql  ="DELETE FROM lotes WHERE lote_id=:leid LIMIT 1";
 		try
 		{
@@ -320,9 +319,7 @@ class BipherHacienda
 			$stmt->bindParam(':leid', $leid, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
-
 			//Ahora cambio el orden de los lotes siguientes al que borré
-
 			$consulta ="UPDATE lotes SET orden_lo = orden_lo-1 WHERE remate_id =:reid AND orden_lo>:orde";
 			try
 			{
@@ -331,7 +328,6 @@ class BipherHacienda
 				$stmt->bindParam(':orde', $orde, PDO::PARAM_INT);
 				$stmt->execute();
 				$stmt->closeCursor();
-
 				//Ahora cambio la cardinalidad del remate
 				$consul ="UPDATE remates SET cardinal_re = cardinal_re-1 WHERE remate_id =:reid";
 				try
@@ -346,7 +342,6 @@ class BipherHacienda
 				{
 					return $e->getMessage();
 				}
-
 			}
 			catch(PDOException $e)
 			{
@@ -358,7 +353,6 @@ class BipherHacienda
 				die($e->getMessage());
 			}
 	}
-
 /*
  * Editar un remate
 */
@@ -456,7 +450,6 @@ class BipherHacienda
 		echo '<th>ID</th><th>Lote</th><th>Orden</th><th>Localidad</th><th>Categor&iacute;a</th><th>Precio</th><th></th><th></th><th></th>';
 		echo '</tr>';
 		echo '<tr>';
-
 		$i = 1;
 		while($row = $stmt->fetch())
 		{
@@ -467,7 +460,6 @@ class BipherHacienda
 			$nlo = $row['num_lo'];
 			$ord = $row['orden_lo'];
 			$lid = $row['lote_id'];
-
 			echo '<tr>';
 			echo '<td><input type="hidden" name="lote'.$i.'" value="'.$lid.'" />'.$lid. '</td>';
 			echo '<td>'.$nlo.'</td>';
@@ -477,7 +469,7 @@ class BipherHacienda
 			echo '<td><input id="entabla" type="text" name="precio'.$i.'" value="'.$pre.'"/></td>';
 			echo '<td><a href="editar-lote.php?lote='.$lid.'">Editar</a></td>';
 			echo '<td><a href="c-ordenar.php?rid='.$re.'&ord='.$ord.'&lid='.$lid.'">Cat&aacute;logo</a></td>';
-			echo '<td><a href="borrar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
+			echo '<td><a href="eliminar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
 			echo "</tr>";
 			$intervalo = $i++;
 		}

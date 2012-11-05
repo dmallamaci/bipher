@@ -43,7 +43,7 @@ include_once 'inc/class.hacienda.inc.php';
 			<input type="text" name="numerolote" id="numerolote" value="Lote <?php echo $nombre_lote; ?>" />
 				<br />
 			<label class="selec" for="categoria">Categoría</label>
-			<?php include 'comun/categorias-select.php'; ?>
+			<?php include_once 'comun/categorias-select.php'; ?>
 				<br/><br/>
 			<label for="subcategoria" class="catalogo">Subcategoría (Opcional Catálogo)</label>
 			<input type="text" name="subcategoria"	id="subcategoria" />
@@ -143,7 +143,6 @@ include_once 'inc/class.hacienda.inc.php';
 	$listalot = new BipherHacienda($db);
 	$listalot->listaLotesPorRemateEditable($id);
 ?>
-
 <!-- FIN DE ACCIONES CON HACIENDA -->
 <?php
 	elseif(!empty($_POST['username']) && !empty($_POST['password'])):
