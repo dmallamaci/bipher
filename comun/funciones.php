@@ -7,11 +7,11 @@ class DateTimeArgento extends DateTime {
     }
 }
 /*
- * Dar vuelta las fechas 
+ * Dar vuelta las fechas
  */
 function darVueltaFecha($date) {
     if (empty($date)) {
-        return "";      
+        return "";
         } else {
         $date = strtr($date, "/", "-");
         $i = 0;
@@ -19,8 +19,8 @@ function darVueltaFecha($date) {
         while ($tmp) {
             $dateok[$i] = "$tmp";
             $i++;
-            $tmp = strtok("-");         
-            }       
+            $tmp = strtok("-");
+            }
         return ($dateok[2]."-".$dateok[1]."-".$dateok[0]);
         }
 }
@@ -108,14 +108,14 @@ function decirCategoria($ent) {
     }
 }
 /*
- * No mostrar si Vale Cero 
+ * No mostrar si Vale Cero
  */
 function noMostrarSiEsCero($algo) {
     if($algo == 0 || $algo == '0') {
-        return "";      
+        return "";
     } else {
-        return $algo;       
-    }   
+        return $algo;
+    }
 }
 /*
  * Retornar Cadenas comunes para HTML.
@@ -128,7 +128,6 @@ function headPublico() {
     $head = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'.SALTO;
     $head .= '<title>Buscador Ganadero de ELRURAL.COM</title>'.SALTO;
     $head .= '<link rel="stylesheet" href="comun/frente.css" type="text/css" />'.SALTO;
-    $head .= '<script src="js/desplegable.js" type="text/javascript"></script>'.SALTO;
         echo($head);
 }
 ?>

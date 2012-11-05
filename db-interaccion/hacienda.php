@@ -17,25 +17,25 @@ if ( $_POST['token'] == $_SESSION['token']
 			$directorio->crearDirectorio();
 			header("Location: ../login.php");
 			break;
-		case 'editarremate':
+		case 'editar-remate':
 			$status = $haciendaObj->editaRemate(); //OK
 			header("Location: ../login.php");
 			break;
-		case 'agregarlote':
+		case 'agregar-lote':
 			$status = $haciendaObj->agregarLote(); //OK
 			$ri = $_POST['remate'];
 			$ch = "nuevo";
 //			$orn = 0; //un lote nuevo aparece en posición cero
 			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch");
 			break;
-		case 'editarlote':
+		case 'editar-lote':
 			$status = $haciendaObj->editarLote(); //OK
 			$ri = $_POST['remate_id'];
 			$ch = "changed";
 //			$orn = 0;	//no uso el orden verdadero, no lo necesito aqui
 			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch");
 			break;
-		case 'editarprecios':
+		case 'editar-precios':
 			$status = $haciendaObj->editarPrecios();
 			$ri = $_POST['remate_id'];
 			$ch = "changed";

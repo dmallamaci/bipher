@@ -6,6 +6,7 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
+	<script src="js/desplegable.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="page-wrap">

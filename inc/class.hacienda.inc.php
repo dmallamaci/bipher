@@ -183,22 +183,18 @@ class BipherHacienda
 */
 	public function listaLotesPorRemate($re=NULL)
 	{
-
 		$sql = "SELECT localidades.localidad, provincias.provincia, lotes.categoria_lo, lotes.num_lo, lotes.orden_lo, lotes.lote_id FROM localidades, provincias, lotes WHERE lotes.remate_id =:re AND provincias.provincia_id = localidades.provincia_id AND lotes.localidad_lo = localidades.localidad_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) ORDER BY lote_id DESC";
-
 	try
 	{
 		$stmt = $this->_db->prepare($sql);
 		$stmt->bindParam(':re', $re, PDO::PARAM_INT);
 		$stmt->execute();
-
 		echo '<table class="ensayo" summary="Lotes cargados" cellspacing="0">';
 		echo '<tbody>';
 		echo '<tr class="principal">';
 		echo '<th>ID</th><th>Lote</th><th>Orden</th><th>Localidad</th><th>Provincia</th><th>Categor&iacute;a</th><th></th><th></th>';
 		echo '</tr>';
 		echo '<tr>';
-
 		while($row = $stmt->fetch())
 		{
 			$lok = $row['localidad'];
@@ -207,7 +203,6 @@ class BipherHacienda
 			$nlo = $row['num_lo'];
 			$ord = $row['orden_lo'];
 			$lid = $row['lote_id'];
-
 			echo "<tr>";
 			echo "<td>" .$lid."</td>";
 			echo "<td>" .$nlo."</td>";
@@ -215,12 +210,11 @@ class BipherHacienda
 			echo "<td>" .$lok."</td>";
 			echo "<td>" .$prv."</td>";
 			echo "<td>" .decirCategoria($kat)."</td>";
-			echo '<td><a href="editarlote.php?lote='.$lid.'">Editar</a></td>';
-			echo '<td><a href="borrarlote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
+			echo '<td><a href="editar-lote.php?lote='.$lid.'">Editar</a></td>';
+			echo '<td><a href="borrar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
 			echo "</tr>";
 		}
 		echo "</table>";
-
 		$stmt->closeCursor();
 	}
 	catch(PDOException $e)
@@ -447,7 +441,6 @@ class BipherHacienda
 */
 	public function listaLotesPorRemateEditable($re=NULL)
 	{
-
 		$sql = "SELECT localidades.localidad, provincias.provincia, lotes.categoria_lo, lotes.precio, lotes.num_lo, lotes.orden_lo, lotes.lote_id FROM localidades, provincias, lotes WHERE lotes.remate_id =:re AND provincias.provincia_id = localidades.provincia_id AND lotes.localidad_lo = localidades.localidad_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) ORDER BY orden_lo ASC";
 		$intervalo = NULL;
 	try
@@ -455,9 +448,8 @@ class BipherHacienda
 		$stmt = $this->_db->prepare($sql);
 		$stmt->bindParam(':re', $re, PDO::PARAM_INT);
 		$stmt->execute();
-
-		echo '<form method="post" action="db-interaction/hacienda.php" id="cambiar-precios-form">';
-		echo '<input type="hidden" name="action" value="editarprecios" />';
+		echo '<form method="post" action="db-interaccion/hacienda.php" id="cambiar-precios-form">';
+		echo '<input type="hidden" name="action" value="editar-precios" />';
 		echo '<table class="ensayo" summary="Lotes cargados" cellspacing="0">';
 		echo '<tbody>';
 		echo '<tr class="principal">';
@@ -483,9 +475,9 @@ class BipherHacienda
 			echo '<td>' .$lok. ' - '.$prv.'</td>';
 			echo '<td>' .decirCategoria($kat).'</td>';
 			echo '<td><input id="entabla" type="text" name="precio'.$i.'" value="'.$pre.'"/></td>';
-			echo '<td><a href="editarlote.php?lote='.$lid.'">Editar</a></td>';
+			echo '<td><a href="editar-lote.php?lote='.$lid.'">Editar</a></td>';
 			echo '<td><a href="c-ordenar.php?rid='.$re.'&ord='.$ord.'&lid='.$lid.'">Cat&aacute;logo</a></td>';
-			echo '<td><a href="borrarlote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
+			echo '<td><a href="borrar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
 			echo "</tr>";
 			$intervalo = $i++;
 		}
@@ -499,7 +491,6 @@ class BipherHacienda
 		echo '<input type="submit" name="cambiar-precios" id="cambiar-precios" value="Cambiar precios a todos los lotes" class="button" />';
 		}
 		echo '</form>';
-
 		$stmt->closeCursor();
 	}
 	catch(PDOException $e)

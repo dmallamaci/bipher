@@ -1,0 +1,80 @@
+			<label class="selec" for="raza1">Raza 1</label>
+			<select id="raza1" name="raza1">
+				<option value="Cruza"> - seleccione (obligatorio) - </option>
+				<optgroup label="CRUZAS">
+					<option value="Cruza" selected="selected">Cruza</option>
+					<option value="Mestizos">Mestizos</option>
+					<option value="Cruzas Britanicas">Cruzas Británicas</option>
+					<option value="Cruzas Continentales">Cruzas Continentales</option>
+					<option value="Cruzas Indicas">Cruzas Índicas</option>
+				</optgroup>
+				<optgroup label="RAZAS BRITANICAS">
+					<option value="A. Angus">Aberdeen Angus</option>
+					<option value="Caretas">Caretas</option>
+					<option value="Hereford">Hereford</option>
+					<option value="Red Polled">Red Polled</option>
+					<option value="Shorton">Shorton</option>
+				</optgroup>
+				<optgroup label="RAZAS SINTETICAS">
+					<option value="Brahman">Brahman</option>
+					<option value="Brangus">Brangus</option>
+					<option value="Braford">Braford</option>
+					<option value="Bonsmara">Bonsmara</option>
+					<option value="Limangus">Limangus</option>
+				</optgroup>
+				<optgroup label="RAZAS CONTINENTALES">
+					<option value="Charolais">Charolais</option>
+					<option value="Holando">Holando</option>
+					<option value="Overos Negros">Overos Negros</option>
+					<option value="Limousin">Limousin</option>
+					<option value="Simmental">Simmental</option>
+				</optgroup>
+				<optgroup label="OTRAS">
+					<option value="Jersey">Jersey</option>
+					<option value="Nellore">Nellore</option>
+					<option value="Bufalos">Bufalos</option>
+					<option value="Buvilla">Buvilla</option>
+					<option value="Pampas">Pampas</option>
+				</optgroup>
+			</select>
+				<br/><br/>
+			<label class="selec catalogo" for="raza2">Raza 2</label>
+			<select id="raza2" name="raza2">
+				<option value=" "> - seleccione (opcional) - </option>
+				<optgroup label="CRUZAS">
+					<option value=" y Cruza">y Cruza</option>
+					<option value=" y Mestizos">y Mestizos</option>
+					<option value=" y Cruzas Britanicas">y Cruzas Británicas</option>
+					<option value=" y Cruzas Continentales">y Cruzas Continentales</option>
+					<option value=" y Cruzas Indicas">y Cruzas Índicas</option>
+					<option value=" y Cuartinos">y Cuartinos</option>
+				</optgroup>
+				<optgroup label="RAZAS BRITANICAS">
+					<option value=" y A. Angus">y Aberdeen Angus</option>
+					<option value=" y Caretas">y Caretas</option>
+					<option value=" y Hereford">y Hereford</option>
+					<option value=" y Red Polled">y Red Polled</option>
+					<option value=" y Shorton">y Shorton</option>
+				</optgroup>
+				<optgroup label="RAZAS SINTETICAS">
+					<option value=" y Brahman">y Brahman</option>
+					<option value=" y Brangus">y Brangus</option>
+					<option value=" y Braford">y Braford</option>
+					<option value=" y Bonsmara">y Bonsmara</option>
+					<option value=" y Limangus">y Limangus</option>
+				</optgroup>
+				<optgroup label="RAZAS CONTINENTALES">
+					<option value=" y Charolais">y Charolais</option>
+					<option value=" y Holando">y Holando</option>
+					<option value=" y Overos Negros">y Overos Negros</option>
+					<option value=" y Limousin">y Limousin</option>
+					<option value=" y Simmental">y Simmental</option>
+				</optgroup>
+				<optgroup label="OTRAS">
+					<option value=" y Jersey">y Jersey</option>
+					<option value=" y Nellore">y Nellore</option>
+					<option value=" y Bufalos">y Bufalos</option>
+					<option value=" y Buvilla">y Buvilla</option>
+					<option value=" y Pampas">y Pampas</option>
+				</optgroup>
+			</select>
