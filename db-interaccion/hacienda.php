@@ -57,6 +57,18 @@ if ( $_POST['token'] == $_SESSION['token']
 			$orn = $_POST['orden_lo'];
 			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch&orden=$orn");
 			break;
+		case 'ordenar-lotes':
+			$status = $haciendaObj->cambiarOrdenDeVenta();
+			$ri = $_POST['remate_id'];
+			$ch = "changed";
+			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch#lotes");
+			break;
+		case 'guardar-rutas':
+			$status = $haciendaObj->cambiarRutasDelLote();
+			$ri = $_POST['remate_id'];
+			$ch = "changed";
+			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch#lotes");
+			break;
 		case 'atras':
 			header("Location: ../login.php");
 			break;

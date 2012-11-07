@@ -447,7 +447,7 @@ class BipherHacienda
 		echo '<table class="ensayo" summary="Lotes cargados" cellspacing="0">';
 		echo '<tbody>';
 		echo '<tr class="principal">';
-		echo '<th>ID</th><th>Lote</th><th>Orden</th><th>Localidad</th><th>Categor&iacute;a</th><th>Precio</th><th></th><th></th><th></th>';
+		echo '<th>ID</th><th>Lote</th><th>Orden</th><th>Localidad</th><th>Categoría</th><th>Precio</th><th></th><th></th><th></th>';
 		echo '</tr>';
 		echo '<tr>';
 		$i = 1;
@@ -468,7 +468,7 @@ class BipherHacienda
 			echo '<td>' .decirCategoria($kat).'</td>';
 			echo '<td><input id="entabla" type="text" name="precio'.$i.'" value="'.$pre.'"/></td>';
 			echo '<td><a href="editar-lote.php?lote='.$lid.'">Editar</a></td>';
-			echo '<td><a href="c-ordenar.php?rid='.$re.'&ord='.$ord.'&lid='.$lid.'">Cat&aacute;logo</a></td>';
+			echo '<td><a href="ordenar-lotes.php?rid='.$re.'&ord='.$ord.'&lid='.$lid.'">Cat&aacute;logo</a></td>';
 			echo '<td><a href="eliminar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
 			echo "</tr>";
 			$intervalo = $i++;
@@ -533,30 +533,211 @@ class BipherHacienda
 /*
  *	Eliminar el directorio del remate y su contenido
  */
-	public function eliminarDirectorio($tmp_path)
+	public function eliminarDirectorio($directorio)
 	{
-	  if(!is_writeable($tmp_path) && is_dir($tmp_path)){chmod($tmp_path,0777);}
-		$handle = opendir($tmp_path);
-	  while($tmp=readdir($handle)){
-		if($tmp!='..' && $tmp!='.' && $tmp!=''){
-			 if(is_writeable($tmp_path.DS.$tmp) && is_file($tmp_path.DS.$tmp)){
-					 unlink($tmp_path.DS.$tmp);
-			 }elseif(!is_writeable($tmp_path.DS.$tmp) && is_file($tmp_path.DS.$tmp)){
-				 chmod($tmp_path.DS.$tmp,0666);
-				 unlink($tmp_path.DS.$tmp);
-			 }
-			 if(is_writeable($tmp_path.DS.$tmp) && is_dir($tmp_path.DS.$tmp)){
-					delete_folder($tmp_path.DS.$tmp);
-			 }elseif(!is_writeable($tmp_path.DS.$tmp) && is_dir($tmp_path.DS.$tmp)){
-					chmod($tmp_path.DS.$tmp,0777);
-					delete_folder($tmp_path.DS.$tmp);
-			 }
+		if ($handle = opendir("$directorio")) {
+		while (false !== ($item = readdir($handle))) {
+		  if ($item != "." && $item != "..") {
+			if (is_dir("$directorio/$item")) {
+			  remove_directory("$directorio/$item");
+			} else {
+			  unlink("$directorio/$item");
+			}
+		  }
 		}
-	  }
-	  closedir($handle);
-	  rmdir($tmp_path);
-	  if(!is_dir($tmp_path)){return true;}
-	  else{return false;}
+		closedir($handle);
+		rmdir($directorio);
+		}
 	}
+/*
+* Cargar Orden de Venta de un Lote para cambiarlo
+*/
+	public function cargarOrdenDeVenta($subasta, $orden)
+	{
+		$sql = "SELECT remates.cardinal_re, lotes.num_lo FROM remates, lotes WHERE remates.remate_id = :subasta AND lotes.orden_lo = :orden AND lotes.remate_id = :subasta LIMIT 1";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':subasta', $subasta, PDO::PARAM_INT);
+			$stmt->bindParam(':orden', $orden, PDO::PARAM_INT);
+			$stmt->execute();
+			$row = $stmt->fetch();
+			$cardinal = $row['cardinal_re'];
+			$nombre = $row['num_lo'];
+			echo '<div><form method="post" action="db-interaccion/hacienda.php" id="ordenar-lote-form">';
+			echo '<input type="hidden" name="action" value="ordenar-lotes" />';
+			echo '<input type="hidden" name="remate_id" value="'.$subasta.'" />';
+			echo '<input type="hidden" name="cardinal_re" value="'.$cardinal.'" />';
+			echo '<input type="hidden" name="origen" value="'.$orden.'" />';
+			echo '<p>Para el lote <strong>'.$nombre.'</strong> el Orden de Venta actual es <strong>'.$orden.'</strong></p>';
+			echo '<p>Escriba el número de la nueva posición en el Orden de Venta.</p>';
+			echo '<p>Para este remate, el número de la nueva posición debe estar entre <strong>1</strong> y <strong>'.$cardinal.'</strong></p><br />';
+			echo '<label for="destino">Nuevo Orden de Venta</label><input type="text" name="destino" id="destino" value="'.$orden.'" /> <br />';
+			echo '<input type="submit" name="ordenar" id="ordenar" value="Asignar Nuevo Orden de Venta" class="button" />
+	<input type="button" class="button" value="Volver a la lista sin cambiar" onclick="history.back()"></input>
+	<input type="hidden" name="token" value="'.$_SESSION["token"].'" />';
+			echo '</form></div>';
+			$stmt->closeCursor();
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+/*
+* CAMBIAR EL ORDEN DE UN LOTE EN LA LISTA DE LOTES
+*/
+	public function cambiarOrdenDeVenta()
+	{
+		$rid = (int) $_POST['remate_id']; //debe ser el id del remate
+		$lugar_inicial = (int) $_POST['origen'];
+		$lugar_actual = (int) $_POST['destino'];
+		$cardinalidad = (int) $_POST['cardinal_re'];
+		if($lugar_actual <= $cardinalidad && $lugar_actual > 0)
+		{
+			if($lugar_actual < $lugar_inicial)
+			{
+				/*
+				 * La consulta modifica todas las posiciones de los lotes
+				 * entre la posicion original y la que fue movido.
+				 */
+				$sql = "UPDATE lotes SET orden_lo=(CASE WHEN orden_lo+1>$lugar_inicial THEN $lugar_actual ELSE orden_lo+1 END) WHERE remate_id=$rid AND orden_lo BETWEEN $lugar_actual AND $lugar_inicial";
+			}
+			else
+			{
+				// Se decrementa la posicion del lote
+				$sql = "UPDATE lotes SET orden_lo=(CASE WHEN orden_lo-1<$lugar_inicial THEN $lugar_actual ELSE orden_lo-1 END) WHERE remate_id=$rid AND orden_lo BETWEEN $lugar_inicial AND $lugar_actual";
+			}
+		$rows = $this->_db->exec($sql);
+		echo "Consulta realizada con exito. ", "Filas afectadas: $rows";
+		}
+		else
+		{
+			$ri = $rid;
+			$ch = "nuevo";
+			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch");
+			exit;
+		}
+	}
+/*
+* Cargar Fotos, Video y Certificador del lote
+*/
+	public function cargarArchivosDelLote($loteid)
+	{
+		$sql = "SELECT remate_id, foto_1, foto_2, foto_3, foto_4, video, certificador_id FROM lotes WHERE lote_id = :loteid LIMIT 1";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':loteid', $loteid, PDO::PARAM_INT);
+			$stmt->execute();
+			$row = $stmt->fetch();
+			$f1 = $row['foto_1'];
+			$f2 = $row['foto_2'];
+			$f3 = $row['foto_3'];
+			$f4 = $row['foto_4'];
+			$vi = $row['video'];
+			$ci = $row['certificador_id'];
+			$remate = $row['remate_id'];
+			echo '<div><form method="post" action="db-interaccion/hacienda.php" id="archivos-lote-form">';
+			echo '<input type="hidden" name="action" value="guardar-rutas" />';
+			echo '<input type="hidden" name="lote_id" value="'.$loteid.'" />';
+			echo '<input type="hidden" name="remate_id" value="'.$remate.'" />';
+//			echo '<input type="hidden" name="origen" value="'.$orden.'" />';
+//			echo '<p>Para el lote <strong>'.$nombre.'</strong> el Orden de Venta actual es <strong>'.$orden.'</strong></p>';
+//			echo '<p>Escriba el n&uacute;mero de la nueva posici&oacute;n en el Orden de Venta.</p>';
+//			echo '<p>Para este remate, el n&uacute;mero de la nueva posici&oacute;n debe estar entre <strong>1</strong> y <strong>'.$cardinal.'</strong></p><br />';
+			echo '<label for="foto_1">Foto 1</label><input type="text" name="foto_1" id="foto_1" value="'.$f1.'" /> <br />';
+			echo '<label for="foto_2">Foto 2</label><input type="text" name="foto_2" id="foto_2" value="'.$f2.'" /> <br />';
+			echo '<label for="foto_3">Foto 3</label><input type="text" name="foto_3" id="foto_3" value="'.$f3.'" /> <br />';
+			echo '<label for="foto_4">Foto 4</label><input type="text" name="foto_4" id="foto_4" value="'.$f4.'" /> <br />';
+			echo '<label for="video">Video</label><input type="text" name="video" id="video" value="'.$vi.'" /> <br />';
+			//XXX Hacer combo de certificadores
+//			echo '<label for="certificador_id">Certificador</label><input type="text" name="certificador_id" id="certificador_id" value="'.$ci.'" /> <br />';
+			echo '<input type="submit" name="cambiar" id="ordenar" value="Asignar Nuevas Rutas" class="button" />
+	<input type="button" class="button" value="Volver a la lista sin cambiar" onclick="history.back()"></input>
+	<input type="hidden" name="token" value="'.$_SESSION["token"].'" />';
+			echo '</form></div>';
+			$stmt->closeCursor();
+		}
+	catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+/*
+* Modificar las rutas a los archivos del lote
+*/
+	public function cambiarRutasDelLote()
+	{
+		$sql ="UPDATE lotes SET foto_1 =:f1, foto_2 =:f2, foto_3 =:f3, foto_4 =:f4, video =:vi, certificador_id =:ci WHERE lote_id =:li";
+
+		$li = $_POST['lote_id'];
+		$f1 = trim($_POST['foto_1']);
+		$f2 = trim($_POST['foto_2']);
+		$f3 = trim($_POST['foto_3']);
+		$f4 = trim($_POST['foto_4']);
+		$vi = trim($_POST['video']);
+		$ci = $_POST['certificador_id'];
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':li', $li, PDO::PARAM_INT);
+			$stmt->bindParam(':f1', $f1, PDO::PARAM_STR);
+			$stmt->bindParam(':f2', $f2, PDO::PARAM_STR);
+			$stmt->bindParam(':f3', $f3, PDO::PARAM_STR);
+			$stmt->bindParam(':f4', $f4, PDO::PARAM_STR);
+			$stmt->bindParam(':vi', $vi, PDO::PARAM_STR);
+			$stmt->bindParam(':ci', $ci, PDO::PARAM_INT);
+			$stmt->execute();
+			$stmt->closeCursor();
+			return TRUE;
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+/*
+* Subir un video desde un formulario
+*/
+	public function guardarRutaVideo($ruta, $lid)
+	{
+		$sql = "UPDATE lotes SET video =:ruta WHERE lote_id =:lid";
+			try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':lid', $lid, PDO::PARAM_INT);
+			$stmt->bindParam(':ruta', $ruta, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->closeCursor();
+			return TRUE;
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+/*
+* Subir una foto desde un formulario
+*/
+	public function guardarRutaFoto($ruta, $campo, $lid)
+	{
+		$sql = "UPDATE lotes SET $campo =:ruta WHERE lote_id =:lid";
+			try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':lid', $lid, PDO::PARAM_INT);
+			$stmt->bindParam(':ruta', $ruta, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->closeCursor();
+			return TRUE;
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+
+// FIN DE LA CLASE
 }
 ?>
