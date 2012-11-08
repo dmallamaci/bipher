@@ -12,31 +12,30 @@ htmlDoc();
 <!-- ACCIONES CON HACIENDA -->
 <?php
 include_once 'inc/class.hacienda.inc.php';
-// SUBIR UN VIDEO
-		$lid = $_POST['lote_id'];
-		$rid = $_POST['remate_id'];
-		$od = $_POST['orden_lo'];
+	$ambit = (int) $_POST['ambito'];
+	$orden = 1;
+	$visible = 1;
+// SUBIR UN BANNER
 //	compruebo que tenga el formato adecuado
-if($_FILES['video']['type'] != 'video/x-flv'){
+if(!($_FILES['banner']['type'] =="image/jpeg" OR $_FILES['banner']['type'] =="image/gif" OR $_FILES['banner']['type'] =="image/png")){
 	die('El video no tiene el formato adecuado. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 }
 //	compruebo que no se hayan producido errores
-if($_FILES['video']['error'] != 0){
+if($_FILES['banner']['error'] != 0){
 	die('Se ha producido un error. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 }
 //se intenta guardar y se comprueba que se guarde bien
-		$video = $_FILES['video']['tmp_name'];
-		$destino = 'images/'.$rid.'/'.$lid.'.flv';
-if(move_uploaded_file($video, $destino)){
+		$banner = $_FILES['banner']['tmp_name'];
+		$destino = 'images/banners';
+if(move_uploaded_file($banner, $destino)){
 	//cambio la ruta del video
-	include_once 'inc/class.hacienda.inc.php';
-	$video = new BipherHacienda($db);
-	$video->guardarRutaVideo($destino, $lid);
+	$banner = new BipherHacienda($db);
+	$banner->guardarRutaBanner($ambit, $orden, $visible, $destino);
 } else {
-	die('El video no se pudo guardar. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
+	die('El banner no se pudo guardar. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 }
-header("Location: ordenar-lotes.php?rid=$rid&ord=$od&lid=$lid");
-// FIN DE SUBIR UN VIDEO
+header("Location: banners.php?");
+// FIN DE SUBIR UN BaNNER
 ?>
 <!-- FIN DE ACCIONES CON HACIENDA -->
 <?php

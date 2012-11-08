@@ -29,11 +29,11 @@ include_once 'inc/class.hacienda.inc.php';
 			//compruebo que tenga el formato adecuado
 //			echo $_FILES['fotos']['type'][$contador];
 				if($_FILES['fotos']['type'][$contador] != 'image/jpeg'){
-					die('La imagen que trata de subir a '.$nombre_campo.' no tiene formato JPG');
+					die('La imagen que trata de subir a '.$nombre_campo.' no tiene formato JPG. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 				}
 				//compruebo que no se hayan producido errores
 				if($_FILES['fotos']['error'][$contador] != 0){
-					die('Se ha producido un error al subir la imagen a '.$nombre_campo);
+					die('Se ha producido un error al subir la imagen a '.$nombre_campo.'.  <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 				}
 				//se intenta guardar y se comprueba que se guarde bien
 						$imagen = $_FILES['fotos']['tmp_name'][$contador];
@@ -42,7 +42,7 @@ include_once 'inc/class.hacienda.inc.php';
 					//cambio la ruta de la foto
 					$foto->guardarRutaFoto($destino, $nombre_campo, $lid);
 				} else {
-					die('La imagen que trata de subir a '.$nombre_campo.' no se pudo guardar');
+					die('La imagen que trata de subir a '.$nombre_campo.' no se pudo guardar. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 				}
 			echo $urls[$contador].'<br />';
 		}

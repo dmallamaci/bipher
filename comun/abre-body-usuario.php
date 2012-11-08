@@ -7,7 +7,7 @@
 	if(isset($_SESSION['LoggedIn']) && isset($_SESSION['username'])
 		&& $_SESSION['LoggedIn']==1):
 ?>
-		<p><a href="logout.php" class="button">Cerrar sesi&oacute;n</a> <a href="login.php" class="button">Volver sin Guardar</a>
+		<p><a href="logout.php" class="button">Cerrar sesión</a> <a href="login.php" class="button">Volver sin Guardar</a>
 <!-- Este botón conduce al seteo de Mi Cuenta
 	<a href="account.php" class="button">Mi cuenta</a>
 -->		</p>
@@ -15,7 +15,7 @@
 // Si no está logueado muestra los botones de Registro e Iniciar Sesión
 	else:
 ?>
-		<p><a class="button" href="signup.php">Registrarse</a> &nbsp; <a class="button" href="login.php">Iniciar sesi&oacute;n</a></p>
+		<p><a class="button" href="signup.php">Registrarse</a> &nbsp; <a class="button" href="login.php">Iniciar sesión</a></p>
 <?php endif; ?>
 		</div>
 			<div class="clear"></div>

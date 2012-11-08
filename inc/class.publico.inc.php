@@ -6,7 +6,7 @@ class BipherPublico
 {
     /**
     * The database object
-    * @var object
+    * @var objectg
     */
     private $_db;
     /**
@@ -146,15 +146,15 @@ class BipherPublico
             }
     }
 /*
- *Cargar la info de proximos remates y mostrarla en la cartelera
- *según su ambito de publicacion y su fecha.
- *Recibe como parametros: un entero que es el ambito, y usa CURDATE()
+ * Cargar la info de proximos remates y mostrarla en la cartelera (index)
+ * según su ambito de publicacion y su fecha.
+ * Recibe como parametros: un entero que es el ambito, y usa CURDATE()
 */
     public function ventaCatalogo($ambito) {
         switch($ambito) {
             //Solo Buscador (Remates Pasados)
             case 0:
-                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 5";
+                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 10";
             break;
             //Catalogo Despublicado (Agenda de Remates) - Sin enlace a lotes.
             case 1:
@@ -164,7 +164,7 @@ class BipherPublico
             case 2:
                 $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC LIMIT 3";
             break;
-            //Subasta Hoy (un destacado para el remate de hoy)
+            //Ba (un destacado para el remate de hoy)
             case 3:
                 $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re=CURDATE() LIMIT 1";
             break;

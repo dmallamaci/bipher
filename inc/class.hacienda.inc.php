@@ -84,7 +84,6 @@ class BipherHacienda
 		$rei = $_POST['remate'];
 		$car = (int) $_POST['cardinal_re'];
 		$ord = $car + 1;
-
 		$fec = $_POST['fecha'];
 		$nlo = $_POST['numerolote'];
 		$prv = $_POST['provincia'];
@@ -731,6 +730,31 @@ class BipherHacienda
 			$stmt->execute();
 			$stmt->closeCursor();
 			return TRUE;
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+/*
+* Subir un BANNER desde un formulario
+*/
+	public function guardarRutaBanner($ambit, $orden, $visible, $destino)
+	{
+		$am = (int) $_POST['ambit'];
+		$od = (int) $_POST['orden'];
+		$vi = (int) $_POST['visible'];
+		$de = $_POST['destino'];
+		$sql = "INSERT INTO controles (ambito_banner, orden_banner, visible_banner, ruta_banner) VALUES (:am, :od, :vi, :de)";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':am', $am, PDO::PARAM_INT);
+			$stmt->bindParam(':od', $od, PDO::PARAM_INT);
+			$stmt->bindParam(':vi', $vi, PDO::PARAM_INT);
+			$stmt->bindParam(':de', $de, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->closeCursor();
 		}
 		catch(PDOException $e)
 		{

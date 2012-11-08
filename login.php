@@ -10,7 +10,7 @@ htmlDoc();
 <?php include_once 'comun/abre-body-usuario.php';?>
 <?php if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['username'])): ?>
 <!-- COMIENZAN HERRAMIENTAS PARA EL OPERADOR -->
-	<p><a href="nuevo-remate.php" class="button">Agregar un Remate</a>&nbsp;<a href="nuevo-municipio.php" class="button">Agregar una Localidad</a></p>
+	<p><a href="nuevo-remate.php" class="button">Agregar un Remate</a>&nbsp;<a href="nuevo-municipio.php" class="button">Agregar una Localidad</a>&nbsp;<a href="banners.php" class="button">Gestionar Banners</a></p>
 			<br />
 <!--	BOTONES COMENTADOS
 		<p><a href="c-lista.php" class="button">Vacio - Lista de Cat&aacute;logos</a>&nbsp;<a href="c-lista.php" class="button">Boton vacio</a></p>
