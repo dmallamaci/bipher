@@ -19,6 +19,8 @@ htmlDoc();
 			<input type="hidden" name="MAX_FILE_SIZE" value="200000" />
 		    <label for="banner">Banner</label>
 		    <input type="file" name="banner" id="banner" />
+				<br />
+		    <label for="ambito">Posición </label>
 		    <select id="ambito" name="ambito">
 				<option value="4" selected="selected">300px - Left</option>
 				<option value="3">720px - Top</option>
@@ -26,12 +28,43 @@ htmlDoc();
 				<option value="6">720px - Bottom</option>
 		    </select>
 		    	<br /><br />
+		    <label for="enlace">Enlace Externo (sin <em>http:// </em>) </label>
+			<input type="text" name="enlace" id="enlace" />
+		    	<br />
 			<input type="submit" name="subirbanner" value="Subir Banner" class="button" />
-			<input type="button" class="button" value="Volver a la lista sin cambiar" onclick="history.back()"></input>
+			<input type="button" class="button" value="Volver sin cambiar" onclick="history.back()"></input>
 			<input type="hidden" name="token" value="<?php $_SESSION["token"]?>" />
 	</form>
 </div>
 		<hr />
+		<h3>Gestionar Banners en LEFT - 300px</h3>
+		<p>Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
+<?php
+include_once 'inc/class.banners.inc.php';
+	$avisos4 = new BipherBanners($db);
+	$avisos4->mostrarBanners(4);
+?>
+	<hr />
+		<h3>Gestionar Banners en TOP - 720px</h3>
+		<p>Solo aparece publicado el banner que tenga marcada la casilla <strong>Publicado</strong> con el número de orden más bajo. Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
+<?php
+	$avisos3 = new BipherBanners($db);
+	$avisos3->mostrarBanners(3);
+?>
+	<hr />
+		<h3>Gestionar Banners en MIDDLE - 720px</h3>
+		<p>Solo aparece publicado el banner que tenga marcada la casilla <strong>Publicado</strong> con el número de orden más bajo. Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
+<?php
+	$avisos5 = new BipherBanners($db);
+	$avisos5->mostrarBanners(5);
+?>
+	<hr />
+		<h3>Gestionar Banners en BOTTOM - 720px</h3>
+		<p>Solo aparece publicado el banner que tenga marcada la casilla <strong>Publicado</strong> con el número de orden más bajo. Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
+<?php
+	$avisos6 = new BipherBanners($db);
+	$avisos6->mostrarBanners(6);
+?>
 <!-- FIN DE ACCIONES CON BANNERS -->
 <?php
 	elseif(!empty($_POST['username']) && !empty($_POST['password'])):

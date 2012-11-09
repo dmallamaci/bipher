@@ -11,7 +11,6 @@ htmlDoc();
 <?php if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['username'])): ?>
 <!-- ACCIONES CON HACIENDA -->
 <?php
-include_once 'inc/class.hacienda.inc.php';
 // SUBIR UN VIDEO
 		$lid = $_POST['lote_id'];
 		$rid = $_POST['remate_id'];
