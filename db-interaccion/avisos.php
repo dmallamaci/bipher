@@ -12,10 +12,12 @@ if ( $_POST['token'] == $_SESSION['token']
 	switch($_POST['action'])
 	{
 		case 'editar-orden':
-			$status = $bannerObj->cambiarRutasDelLote();
-			$ri = $_POST['remate_id'];
-			$ch = "changed";
-			header("Location: ../nuevo-lote.php?subasta=$ri&lote=$ch#lotes");
+			$status = $bannerObj->cambiarOrdenBanners();
+			header("Location: ../banners.php");
+			break;
+		case 'editar-banner':
+			$status = $bannerObj->editarBanner();
+			header("Location: ../banners.php");
 			break;
 		case 'atras':
 			header("Location: ../login.php");

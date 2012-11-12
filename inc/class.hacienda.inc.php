@@ -358,13 +358,11 @@ class BipherHacienda
 	public function editaRemate()
 	{
 		$rid = $_POST['remate_id'];
-
 		$statu = $_POST['status_re'];
 		$fecha = darVueltaFecha($_POST['fecha_re']);
 		$hora = $_POST['hora_re'];
 		$orga = $_POST['organizador'];
 		$meto = $_POST['metodo'];
-
 		$sql = "UPDATE remates SET fecha_re = :fecha, hora_re = :hora, organizador = :orga, metodo = :meto, status_re = :statu WHERE remate_id = :rid";
 		try
 		{
@@ -377,14 +375,12 @@ class BipherHacienda
 			$stmt->bindParam(':statu', $statu, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
-
 			return TRUE;
 		}
 		catch(PDOException $e)
 		{
 			return $e->getMessage();
 		}
-
 	}
 /*
  * Editar un lote

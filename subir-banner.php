@@ -19,7 +19,7 @@ include_once 'inc/class.banners.inc.php';
 
 // SUBIR UN BANNER
 //	compruebo que tenga el formato adecuado
-if(!($_FILES['banner']['type'] =="image/pjpeg" OR $_FILES['banner']['type'] =="image/gif" OR $_FILES['banner']['type'] =="image/x-png")){
+if(!($_FILES['banner']['type'] =="image/jpeg" OR $_FILES['banner']['type'] =="image/gif" OR $_FILES['banner']['type'] =="image/png")){
 	die('El banner no tiene el formato adecuado. <input type="button" class="button" value="Volver al formulario" onclick="history.back()"></input>');
 }
 //	compruebo que no se hayan producido errores

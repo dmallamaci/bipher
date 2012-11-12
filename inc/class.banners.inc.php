@@ -107,6 +107,85 @@ class BipherBanners
 			return $e->getMessage();
 		}
 	}
+/*
+ * Editar iterativamente el orden de los banners
+*/
+	public function cambiarOrdenBanners()
+	{
+		$i = (int) $_POST['intervalo'];
+//		$i = TOMO EL VALOR CARDINAL DE BANNERS EN LA LISTA;
+		$sql = "UPDATE controles SET orden_banner = :ord WHERE id_banner = :bid";
+// Hago un bucle restando 1 al cardinal y actualizando cada registro
+			try
+			{
+				while($i > 0)
+				{
+				$bid = (int) $_POST['banner'.$i];
+				$ord = (int) trim($_POST['orden'.$i]);
+				$stmt = $this->_db->prepare($sql);
+				$stmt->bindParam(':bid', $bid, PDO::PARAM_INT);
+				$stmt->bindParam(':ord', $ord, PDO::PARAM_INT);
+				$stmt->execute();
+				$i = $i-1;
+				}
+				$stmt->closeCursor();
+				return TRUE;
+			}
+			catch(PDOException $e)
+			{
+				return $e->getMessage();
+			}
+
+	}
+/*
+ *  CARGAR TODA LA INFO DE UN BANNER
+ */
+	public function cargarInfoBanner($bid)
+	{
+		$sql = "SELECT * FROM controles WHERE id_banner=:bid";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':bid', $bid, PDO::PARAM_INT);
+			$stmt->execute();
+			$row = $stmt->fetch();
+			$stmt->closeCursor();
+			return array($row['id_banner'], $row['ambito_banner'], $row['orden_banner'], $row['visible_banner'], $row['ruta_banner'], $row['enlace_banner']);
+		}
+		catch(PDOException $e)
+		{
+			return FALSE;
+		}
+	}
+/*
+ *  EDITAR LA INFO DE UN BANNER
+ */
+	public function editarBanner()
+	{
+		$bid = $_POST['id_banner'];
+		$amb = $_POST['ambito'];
+		$ord = $_POST['orden_banner'];
+		$vis = $_POST['visible'];
+		$enl = $_POST['enlace_banner'];
+		$sql = "UPDATE controles SET ambito_banner = :amb, orden_banner = :ord, visible_banner = :vis, enlace_banner = :enl WHERE id_banner = :bid";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':bid', $bid, PDO::PARAM_INT);
+			$stmt->bindParam(':amb', $amb, PDO::PARAM_INT);
+			$stmt->bindParam(':ord', $ord, PDO::PARAM_INT);
+			$stmt->bindParam(':vis', $vis, PDO::PARAM_INT);
+			$stmt->bindParam(':enl', $enl, PDO::PARAM_STR);
+			$stmt->execute();
+			$stmt->closeCursor();
+			return TRUE;
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+
+	}
 // FIN DE LA CLASE
 }
 ?>

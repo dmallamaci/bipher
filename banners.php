@@ -16,17 +16,11 @@ htmlDoc();
 	<p>El banner debe tener extensión JPG, GIF ó PNG.</p>
 <div>
 	<form method="post" action="subir-banner.php" id="banner-form" enctype="multipart/form-data">
-			<input type="hidden" name="MAX_FILE_SIZE" value="200000" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="250000" />
 		    <label for="banner">Banner</label>
 		    <input type="file" name="banner" id="banner" />
 				<br />
-		    <label for="ambito">Posición </label>
-		    <select id="ambito" name="ambito">
-				<option value="4" selected="selected">300px - Left</option>
-				<option value="3">720px - Top</option>
-				<option value="5">720px - Middle</option>
-				<option value="6">720px - Bottom</option>
-		    </select>
+<?php include_once 'comun/ambitos-select.php';?>
 		    	<br /><br />
 		    <label for="enlace">Enlace Externo (sin <em>http:// </em>) </label>
 			<input type="text" name="enlace" id="enlace" />
