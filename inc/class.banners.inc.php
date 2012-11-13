@@ -135,7 +135,6 @@ class BipherBanners
 			{
 				return $e->getMessage();
 			}
-
 	}
 /*
  *  CARGAR TODA LA INFO DE UN BANNER
@@ -184,7 +183,47 @@ class BipherBanners
 		{
 			return $e->getMessage();
 		}
-
+	}
+/*
+ *	ELIMINAR UN ARCHIVO DE BANNER
+ */
+	public function eliminarGrafico()
+	{
+		$bid = $_POST['id_banner'];
+		$sql = "SELECT ruta_banner FROM controles WHERE id_banner=:bid LIMIT 1";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':bid', $bid, PDO::PARAM_INT);
+			$stmt->execute();
+			$row = $stmt->fetch();
+			$stmt->closeCursor();
+			$ruta = "../".$row['ruta_banner'];
+			unlink("$ruta");
+		}
+		catch(PDOException $e)
+		{
+			return FALSE;
+		}
+	}
+/*
+* Eliminar un banner
+*/
+	public function eliminarBanner()
+	{
+		$bid = $_POST['id_banner'];
+		$sql  ="DELETE FROM controles WHERE id_banner=:bid";
+		try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':bid', $bid, PDO::PARAM_INT);
+			$stmt->execute();
+			$stmt->closeCursor();
+		}
+		catch(PDOException $e)
+			{
+				die($e->getMessage());
+			}
 	}
 // FIN DE LA CLASE
 }

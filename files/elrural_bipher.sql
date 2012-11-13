@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-11-2012 a las 17:44:13
+-- Tiempo de generación: 13-11-2012 a las 19:02:48
 -- Versión del servidor: 5.5.28
 -- Versión de PHP: 5.3.10-1ubuntu3.4
 
@@ -86,19 +86,21 @@ CREATE TABLE IF NOT EXISTS `controles` (
   `ruta_banner` varchar(255) DEFAULT NULL,
   `enlace_banner` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_banner`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
 -- Volcado de datos para la tabla `controles`
 --
 
 INSERT INTO `controles` (`id_banner`, `ambito_banner`, `orden_banner`, `visible_banner`, `ruta_banner`, `enlace_banner`) VALUES
-(8, 4, 1, 1, 'images/banners/banner_elizondo.gif', 'http://www.google.com'),
-(9, 4, 1, 1, 'images/banners/banner_navarro.gif', 'http://yahoo.com.ar'),
-(10, 4, 1, 1, 'images/banners/banner_trafer.gif', 'http://github.com'),
-(11, 5, 1, 1, 'images/banners/banner_navarro.gif', 'http://'),
-(12, 3, 1, 1, 'images/banners/banner_turbocenter.gif', 'http://'),
-(13, 6, 1, 1, 'images/banners/banner_elizondo.gif', 'http://');
+(23, 4, 2, 1, 'images/banners/banner_turbocenter.gif', 'http://'),
+(22, 4, 1, 1, 'images/banners/banner_trafer.gif', 'http://'),
+(20, 4, 3, 1, 'images/banners/banner_elizondo.gif', 'http://'),
+(21, 4, 4, 1, 'images/banners/banner_navarro.gif', 'http://'),
+(15, 5, 21, 1, 'images/banners/NFA_Banner_720x100_2.gif', 'http://'),
+(16, 5, 9, 0, 'images/banners/720x100px_banner_1.jpg', 'http://ninguno.com'),
+(17, 3, 1, 1, 'images/banners/720px_100px_3.png', 'http://'),
+(18, 6, 1, 1, 'images/banners/banner_720x100_7.jpg', 'http://');
 
 -- --------------------------------------------------------
 

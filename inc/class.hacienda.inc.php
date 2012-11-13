@@ -302,7 +302,6 @@ class BipherHacienda
 //		$ruta = '../images/'.$rid;
 //		eliminarDirectorio($ruta);
 	}
-
 /*
 * Eliminar un lote
 */

@@ -19,6 +19,11 @@ if ( $_POST['token'] == $_SESSION['token']
 			$status = $bannerObj->editarBanner();
 			header("Location: ../banners.php");
 			break;
+		case 'eliminar-banner':
+			$status = $bannerObj->eliminarGrafico();
+			$status = $bannerObj->eliminarBanner();
+			header("Location: ../banners.php");
+			break;
 		case 'atras':
 			header("Location: ../login.php");
 			break;
