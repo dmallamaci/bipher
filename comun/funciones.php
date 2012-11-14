@@ -39,19 +39,16 @@ function cadenaToReal($str) {
 function ambitoDePublicacion($entero) {
     switch($entero) {
         case 0:
-            return 'Sólo Buscador';
+            return 'Buscador';
             break;
         case 1:
-            return 'Cálogo Despublicado';
+            return 'Agenda';
             break;
         case 2:
-            return 'Catálogo Publicado';
-            break;
-        case 3:
-            return 'Subasta Online';
+            return 'Catálogo';
             break;
         default:
-            return 'Sin Ámbito de Publicaci&oacute;n';
+            return 'Sin Ámbito de Publicación';
             break;
     }
 }

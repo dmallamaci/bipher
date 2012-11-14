@@ -36,9 +36,13 @@ class BipherHacienda
 		$hora = $_POST['hora_re'];
 		$orga = $_POST['organizador'];
 		$meto = $_POST['metodo'];
-		$stat = $_POST['status_re'];
+		$logo = trim($_POST['logo_re']);
+		$nomb = $_POST['nombre_re'];
+		$info = $_POST['informes_re'];
+		$stat = (int) $_POST['status_re'];
+		$card = 0;
 
-		$sql = "INSERT INTO remates (fecha_re, hora_re, organizador, metodo, status_re) VALUES (:fecha, :hora, :orga, :meto, :stat)";
+		$sql = "INSERT INTO remates (fecha_re, hora_re, organizador, metodo, logo_re, nombre_re, informes_re, status_re, cardinal_re) VALUES (:fecha, :hora, :orga, :meto, :logo, :nomb, :info, :stat, :card)";
 		try
 		{
 			$stmt = $this->_db->prepare($sql);
@@ -46,7 +50,11 @@ class BipherHacienda
 			$stmt->bindParam(':hora', $hora, PDO::PARAM_STR);
 			$stmt->bindParam(':orga', $orga, PDO::PARAM_STR);
 			$stmt->bindParam(':meto', $meto, PDO::PARAM_STR);
+			$stmt->bindParam(':logo', $logo, PDO::PARAM_STR);
+			$stmt->bindParam(':nomb', $nomb, PDO::PARAM_STR);
+			$stmt->bindParam(':info', $info, PDO::PARAM_STR);
 			$stmt->bindParam(':stat', $stat, PDO::PARAM_INT);
+			$stmt->bindParam(':card', $card, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
 		}
@@ -136,40 +144,39 @@ class BipherHacienda
 */
 	public function listaRemates()
 	{
-		$sql = "SELECT remate_id, fecha_re, organizador, status_re FROM remates WHERE fecha_re > DATE_ADD(CURDATE(), INTERVAL -200 DAY) ORDER BY fecha_re DESC;";
-
+//		$sql = "SELECT remate_id, fecha_re, organizador, status_re FROM remates WHERE fecha_re > DATE_ADD(CURDATE(), INTERVAL -200 DAY) ORDER BY fecha_re DESC;";
+		$sql = "SELECT remate_id, fecha_re, hora_re, organizador, status_re, cardinal_re FROM remates ORDER BY fecha_re DESC";
 	try
 	{
 		$stmt = $this->_db->prepare($sql);
 		$stmt->execute();
-
 		echo '<table class="ensayo" summary="Remates de hacienda cargados en Bipher" cellspacing="0">';
 		echo '<tbody>';
 		echo '<tr class="principal">';
-		echo '<th>ID</th><th>Fecha</th><th>Organizador</th><th>&Aacute;mbito de Publicaci&oacute;n</th><th></th><th></th><th></th><th></th>';
+		echo '<th>ID</th><th>Fecha</th><th>Hora</th><th>Organizador</th><th>Ámbito de Publicación</th><th>#Lotes</th><th></th><th></th><th></th>';
 		echo '</tr>';
 		echo '<tr>';
-
 		while($row = $stmt->fetch())
 		{
 			$rid = $row['remate_id'];
 			$fecha = $row['fecha_re'];
+			$hora = $row['hora_re'];
 			$orga = $row['organizador'];
 			$stat = $row['status_re'];
-
+			$card = $row['cardinal_re'];
 			echo "<tr>";
 			echo "<td>" .$rid."</td>";
 			echo "<td>" .darVueltaFecha($fecha)."</td>";
+			echo "<td>" .$hora."</td>";
 			echo "<td>" .$orga."</td>";
 			echo "<td>" .ambitoDePublicacion($stat)."</td>";
+			echo "<td>" .$card."</td>";
 			echo '<td><a href="editar-remate.php?subasta='.$rid.'">Editar</a></td>';
 			echo '<td><a href="eliminar-remate.php?subasta='.$rid.'">Borrar</a></td>';
-			echo '<td><a href="c-editar.php?subasta='.$rid.'">Catálogo</a></td>';
 			echo '<td><a href="nuevo-lote.php?subasta='.$rid.'&lote=nuevo">Lotes</a></td>';
 			echo "</tr>";
 		}
 		echo "<table>";
-
 		$stmt->closeCursor();
 	}
 	catch(PDOException $e)
@@ -228,7 +235,7 @@ class BipherHacienda
 	public function cargarInfoRemate($subasta=NULL)
 	{
 		$subasta = $_GET['subasta'];
-		$sql = "SELECT fecha_re, hora_re, organizador, metodo, status_re, cardinal_re FROM remates WHERE remate_id=:subasta";
+		$sql = "SELECT * FROM remates WHERE remate_id=:subasta";
 		try
 		{
 			$stmt = $this->_db->prepare($sql);
@@ -236,7 +243,7 @@ class BipherHacienda
 			$stmt->execute();
 			$linea = $stmt->fetch();
 			$stmt->closeCursor();
-			return array($subasta, $linea['fecha_re'], $linea['hora_re'], $linea['organizador'], $linea['metodo'], $linea['status_re'], $linea['cardinal_re']);
+			return array($linea['remate_id'], $linea['fecha_re'], $linea['hora_re'], $linea['organizador'], $linea['metodo'], $linea['logo_re'], $linea['nombre_re'], $linea['informes_re'], $linea['status_re'], $linea['cardinal_re']);
 		}
 		catch(PDOException $e)
 		{
@@ -357,21 +364,27 @@ class BipherHacienda
 	public function editaRemate()
 	{
 		$rid = $_POST['remate_id'];
-		$statu = $_POST['status_re'];
-		$fecha = darVueltaFecha($_POST['fecha_re']);
+		$fech = darVueltaFecha($_POST['fecha_re']);
 		$hora = $_POST['hora_re'];
 		$orga = $_POST['organizador'];
 		$meto = $_POST['metodo'];
-		$sql = "UPDATE remates SET fecha_re = :fecha, hora_re = :hora, organizador = :orga, metodo = :meto, status_re = :statu WHERE remate_id = :rid";
+		$logo = $_POST['logo_re'];
+		$nomb = $_POST['nombre_re'];
+		$info = $_POST['informes_re'];
+		$stat = $_POST['status_re'];
+		$sql = "UPDATE remates SET fecha_re = :fech, hora_re = :hora, organizador = :orga, metodo = :meto, logo_re = :logo, nombre_re = :nomb, informes_re = :info, status_re = :stat WHERE remate_id = :rid";
 		try
 		{
 			$stmt = $this->_db->prepare($sql);
 			$stmt->bindParam(':rid', $rid, PDO::PARAM_INT);
-			$stmt->bindParam(':fecha', $fecha, PDO::PARAM_INT);
+			$stmt->bindParam(':fech', $fech, PDO::PARAM_INT);
 			$stmt->bindParam(':hora', $hora, PDO::PARAM_STR);
 			$stmt->bindParam(':orga', $orga, PDO::PARAM_STR);
 			$stmt->bindParam(':meto', $meto, PDO::PARAM_STR);
-			$stmt->bindParam(':statu', $statu, PDO::PARAM_INT);
+			$stmt->bindParam(':logo', $logo, PDO::PARAM_STR);
+			$stmt->bindParam(':nomb', $nomb, PDO::PARAM_STR);
+			$stmt->bindParam(':info', $info, PDO::PARAM_STR);
+			$stmt->bindParam(':stat', $stat, PDO::PARAM_INT);
 			$stmt->execute();
 			$stmt->closeCursor();
 			return TRUE;

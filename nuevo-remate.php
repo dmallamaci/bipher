@@ -32,8 +32,17 @@ htmlDoc();
 				<label for="organizador">Organizador del Remate</label>
 				<input type="text" name="organizador" id="organizador" />
 					<br /><br />
-				<label for="metodo">M&eacute;todo de Venta</label>
+				<label for="metodo">Método de Venta</label>
 				<input type="text" name="metodo" id="metodo" />
+					<br /><br />
+				<label for="logo_re">Logo </label>
+				<input type="text" name="logo_re" id="logo_re" value="images/logos/rural.png" />
+					<br /><br />
+				<label for="nombre_re">Nombre o frase de promoción  </label>
+				<input type="text" name="nombre_re" id="nombre_re" />
+					<br /><br />
+				<label for="informes_re">Información  </label>
+				<input type="text" name="informes_re" id="informes_re" />
 					<br /><br />
 				<input type="submit" name="nuevoremate" id="nuevoremate" value="Agregar Remate" class="button" />
 				<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
