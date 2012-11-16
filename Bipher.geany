@@ -19,13 +19,14 @@ long_line_column=72
 
 [files]
 current_page=6
-FILE_NAME_0=7834;PHP;0;16;1;1;1;/var/www/bipher/nuevo-lote.php;0;4
-FILE_NAME_1=1695;PHP;0;16;1;1;1;/var/www/bipher/db-interaccion/hacienda.php;0;4
-FILE_NAME_2=16312;PHP;0;16;1;1;1;/var/www/bipher/inc/class.hacienda.inc.php;0;4
+FILE_NAME_0=1695;PHP;0;16;1;1;1;/var/www/bipher/db-interaccion/hacienda.php;0;4
+FILE_NAME_1=5169;PHP;0;16;1;1;1;/var/www/bipher/inc/class.hacienda.inc.php;0;4
+FILE_NAME_2=0;PHP;0;16;1;1;1;/var/www/bipher/login.php;0;4
 FILE_NAME_3=0;PHP;0;16;1;1;1;/var/www/bipher/res-lotes.php;0;4
-FILE_NAME_4=407;PHP;0;16;1;1;1;/var/www/bipher/editar-lote.php;0;4
-FILE_NAME_5=0;PHP;0;16;1;1;1;/var/www/bipher/eliminar-remate.php;0;4
-FILE_NAME_6=0;PHP;0;16;1;1;1;/var/www/bipher/nuevo-remate.php;0;4
+FILE_NAME_4=2056;PHP;0;16;1;1;1;/var/www/bipher/editar-remate.php;0;4
+FILE_NAME_5=104;PHP;0;16;1;1;1;/var/www/bipher/nuevo-remate.php;0;4
+FILE_NAME_6=4099;PHP;0;16;1;1;1;/var/www/bipher/comun/logos-select.php;0;4
+FILE_NAME_7=961;PHP;0;16;1;1;1;/var/www/bipher/comun/ambitos-select.php;0;4
 
 [VTE]
 last_dir=/var/www/bipher

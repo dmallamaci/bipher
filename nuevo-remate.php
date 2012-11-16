@@ -5,6 +5,7 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
+<script src="js/cambiar-logo.js" type="text/javascript"></script>
 </head>
 <body>
 <?php include_once 'comun/abre-body-usuario.php';?>
@@ -34,9 +35,8 @@ htmlDoc();
 					<br /><br />
 				<label for="metodo">Método de Venta</label>
 				<input type="text" name="metodo" id="metodo" />
-					<br /><br />
-				<label for="logo_re">Logo </label>
-				<input type="text" name="logo_re" id="logo_re" value="images/logos/rural.png" />
+					<br />
+<?php include_once 'comun/logos-select.php';?>
 					<br /><br />
 				<label for="nombre_re">Nombre o frase de promoción  </label>
 				<input type="text" name="nombre_re" id="nombre_re" />

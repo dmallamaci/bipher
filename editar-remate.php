@@ -5,6 +5,7 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
+<script src="js/cambiar-logo.js" type="text/javascript"></script>
 </head>
 <body>
 <?php include_once 'comun/abre-body-usuario.php';?>
@@ -53,10 +54,8 @@ htmlDoc();
 					<br /><br />
 				<label for="organizador">Organizador del Remate</label>
 				<input type="text" name="organizador" id="organizador" value="<?php echo $organizador; ?>"  />
-					<br /><br />
-				<label for="logo_re">Logo </label>
-				<input type="text" name="logo_re" id="logo_re" value="<?php echo $logo; ?>" />
-				<img src="<?php echo $logo; ?>" alt="Logo" /> <span><a href="#">Cambiar</a></span>
+					<br />
+<?php include_once 'comun/logos-select.php';?>
 					<br /><br />
 				<label for="metodo">Método de Venta</label>
 				<input type="text" name="metodo" id="metodo" value="<?php echo $metodo; ?>" />
