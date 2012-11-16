@@ -3,6 +3,12 @@
  * Desplegable de Logos. Puede recibir o no la variable $logo, que es el
  * path del logo. Si existe $logo muestra el desplegable con ese
  * logo seleccionado.
+ *
+ * PARA AGREGAR UN LOGO
+ * -Subir el gráfico png a la carpeta images/logos
+ * - Incrementar una unidad la condición del WHILE
+ * - Añadir un CASE
+ * - Añadir el <option> correspondiente en el <select>
  */
 // Variables vacías para el atributo "selected" del desplegable
 $opcion = array();
