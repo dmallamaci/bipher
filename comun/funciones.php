@@ -105,6 +105,85 @@ function decirCategoria($ent) {
     }
 }
 /*
+ * Convertir a cadena la el Enterro de la Provincia
+ */
+function decirProvincia($ent) {
+    switch($ent) {
+        case 1:
+            return 'Buenos Aires';
+            break;
+        case 2:
+            return 'Catamarca';
+            break;
+        case 3:
+            return 'Chaco';
+            break;
+        case 4:
+            return 'Chubut';
+            break;
+        case 5:
+            return 'Cordoba';
+            break;
+        case 6:
+            return 'Corrientes';
+            break;
+        case 7:
+            return 'Entre Rios';
+            break;
+        case 8:
+            return 'Formosa';
+            break;
+        case 9:
+            return 'Jujuy';
+            break;
+        case 10:
+            return 'La Pampa';
+            break;
+        case 11:
+            return 'La Rioja';
+            break;
+        case 12:
+            return 'Mendoza';
+            break;
+        case 13:
+            return 'Misiones';
+            break;
+        case 14:
+            return 'Neuquen';
+            break;
+        case 15:
+            return 'Rio Negro';
+            break;
+        case 16:
+            return 'Salta';
+            break;
+        case 17:
+            return 'San Juan';
+            break;
+        case 18:
+            return 'San Luis';
+            break;
+        case 19:
+            return 'Santa Cruz';
+            break;
+        case 20:
+            return 'Santa Fe';
+            break;
+        case 21:
+            return 'Santiago del Estero';
+            break;
+        case 22:
+            return 'Tierra del Fuego';
+            break;
+        case 23:
+            return 'Tucuman';
+            break;
+        default:
+            return 'No Disponible';
+            break;
+    }
+}
+/*
  * No mostrar si Vale Cero
  */
 function noMostrarSiEsCero($algo) {

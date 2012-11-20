@@ -744,6 +744,30 @@ class BipherHacienda
 			return $e->getMessage();
 		}
 	}
+/*
+ *	AGREGAR UNA LOCALIDAD
+ */
+	public function agregarLocalidad()
+	{
+		$pid = $_POST['provincia']*1;
+// sin  utf8_decode COMENTAR EN LOCALHOSTH
+//		$lok = strtoupper(trim($_POST['localidad']));
+// con  utf8_decode COMENTAR EN SERVIDOR
+		$lok = utf8_decode(trim($_POST['localidad']));
+		$coo = $_POST['coordenadas'];
+		list($cox, $coy) = explode(",", $coo);
+		$lat = cadenaToReal($cox)*1;
+		$lon = cadenaToReal($coy)*1;
+
+		$sql = "INSERT INTO localidades (localidad, latitud, longitud, provincia_id) VALUES (:lok, :lat, :lon, :pid)";
+		$stmt = $this->_db->prepare($sql);
+		$stmt->bindParam(':pid', $pid, PDO::PARAM_INT);
+		$stmt->bindParam(':lok', $lok, PDO::PARAM_STR);
+		$stmt->bindParam(':lat', $lat);
+		$stmt->bindParam(':lon', $lon);
+		$stmt->execute();
+		$stmt->closeCursor();
+	}
 // FIN DE LA CLASE
 }
 ?>

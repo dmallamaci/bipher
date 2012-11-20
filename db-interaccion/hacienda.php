@@ -11,6 +11,10 @@ if ( $_POST['token'] == $_SESSION['token']
 {
 	switch($_POST['action'])
 	{
+		case 'agregar-localidad':
+			$status = $haciendaObj->agregarLocalidad();
+			header("Location: ../login.php");
+			break;
 		case 'agregar-remate':
 			$status = $haciendaObj->agregarRemate(); //OK
 			$directorio = new BipherHacienda($db);

@@ -21,8 +21,8 @@ htmlDoc();
     }
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
   }
-
   function codeAddress() {
+
     var address = document.getElementById("address").value;
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
@@ -32,26 +32,59 @@ htmlDoc();
             map: map,
             position: results[0].geometry.location
         });
-
-
       } else {
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
   }
 </script>
+<script type="text/javascript">
+function validar(){
+	if (document.lok.provincia.selectedIndex==0){
+		alert("Falta elegir la Provincia. \nComplete el formulario o use \nel boton Volver sin Guardar");
+		document.lok.provincia.focus();
+		return false;
+		}
+	if (document.lok.localidad.value.length==0 || document.form_mapa.coordenadas.value.length==0){
+		alert('Falta la Localidad o las Coordenadas. \nComplete el formulario o use \nel boton Volver sin Guardar');
+		document.lok.localidad.focus();
+		return false;
+		}
+	return true;
+}
+</script>
+<script type="text/javascript">
+    function conMayusculas(field) {
+            field.value = field.value.toUpperCase()
+}
+</script>
 </head>
 <body onload="initialize()">
-
 <?php include_once 'comun/abre-body-usuario.php';?>
 <?php if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['username'])): ?>
 <!-- ACCIONES CON MAPAS -->
      <h2>Obtener coordenadas de una localidad</h2>
-		<br />
-<form id="form_mapa">
-    <input id="address" type="textbox" value="Sydney, NSW" />
-    <input type="button" value="Encode" onclick="codeAddress()" />
+		<p>Para obtener mejores resultados escriba la localidad a buscar seguida de la provincia y el pais, separados por comas.<br />Por ejemplo, para buscar <em>Pergamino</em> escriba: <em>Pergamino, Buenos Aires, Argentina</em>.</p>
+	<br />
+	<label for="address">Localidad a Buscar </label>
+    <input id="address" type="textbox" value="" />
+    <input type="button" value="Obtener Coordenadas" onclick="codeAddress()" />
+	<br />
+	<hr />
+<h2>Guarde el resultado en la base de datos</h2>
+<p>Si obtuvo como resultado un par de coordenadas debe guardar el resultado en la base de datos.<br /> Vuelva a escribir el nombre de la localidad y seleccione la provincia a la que pertenece.</p>
+<form method="post" action="db-interaccion/hacienda.php" id="lok" name="lok">
+	<input type="hidden" name="action" value="agregar-localidad" />
+	<label for="coordenadas">Coordenadas </label>
 	<input type="text" id="coordenadas" name="coordenadas" value="" />
+	<br />
+	<label for="localidad">Nombre de Localidad </label>
+	<input type="text" id="localidad" name="localidad" onchange="conMayusculas(this)" />
+	<?php include_once 'comun/provincias-select.php';?>
+	<br />
+	<input type="submit" name="agregalocalidad" id="agregalocalidad" value="Agregar nueva Localidad" onclick="return validar()" class="button" />
+	<input type="submit" name="atras" id="atras" value="Volver sin Guardar" class="button" />
+	<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
 </form>
 
 <div style="width: 700px; border-width: 1px; border-style: solid; border-color: #979797; padding:8px 8px 8px 8px;">
