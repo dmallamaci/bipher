@@ -150,23 +150,36 @@ class BipherPublico
  * según su ambito de publicacion y su fecha.
  * Recibe como parametros: un entero que es el ambito, y usa CURDATE()
 */
-    public function ventaCatalogo($ambito) {
+    public function ventaIndex($ambito) {
         switch($ambito) {
             //Solo Buscador (Remates Pasados)
+            // levanta registros donde la fecha del remate es menor a hoy
+            // y el ámbito (status_re) == 0
             case 0:
-                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 10";
+                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 5";
             break;
-            //Catalogo Despublicado (Agenda de Remates) - Sin enlace a lotes.
+            //Agenda de Remates - Sin enlace a lotes.
+            // levanta registros donde la fecha de remate es mayor a ayer
+            // y el ámbito es == 1 (Los formatea sin enlace a los lotes)
             case 1:
-                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC";
+                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC LIMIT 5";
             break;
-            //Catalogo Publicado (Destacado)
+            //Catalogo (Destacado)
+            // levanta registros donde la fecha de remate es mayor a ayer
+            // y el ámbito es == 2 (Los formatea CON enlace al Catálogo
+            // y los lotes)
             case 2:
-                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC LIMIT 3";
+                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re>=CURDATE() ORDER BY fecha_re ASC LIMIT 5";
             break;
-            //Ba (un destacado para el remate de hoy)
+            //Banners Top, Middle y Bottom respectivamente
             case 3:
-                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re=CURDATE() LIMIT 1";
+            case 5:
+            case 6:
+                $sql = "SELECT ruta_banner, enlace_banner FROM controles WHERE ambito_banner =:ambito AND visible_banner = 1 ORDER BY orden_banner ASC LIMIT 1";
+            break;
+            //Banners LEFT
+            case 4:
+                $sql = "SELECT ruta_banner, enlace_banner FROM controles WHERE ambito_banner =:ambito AND visible_banner = 1 ORDER BY orden_banner ASC";
             break;
             //Por default solo el buscador
             default:
@@ -200,6 +213,9 @@ class BipherPublico
 */
     private function formatearVenta($row, $ambito)
     {
+	// Discrimino si son remates o banners
+		if($ambito < 3) // es un remate
+		{
         $rid = $row['remate_id'];
         $fec = $row['fecha_re'];
         $hor = $row['hora_re'];
@@ -210,22 +226,34 @@ class BipherPublico
         $car = $row['cardinal_re'];
         $inf = $row['informes_re'];
         $salto = '<br />';
-
         switch($ambito)
             {
+			  // Es el encabezado de una lista de lotes
+			  case -1:
+				$dia = new DateTimeArgento($fec);
+				$diaSemana = $dia->format('l');
+				$abre = '<div style="padding-top: 20px;">';
+				$venta = '<h2 class="centrado">Organizador: '.$org.'</h2>';
+				$venta = $venta.'<div class="logotipo izquierda centrado"><img src="'.$log.'" alt="Logo de '.$org.'" /></div>';
+				$venta = $venta.'<div id="datosubasta" class="centrado"><p><strong>'.$nom.'</strong></p>';
+				$venta = $venta.'<p class="centrado">'.$car.' lotes a la venta. '.$met.'.</p>';
+				$venta = $venta.'<p>Informes: '.$inf.'</p></div>';
+				$venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.'hs.</div>';
+				$cierra = '</div>';
+			  break;
             //Solo Buscador
             case 0:
                 $abre = '<div class="buscador">';
-                $venta = '<div><span><a href="p-catalogo.php?subasta='.$rid.'" class="sindecorar"><img src="images/vineta-vaca.png" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; '.$car.' lotes subastados</a></span></div>';
-                $cierra = '<br /></div>';
+                $venta = '<span><a href="lista-lotes.php?subasta='.$rid.'" class="sindecorar"><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; '.$car.' lotes subastados</a></span>';
+                $cierra = '</div>';
             break;
-            //Catalogo Despublicado (Equivale a Agenda de Remates)
+            // Agenda de Remates
             case 1:
                 $abre = '<div class="despublicado">';
                 $venta = '<div><span><img src="images/vineta-vaca.png" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Informes:'.$inf.'</span></div>';
                 $cierra = '</div>';
             break;
-            //Catalogo Publicado
+            // Catalogo Publicado
             case 2:
                 $dia = new DateTimeArgento($fec);
                 $diaSemana = $dia->format('l');
@@ -239,50 +267,37 @@ class BipherPublico
                 $venta = $venta.'<p>'.$met.'</p>';
                 $cierra = '</div>';
             break;
-            //Enlazar a transmisión en vivo de CR
-            case 3:
-                $dia = new DateTimeArgento($fec);
-                $diaSemana = $dia->format('l');
-                $abre = '<div id="subastaahora">';
-                $venta = '<p><strong>'.$nom.'</strong></p>';
-                $venta = $venta.'<div class="logotipo"><img src="'.$log.'" alt="Logo de '.$org.'" /></div>';
-                $venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.'hs.</div>';
-                $venta = $venta.'<p>Organiza: <strong>'.$org.'</strong></p>';
-                $venta = $venta.'<p><a class="vercatalogo" href="#">+ Ver Remate</a><p>';
-                $cierra = '</div>';
-            break;
-            //XXX Es la cabecera del catalogo para este remate
-            case 7:
-                $dia = new DateTimeArgento($fec);
-                $diaSemana = $dia->format('l');
-                $abre = '<div>';
-                $venta = '<h2 class="centrado">Organiza: '.$org.'</h2>';
-                $venta = $venta.'<div class="logotipo izquierda centrado"><img src="'.$log.'" alt="Logo de '.$org.'" /></div>';
-                $venta = $venta.'<div id="datosubasta" class="izquierda"><p><strong>'.$nom.'</strong></p>';
-                $venta = $venta.'<p>Son '.$car.' lotes a la venta. '.$met.'.</p>';
-                $venta = $venta.'<p>Informes: '.$inf.'</p></div>';
-
-                $venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.'hs.</div>';
-                $cierra = '</div>';
-            break;
-            //XXX Es la cabecera del detalle de lote para este remate
-            case 8:
-                $abre = '<div class="xxxxxxxx">';
-                $venta = '<h2>'.$nom.'</h2>';
-                $venta = $venta.'<div class="logotipo"><img src="'.$log.'" alt="Logo de '.$org.'" /></div>';
-                $venta = $venta.'<div class="fechagrande">'.darVueltaFecha($fec).' - '.$hor.'hs.</div>';
-                $venta = $venta.'<p>Organiza: <strong>'.$org.'</strong></p>';
-                $venta = $venta.'<p>Son '.$car.' lotes a la venta en '.$met.'.<p>';
-                $venta = $venta.'<p>Informes: '.$inf.'<p>';
-                $cierra = '</div>';
-            break;
             //Por default solo el buscador
             default:
-                $abre = '<div class="buscador">';
+                $abre = '<div>';
                 $cierra = '</div>';
             break;
             }
         return $abre.$venta.$cierra;
+       }
+       else // es un banner
+       {
+		 $ruta = $row['ruta_banner'];
+		 $enlace = $row['enlace_banner'];
+		 $venta = '<a href="'.$enlace.'" style="border:0px" target="_blank">';
+		 $venta = $venta.'<img src="'.$ruta.'" alt="banner" />';
+		 $venta = $venta.'</a>';
+		 $cierra = '</div>';
+		 switch($ambito)
+			{
+				case 3:
+				case 5:
+				$abre = '<div class="banner720">';
+					break;
+				case 6:
+				$abre = '<div class="banner720">';
+					break;
+				case 4:
+				$abre = '<div class="bannerleft">';
+					break;
+			}
+			return $abre.$venta.$cierra;
+		}
     }
 /*
  * Mostrar los detalles de un lote
@@ -327,6 +342,79 @@ class BipherPublico
             return $e->getMessage();
         }
     }
+/*
+* Cargar datos de un remate para su catálogo
+*/
+	public function cargaDatosRemate($ri, $ambito)
+	{
+		$sql = "SELECT * FROM remates WHERE remate_id =:ri LIMIT 1";
+			try
+		{
+			$stmt = $this->_db->prepare($sql);
+			$stmt->bindParam(':ri', $ri, PDO::PARAM_INT);
+			$stmt->execute();
+		//Muestra la venta de la cartelera con formato
+			while($row = $stmt->fetch())
+			{
+				echo $this->formatearVenta($row, $ambito);
+			}
+			$stmt->closeCursor();
+		}
+		catch(PDOException $e)
+		{
+			return FALSE;
+		}
+	}
+/*
+* Muestra los lotes en tabla agrupados por categoria
+* recibe el ID de remate y el entero de la categoría
+*/
+	public function ordenaLotesPorCategoria($ri)
+	{
+		$sql = "SELECT localidades.localidad, provincias.provincia, lotes.categoria_lo, lotes.subcategoria, lotes.num_lo, lotes.orden_lo, lotes.lote_id FROM localidades, provincias, lotes WHERE lotes.remate_id =:re AND provincias.provincia_id = localidades.provincia_id AND lotes.localidad_lo = localidades.localidad_id ORDER BY orden_lo ASC";
+	try
+	{
+		$stmt = $this->_db->prepare($sql);
+		$stmt->bindParam(':re', $ri, PDO::PARAM_INT);
+		$stmt->execute();
+
+			//XXX Poner una viñeta a la categotia
+			echo '<table class="ensayo" summary="Lotes cargados" cellspacing="0">';
+			echo '<tbody>';
+			echo '<tr class="principal">';
+			echo '<th></th><th>Lote</th><th>Orden</th><th>Origen</th><th>Categor&iacute;a</th><th>Detalles</th><th></th>';
+			echo '</tr>';
+			echo '<tr>';
+
+			while($row = $stmt->fetch())
+			{
+				$lok = $row['localidad'];
+				$prv = $row['provincia'];
+				$kat = $row['categoria_lo'];
+				$sbk = $row['subcategoria'];
+				$nlo = $row['num_lo'];
+				$ord = $row['orden_lo'];
+				$lid = $row['lote_id'];
+
+				echo '<tr>';
+				echo '<td><a class="sinborde desplazarpoco" href="p-lote.php?subasta='.$ri.'&lote='.$lid.'"><img src="images/vineta-vaca.png" /></a></td>';
+				echo '<td>'.$nlo.'</td>';
+				echo '<td><strong>&nbsp; &nbsp;'.noMostrarSiEsCero($ord).'</strong></td>';
+				echo '<td>'.$lok.' - '.$prv.'</td>';
+				echo '<td>'.decirCategoria($kat).'</td>';
+				echo '<td>'.$sbk.'</td>';
+				echo '<td><a href="p-lote.php?subasta='.$ri.'&lote='.$lid.'">Ver</a></td>';
+				echo '</tr>';
+			}
+			echo '</table>';
+			$stmt->closeCursor();
+
+		}
+	catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
 // FIN DE LA CLASE
 }
 ?>

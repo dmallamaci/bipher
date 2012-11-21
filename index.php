@@ -39,27 +39,52 @@ htmlDoc();
             </div>
         </div>
 <?php
-// Venta del remate de Hoy y enlace a TX en Vivo
+// Banner TOP, si existe
 $ca3 = new BipherPublico($db);
-$ca3->ventaCatalogo(3);
+$ca3->ventaIndex(3);
 ?>
-<!--
-comienzan LOS BANNERS DE PUBLICIDAD
--->
-    <div class="avisos">Aqui va publicidad<img src="images/lart.png" /></div>
-    <div class="avisos">Aqui va publicidad<img src="images/lart.png" /></div>
-    <div class="avisos">Aqui va publicidad<img src="images/lart.png" /></div>
-<!-- Termina la publicidad -->
-</div>
+<div id="contenedor">
+<!-- comienzan LOS BANNERS DE LEFT -->
+    <div class="avisos">
+<?php
+// Banners LEFT
+$ca4 = new BipherPublico($db);
+$ca4->ventaIndex(4);
+?>
+    </div>
+<!-- Terminan LOS BANNERS DE LEFT -->
+
 <!-- Comienza la columna de Próximos remates -->
         <div id="proximosremates">
+			<h2>Próximos Remates</h2>
 <?php
 $ca2 = new BipherPublico($db);
-$ca2->ventaCatalogo(2);
+$ca2->ventaIndex(2);
 $ca1 = new BipherPublico($db);
-$ca1->ventaCatalogo(1);
+$ca1->ventaIndex(1);
 ?>
         </div>
+<!-- Termina la columna de Próximos remates -->
+</div>
+<div class="clear"></div>
+<?php
+// Banner MIDDLE si existe
+$ca5 = new BipherPublico($db);
+$ca5->ventaIndex(5);
+?>
+<div id="guarda">
+<h2 class="centrado">Últimos remates televisados</h2>
+</div>
+<?php
+// Lista de Remates Pasados (Buscador)
+$ca0 = new BipherPublico($db);
+$ca0->ventaIndex(0);
+// Banner BOTTOM, si existe
+$ca6 = new BipherPublico($db);
+$ca6->ventaIndex(6);
+?>
+<!-- Fin de los contenidos -->
+
     </div>
 </body>
 </html>

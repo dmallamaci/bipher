@@ -37,7 +37,7 @@ If(isset($amb))
 		    <label for="ambito">Posición </label>
 		    <select id="ambito" name="ambito">
 				<option value="4"<?php echo $opcion[4] ?>>300px - Left</option>
-				<option value="3"<?php echo $opcion[3] ?>>720px - Top</option>
-				<option value="5"<?php echo $opcion[5] ?>>720px - Middle</option>
-				<option value="6"<?php echo $opcion[6] ?>>720px - Bottom</option>
+				<option value="3"<?php echo $opcion[3] ?>>780px - Top</option>
+				<option value="5"<?php echo $opcion[5] ?>>780px - Middle</option>
+				<option value="6"<?php echo $opcion[6] ?>>780px - Bottom</option>
 		    </select>

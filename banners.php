@@ -39,21 +39,21 @@ include_once 'inc/class.banners.inc.php';
 	$avisos4->mostrarBanners(4);
 ?>
 	<hr />
-		<h3>Gestionar Banners en TOP - 720px</h3>
+		<h3>Gestionar Banners en TOP - 780px</h3>
 		<p>Solo aparece publicado el banner que tenga marcada la casilla <strong>Publicado</strong> con el número de orden más bajo. Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
 <?php
 	$avisos3 = new BipherBanners($db);
 	$avisos3->mostrarBanners(3);
 ?>
 	<hr />
-		<h3>Gestionar Banners en MIDDLE - 720px</h3>
+		<h3>Gestionar Banners en MIDDLE - 780px</h3>
 		<p>Solo aparece publicado el banner que tenga marcada la casilla <strong>Publicado</strong> con el número de orden más bajo. Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
 <?php
 	$avisos5 = new BipherBanners($db);
 	$avisos5->mostrarBanners(5);
 ?>
 	<hr />
-		<h3>Gestionar Banners en BOTTOM - 720px</h3>
+		<h3>Gestionar Banners en BOTTOM - 780px</h3>
 		<p>Solo aparece publicado el banner que tenga marcada la casilla <strong>Publicado</strong> con el número de orden más bajo. Para reordenar los banners asigne a cada uno un número entre 1 y 99 y luego pulse el botón <strong>Cambiar Orden</strong>.</p>
 <?php
 	$avisos6 = new BipherBanners($db);
