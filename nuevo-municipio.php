@@ -71,8 +71,9 @@ function validar(){
     <input type="button" value="Obtener Coordenadas" onclick="codeAddress()" />
 	<br />
 	<hr />
-<h2>Guarde el resultado en la base de datos</h2>
+<h2>Guardar el resultado en la base de datos</h2>
 <p>Si obtuvo como resultado un par de coordenadas debe guardar el resultado en la base de datos.<br /> Vuelva a escribir el nombre de la localidad y seleccione la provincia a la que pertenece.</p>
+
 <form method="post" action="db-interaccion/hacienda.php" id="lok" name="lok">
 	<input type="hidden" name="action" value="agregar-localidad" />
 	<label for="coordenadas">Coordenadas </label>
@@ -81,11 +82,14 @@ function validar(){
 	<label for="localidad">Nombre de Localidad </label>
 	<input type="text" id="localidad" name="localidad" onchange="conMayusculas(this)" />
 	<?php include_once 'comun/provincias-select.php';?>
-	<br />
+	<br /><br />
+		<p>El mapa sirve para verificar que las coordenadas obtenidas corresponden con la localidad buscada.<br />Si la marca en el mapa no es correcta, no guarde las coordenadas. Repita la búsqueda ampliando los criterios.</p>
+		<p>Se puede ampliar, reducir y mover el mapa pero <strong>es solo una guia visual</strong>.<br />Hacer click en el mapa <strong>no modifica las coordenadas</strong>.</p>
 	<input type="submit" name="agregalocalidad" id="agregalocalidad" value="Agregar nueva Localidad" onclick="return validar()" class="button" />
 	<input type="submit" name="atras" id="atras" value="Volver sin Guardar" class="button" />
 	<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
 </form>
+<div style="height: 18px;"></div>
 
 <div style="width: 700px; border-width: 1px; border-style: solid; border-color: #979797; padding:8px 8px 8px 8px;">
         <div id="map_canvas" style="width: 700px; height: 500px"></div>

@@ -15,7 +15,7 @@ htmlDoc();
 <?php
 include_once 'inc/class.hacienda.inc.php';
 		$remat = new BipherHacienda($db);
-		list($id, $fe, $ho, $or, $met, $st, $ca) = $remat->cargarInfoRemate();
+		list($id, $fe, $ho, $or, $met, $logo, $nomb, $inf, $st, $ca) = $remat->cargarInfoRemate();
 		$nombre_lote =  $ca + 1;
 		if($_GET['lote']=="changed")
 		{
@@ -28,8 +28,6 @@ include_once 'inc/class.hacienda.inc.php';
 ?>
 <h2>Agregar o editar lotes en el remate de <?php echo $or; ?> del <?php echo darVueltaFecha($fe); ?></h2>
 			<p>Los campos en verde pueden quedar en blanco cuando se cargan datos solamente para el buscador.</p>
-
-
 <br></br>
 		<form method="post" action="db-interaccion/hacienda.php" id="agregar-lote-form" name="fvalida">
 			<div>
@@ -38,8 +36,7 @@ include_once 'inc/class.hacienda.inc.php';
 				<input type="hidden" name="fecha" id="fecha" value="<?php echo $fe; ?>" />
 				<input type="hidden" name="organizador" id="organizador" value="<?php echo $or; ?>" />
 				<input type="hidden" name="metodo" id="metodo" value="<?php echo $met; ?>" />
-
-			<label for="numerolote" class="catalogo">Designación de Lote (alfanumérico, hasta 25 caracteres)</label>
+			<label for="numerolote" class="catalogo">Designación de Lote o certificado</label>
 			<input type="text" name="numerolote" id="numerolote" value="Lote <?php echo $nombre_lote; ?>" />
 				<br />
 			<label class="selec" for="categoria">Categoría</label>
