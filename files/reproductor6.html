@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript"
+  src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js">
+</script>
+
+<title>Canal Rural en Directo</title>
+
+</head>
+
+<body>
+<script type='text/javascript' src='swfobject.js'></script>
+
+<div id='mediaspace'>This text will be replaced</div>
+<!--
+<div id='player1'>This text will be replaced</div>
+-->
+<script type='text/javascript'>
+  var so = new SWFObject('player.swf','ply','468','500','9','#000000');
+  so.addParam('allowfullscreen','true');
+  so.addParam('allowscriptaccess','always');
+  so.addParam('wmode','opaque');
+  so.addVariable('playlistfile','playlist.xml');
+  so.addVariable('autostart','true');
+  so.addVariable('playlist','bottom');
+  so.write('mediaspace');
+</script>
+
+</body>
+</html>

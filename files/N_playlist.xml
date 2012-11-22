@@ -1,0 +1,39 @@
+<rss version="2.0"
+
+    xmlns:media="http://search.yahoo.com/mrss/" 
+
+    xmlns:jwplayer="http://developer.longtailvideo.com/trac/wiki/FlashFormats"> 
+
+  <channel> 
+
+    <title>TN Single video with bitrate switching</title> 
+
+    <item> 
+
+      <title>TodoNoticias :: Live Streaming</title> 
+
+<!--      <description>Cambiando a full screen se podra notar el cambio del file...</description> -->
+
+      <media:group> 
+
+        <media:content bitrate="532" url="tnmovil2" width="640" />
+
+       <media:content bitrate="232" url="tnmovil1" width="320" />
+
+        <media:content bitrate="132" url="tnmovil3" width="320" />
+
+        <media:thumbnail url="tn.jpg" /> 
+
+      </media:group> 
+
+      <jwplayer:type>rtmp</jwplayer:type> 
+
+      <jwplayer:streamer>rtmp://stream.tn.com.ar/live</jwplayer:streamer> 
+
+    </item> 
+
+  </channel> 
+
+</rss>
+
+

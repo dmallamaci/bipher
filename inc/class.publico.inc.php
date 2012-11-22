@@ -300,48 +300,118 @@ class BipherPublico
 		}
     }
 /*
- * Mostrar los detalles de un lote
- * @param lid : un entero que es el id del lote
- * @return : una lista con los datos del lote
- */
-    public function detallesLote($idLote)
-    {
-        $sql ="SELECT * FROM lotes, localidades, provincias, remates, categorias WHERE lote_id = :lot AND localidad_lo = localidad_id AND provincia_lo = provincias.provincia_id AND lotes.remate_id = remates.remate_id AND categoria_lo= categoria_id LIMIT 1";
-        try {
-            $stmt = $this->_db->prepare($sql);
-            $stmt->bindParam(':lot', $idLote, PDO::PARAM_INT);
-            $stmt->execute();
-            foreach ($stmt as $w) {
-                    echo '<ul class="tabular">';
-                    echo '<li class="lysta">Fecha de comercializaci&oacute;n: <strong>'.darVueltaFecha($w['fecha_lo']).'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Origen de la hacienda: <strong>'.$w['localidad'].' - '.$w['provincia'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Categor&iacute;a: <strong>'.$w['categoria'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Organizador de la subasta: <strong>'.$w['organizador'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">M&eacute;todo de comercializaci&oacute;n: <strong>'.$w['metodo'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Cabezas: <strong>'.$w['cabezas'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Raza: <strong>'.$w['raza'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Peso: <strong>'.$w['peso'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Precio: <strong>'.'$ '.$w['precio'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Plazo: <strong>'.$w['plazo'].'</strong></li>';
-//                  echo '<br></br>';
-                    echo '<li class="lysta">Observaciones: <strong>'.$w['notas'].'</strong></li>';
-                    echo '</ul>';
-                    echo '<br></br>';
-            }
-        }
-        catch(PDOException $e) {
-            return $e->getMessage();
-        }
-    }
+* Mostrar los detalles del lote
+*/
+	public function detallesDelLote($lid)
+	{
+		$sql ="SELECT * FROM lotes, localidades, provincias, remates, categorias WHERE lote_id =:lid AND localidad_lo = localidades.localidad_id AND provincia_lo = provincias.provincia_id AND lotes.remate_id = remates.remate_id AND categoria_lo = categorias.categoria_id LIMIT 1";
+		try
+		{
+		$stmt = $this->_db->prepare($sql);
+		$stmt->bindParam(':lid', $lid, PDO::PARAM_INT);
+		$stmt->execute();
+		while($w = $stmt->fetch())
+			{
+			echo '<div id="contenedor-de-lote" class="guarda">';
+			echo '<div id="fotos">';
+			echo $this->formatearFotosLote($w['foto_1'],$w['foto_2'],$w['foto_3'],$w['foto_4']);
+
+			echo $this->embeberVideoLote($w['video']);
+			echo '</div>';
+			echo $this->formatearDetallesLote($w);
+
+			echo $this->llamarMapa($w['latitud'],$w['longitud']);
+			echo '<div class="clear"><br /></div>';
+			echo '</div>';
+			}
+		$stmt->closeCursor();
+		}
+		catch(PDOException $e)
+		{
+			return $e->getMessage();
+		}
+	}
+/*
+* Dar formato a las fotos del lote
+*/
+	private function formatearFotosLote($f1,$f2,$f3,$f4)
+	{
+
+		echo '<ul id="galeria">';
+		echo '<li><a href="'.$f1.'" class="highslide" onclick="return hs.expand(this)"><img src="'.$f1.'" alt="Clic para ampliar" /></a></li>';
+		echo '<li><a href="'.$f2.'" class="highslide" onclick="return hs.expand(this)"><img src="'.$f2.'" alt="Clic para ampliar" /></a></li>';
+		echo '<li><a href="'.$f3.'" class="highslide" onclick="return hs.expand(this)"><img src="'.$f3.'" alt="Clic para ampliar" /></a></li>';
+		echo '<li><a href="'.$f4.'" class="highslide" onclick="return hs.expand(this)"><img src="'.$f4.'" alt="Clic para ampliar" /></a></li>';
+
+	}
+/*
+* Formatear Detalles del Lote
+*/
+	private function formatearDetallesLote($w)
+	{
+		echo '<div id="datalote">';
+		echo '<div id="certificador"><img src="'.$w['logo_re'].'" /><p>Organizador: <strong>'.$w['organizador'].'</strong></p></div>';
+			echo '<ul>';
+					echo '<li class="lysta">Fecha de comercialización: <strong>'.darVueltaFecha($w['fecha_lo']).'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Origen de la hacienda: <strong>'.$w['localidad'].' - '.$w['provincia'].'</strong></li>';
+					echo '<li class="lysta">Certificado/Designación: <strong>'.$w['num_lo'].'</strong></li>';
+					echo '<li class="lysta">Categoría: <strong>'.$w['categoria'].'</strong></li>';
+					echo '<li>Detalles: <strong>'.$w['subcategoria'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Método de comercialización: <strong>'.$w['metodo'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Cabezas: <strong>'.$w['cabezas'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Raza: <strong>'.$w['raza'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Peso: <strong>'.$w['peso'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Precio: <strong>'.'$ '.$w['precio'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Plazo: <strong>'.$w['plazo'].'</strong></li>';
+//					echo '<br></br>';
+					echo '<li class="lysta">Observaciones: <strong>'.$w['notas'].'</strong></li>';
+					echo '</ul>';
+			echo '</div>';
+			echo '<div class="clear"><br /></div>';
+	}
+/*
+* Formatea el mapa de google
+*/
+	private function llamarMapa($lat,$lon)
+	{
+		$la = ($lat * (-1));
+		$lo = ($lon * (-1));
+		echo '<div id="mapa">';
+		echo '<img src="http://maps.google.com/maps/api/staticmap?center='.$la.','.$lo.'&zoom=10&size=800x360&markers=size:mid|color:blue|label:L|'.$la.','.$lo.'&sensor=false" />';
+		echo '</div>';
+	}
+/*
+* Embeber el video del lote
+*/
+	private function embeberVideoLote($vid)
+	{
+		echo '<div id="videolote">';
+		echo '<object id="player" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" name="player" width="340" height="279">
+		<param name="movie" value="files/player.swf" />
+		<param name="allowfullscreen" value="true" />
+		<param name="allowscriptaccess" value="always" />';
+		echo '<param name="flashvars" value="../'.$vid.'&image=images/000.jpg" />';
+		echo '<embed
+			type="application/x-shockwave-flash"
+			id="player2"
+			name="player2"
+			src="files/player.swf"
+			width="352"
+			height="288"
+			allowscriptaccess="always"
+			allowfullscreen="true"
+			flashvars="file=../'.$vid.'&image=images/000.jpg"
+		/>
+	</object>';
+		echo '</div>';
+	}
 /*
 * Cargar datos de un remate para su catálogo
 */
@@ -377,15 +447,12 @@ class BipherPublico
 		$stmt = $this->_db->prepare($sql);
 		$stmt->bindParam(':re', $ri, PDO::PARAM_INT);
 		$stmt->execute();
-
-			//XXX Poner una viñeta a la categotia
 			echo '<table class="ensayo" summary="Lotes cargados" cellspacing="0">';
 			echo '<tbody>';
 			echo '<tr class="principal">';
-			echo '<th></th><th>Lote</th><th>Orden</th><th>Origen</th><th>Categor&iacute;a</th><th>Detalles</th><th></th>';
+			echo '<th></th><th>Lote</th><th>Orden</th><th>Origen</th><th>Categoría</th><th>Detalles</th><th></th>';
 			echo '</tr>';
 			echo '<tr>';
-
 			while($row = $stmt->fetch())
 			{
 				$lok = $row['localidad'];
@@ -395,20 +462,18 @@ class BipherPublico
 				$nlo = $row['num_lo'];
 				$ord = $row['orden_lo'];
 				$lid = $row['lote_id'];
-
 				echo '<tr>';
-				echo '<td><a class="sinborde desplazarpoco" href="p-lote.php?subasta='.$ri.'&lote='.$lid.'"><img src="images/vineta-vaca.png" /></a></td>';
+				echo '<td><a class="sinborde desplazarpoco" href="detalleslote.php?lote='.$lid.'"><img src="images/vineta-vaca.png" /></a></td>';
 				echo '<td>'.$nlo.'</td>';
 				echo '<td><strong>&nbsp; &nbsp;'.noMostrarSiEsCero($ord).'</strong></td>';
 				echo '<td>'.$lok.' - '.$prv.'</td>';
 				echo '<td>'.decirCategoria($kat).'</td>';
 				echo '<td>'.$sbk.'</td>';
-				echo '<td><a href="p-lote.php?subasta='.$ri.'&lote='.$lid.'">Ver</a></td>';
+				echo '<td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
 				echo '</tr>';
 			}
 			echo '</table>';
 			$stmt->closeCursor();
-
 		}
 	catch(PDOException $e)
 		{

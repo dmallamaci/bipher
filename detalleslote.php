@@ -8,18 +8,26 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
+	<link rel="stylesheet" href="js/highslide/highslide.css" type="text/css" />
+	<script src="js/highslide/highslide.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		hs.graphicsDir = 'js/highslide/graphics/';
+		hs.outlineType = 'rounded-white';
+	</script>
 </head>
 <body>
+	<div id="page-wrap">
+        <div class="clear"></div>
 <!-- Acciones Públicas -->
-        <h2>Detalles del lote</h2>
-            <br/>
 <?php
-$unLote = new BipherPublico($db);
-$unLote->detallesLote($lot);
+	$lid = $_GET['lote'];
+	$detalles = new BipherPublico($db);
+	$detalles->detallesDelLote($lid);
 ?>
-<p>
+	<p>
     <input type="button" class="button" value="Volver a la lista" onclick="history.back()"></input>
     <a href="index.php" class="button">Nueva búsqueda</a>
-</p>               
+	</p>
+	</div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+<rss version="2.0"
+    xmlns:media="http://search.yahoo.com/mrss/" 
+    xmlns:jwplayer="http://developer.longtailvideo.com/trac/wiki/FlashFormats"> 
+  <channel> 
+    <title>elRural Single video with bitrate switching</title> 
+    <item> 
+      <title>Canal Rural :: Live Streaming</title> 
+      <description>Pulse Play para iniciar el video. Pulse Full Screen para pantalla completa.</description> 
+      <media:group> 
+        <media:content bitrate="832" url="rural1" width="720" />
+        <media:content bitrate="532" url="rural2" width="320" />
+        <media:content bitrate="232" url="rural3" width="320" />
+        <media:thumbnail url="rural.jpg" /> 
+      </media:group> 
+      <jwplayer:type>rtmp</jwplayer:type> 
+      <jwplayer:streamer>rtmp://streamrural.cmd.com.ar/live/crural</jwplayer:streamer> 
+    </item> 
+  </channel> 
+</rss>

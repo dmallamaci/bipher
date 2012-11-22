@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-11-2012 a las 19:17:15
+-- Tiempo de generación: 22-11-2012 a las 19:37:58
 -- Versión del servidor: 5.5.28
 -- Versión de PHP: 5.3.10-1ubuntu3.4
 
@@ -86,22 +86,7 @@ CREATE TABLE IF NOT EXISTS `controles` (
   `ruta_banner` varchar(255) DEFAULT NULL,
   `enlace_banner` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_banner`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
-
---
--- Volcado de datos para la tabla `controles`
---
-
-INSERT INTO `controles` (`id_banner`, `ambito_banner`, `orden_banner`, `visible_banner`, `ruta_banner`, `enlace_banner`) VALUES
-(24, 6, 1, 1, 'images/banners/banner_720x100_6.png', 'http://'),
-(23, 4, 2, 1, 'images/banners/banner_turbocenter.gif', 'http://'),
-(22, 4, 6, 1, 'images/banners/banner_trafer.gif', 'http://'),
-(20, 4, 7, 1, 'images/banners/banner_elizondo.gif', 'http://'),
-(21, 4, 1, 1, 'images/banners/banner_navarro.gif', 'http://'),
-(15, 5, 21, 1, 'images/banners/NFA_Banner_720x100_2.gif', 'http://'),
-(16, 5, 9, 0, 'images/banners/720x100px_banner_1.jpg', 'http://ninguno.com'),
-(17, 3, 1, 1, 'images/banners/720px_100px_3.png', 'http://'),
-(18, 6, 1, 1, 'images/banners/banner_720x100_7.jpg', 'http://');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 -- --------------------------------------------------------
 
@@ -116,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `localidades` (
   `longitud` float(10,8) NOT NULL,
   `provincia_id` int(3) NOT NULL,
   PRIMARY KEY (`localidad_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5063 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5073 ;
 
 --
 -- Volcado de datos para la tabla `localidades`
@@ -5210,18 +5195,10 @@ CREATE TABLE IF NOT EXISTS `lotes` (
   `foto_2` varchar(255) NOT NULL DEFAULT 'images/000.jpg',
   `foto_3` varchar(255) NOT NULL DEFAULT 'images/000.jpg',
   `foto_4` varchar(255) NOT NULL DEFAULT 'images/000.jpg',
-  `video` varchar(255) NOT NULL DEFAULT 'images/000.flv',
+  `video` varchar(255) NOT NULL DEFAULT 'images/000.mp4',
   `certificador_id` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`lote_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2875 ;
-
---
--- Volcado de datos para la tabla `lotes`
---
-
-INSERT INTO `lotes` (`lote_id`, `fecha_lo`, `provincia_lo`, `localidad_lo`, `categoria_lo`, `subcategoria`, `cabezas`, `raza`, `peso`, `precio`, `plazo`, `notas`, `remate_id`, `num_lo`, `orden_lo`, `foto_1`, `foto_2`, `foto_3`, `foto_4`, `video`, `certificador_id`) VALUES
-(2860, '0000-00-00', 18, 428, 8, '', '', 'Cruza y Cruzas Continentales', '160', '11.69', 'Contado', 'Con Trazabilidad. Lote desparejo. Sin servicio. Para entorar. ', 109, 'Lote 1', 1, 'images/000.jpg', 'images/000.jpg', 'images/000.jpg', 'images/000.jpg', 'images/000.flv', 1),
-(2874, '2012-11-07', 1, 2, 8, '', '1', 'Limangus y Braford', '220', '10.99', 'Contado', 'Con Trazabilidad. Calidad Exportacion. Sin servicio. Vacias por tacto. Sanidad completa. ', 126, 'Lote 1', 1, 'images/000.jpg', 'images/000.jpg', 'images/000.jpg', 'images/000.jpg', 'images/000.flv', 1);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2876 ;
 
 -- --------------------------------------------------------
 
@@ -5283,14 +5260,6 @@ CREATE TABLE IF NOT EXISTS `remates` (
   `cardinal_re` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`remate_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=128 ;
-
---
--- Volcado de datos para la tabla `remates`
---
-
-INSERT INTO `remates` (`remate_id`, `fecha_re`, `hora_re`, `organizador`, `metodo`, `logo_re`, `nombre_re`, `informes_re`, `status_re`, `cardinal_re`) VALUES
-(126, '2012-11-07', '19:00', 'Rosgan', 'Remate Televisado', 'images/logos/rural.png', 'Nueva subasta 30.000 cabezas', '(011) 4777-4200', 0, 1),
-(127, '2012-11-12', '14:00', 'Test y Prueba', 'Remate Televisado', 'images/logos/llorente.png', '20.000 Cabezas', '4777-4200', 0, 0);
 
 -- --------------------------------------------------------
 

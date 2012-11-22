@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>Canal Rural en Directo</title>
+	<style type="text/css">
+	body{margin:0px;padding:0px}
+	H2 {float:left; width:300px; background:url(../../images/bg_mod_envivo.gif) left bottom repeat-x #252424;margin:0px}
+	H2 .MasVideos{float:right;margin:0px 4px 0px 0px;width:67px;height:32px;background:url(../../images/btn_mod_masvideos.gif) no-repeat; display:block; text-indent:-5000px;}
+	H2 .MasVideos:hover{background:url(../../images/btn_mod_masvideos.gif) top right no-repeat;}
+	#Fondo{background-color:#252424}
+	#eplZocalo {position:absolute;left:1px;top:215px;width:300px;height:50px;z-index:-9999;}
+	</style>
+	<script type="text/javascript" src="jquery-1.5.1.min.js"></script>
+	<script type="text/javascript">
+		var userAgent = navigator.userAgent.toLowerCase(); 
+		jQuery.browser = {  
+			version: (userAgent.match( /.+(?:rv|it|ra|ie|me)[\/: ]([\d.]+)/ ) || [])[1],  
+			windows: /windows/.test( userAgent ),
+			mac: /mac os/.test( userAgent ),
+			chrome: /chrome/.test( userAgent ),  
+			safari: /webkit/.test( userAgent ) && !/chrome/.test( userAgent ), 
+			opera: /opera/.test( userAgent ), 
+			msie: /msie/.test( userAgent ) && !/opera/.test( userAgent ), 
+			mozilla: /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ), 
+			iphone: /iphone/.test( userAgent ), 
+			ipod: /ipod/.test( userAgent ), 
+			ipad: /ipad/.test( userAgent ), 
+		};
+		$(document).ready(function(){
+			if($.browser.ipad){
+				$("#video-holder").html('<video width="300" height="240" controls="true" autoplay="false" id="video"><source src="http://streamrural.cmd.com.ar/live/crural/rural2/playlist.m3u8" type="video/mp4"/></video>');
+			}else{
+				$("#video-holder").html('<video width="300" height="240" controls="true" autoplay="true" id="video"><source src="http://streamrural.cmd.com.ar/live/crural/rural3/playlist.m3u8" type="video/mp4"/></video>');
+			}
+		});
+	</script>
+</head>
+<body>
+	<img src="../../images/im_BarrraVivo.gif" border="0" /><br />
+	<div id="Fondo">
+		<div id="video-holder"></div>
+	</div>
+	<div id="status"></div>
+
+</body>
+</html>

@@ -24,7 +24,7 @@ include_once 'inc/class.hacienda.inc.php';
 //recorro los campos comprobando la propiedad name. Si es "" es que no se subio foto.
 	for($contador=1; $contador<5; $contador++){
 		if(!$_FILES['fotos']['name'][$contador]==""){
-			$urls[$contador] = 'images/'.$rid.'/'.$lid.'_'.$contador.'.jpg';
+			$urls[$contador] = 'images/'.$rid.'/'.$lid.'-'.$contador.'.jpg';
 			$nombre_campo = 'foto_'.$contador;
 			//compruebo que tenga el formato adecuado
 //			echo $_FILES['fotos']['type'][$contador];
