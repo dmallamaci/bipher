@@ -56,13 +56,18 @@ $ca4->ventaIndex(4);
 
 <!-- Comienza la columna de Próximos remates -->
         <div id="proximosremates">
-			<h2>Próximos Remates</h2>
+			<h2>Próximos Remates Destacados</h2>
 <?php
 $ca2 = new BipherPublico($db);
 $ca2->ventaIndex(2);
+
+	echo '<p>&nbsp;</p>';
+	echo '<h2>Agenda de Futuras Subastas</h2>';
 $ca1 = new BipherPublico($db);
 $ca1->ventaIndex(1);
 ?>
+	<p>&nbsp;</p>
+	<p><a href="http://elrural.com/ganaderia/agenda_de_remate" class="button">Ver Agenda Completa</a></p>
         </div>
 <!-- Termina la columna de Próximos remates -->
 </div>

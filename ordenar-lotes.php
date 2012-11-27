@@ -55,7 +55,7 @@ include_once 'inc/class.hacienda.inc.php';
 		<br />
 		<hr />
 	<h3>Subir el video en forma MANUAL</h3>
-	<p>El video debe medir 320x240 y ser FLV</p>
+	<p>El video debe medir 320x240 ó 480x360 y ser MP4</p>
 <div>
 	<form method="post" action="subir-video.php" id="video-lote-form" enctype="multipart/form-data">
 			<input type="hidden" name="lote_id" value="<?php echo $li; ?>" />

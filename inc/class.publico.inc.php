@@ -124,6 +124,7 @@ class BipherPublico
             $recuperarTodos = $stmt->fetchAll();
             $totalRegistros = count($recuperarTodos);
             echo 'Hay '.$totalRegistros.' registros.';
+            echo '<div><img src="images/guarda.png"></div>';
             if($totalRegistros==0) {
                 echo "<h2>No se encontraron lotes</h2>"."<p>Intente de nuevo ampliando los criterios de búsqueda.</p>";
                 $stmt->closeCursor();
@@ -249,8 +250,8 @@ class BipherPublico
             break;
             // Agenda de Remates
             case 1:
-                $abre = '<div class="despublicado">';
-                $venta = '<div><span><img src="images/vineta-vaca.png" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Informes:'.$inf.'</span></div>';
+                $abre = '<div class="buscador">';
+                $venta = '<span><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Informes: '.$inf.'</span>';
                 $cierra = '</div>';
             break;
             // Catalogo Publicado
@@ -260,8 +261,8 @@ class BipherPublico
                 $abre = '<div class="televisado">';
                 $venta = '<p><strong>'.$nom.'</strong></p>';
                 $venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.' hs</div>';
-                $venta = $venta.'<div class="verlotes"><a class="sinborde" href="p-catalogo.php?subasta='.$rid.'"><img src="images/verlotes.png" alt="Logo de '.$org.'" /></a></div>';
-                $venta = $venta.'<div class="logotipo izquierda"><a class="sinborde" href="p-catalogo.php?subasta='.$rid.'"><img src="'.$log.'" alt="Logo de '.$org.'" /></a></div>';
+                $venta = $venta.'<div class="verlotes"><a class="sinborde" href="lista-lotes.php?subasta='.$rid.'"><img src="images/verlotes.png" alt="Logo de '.$org.'" /></a></div>';
+                $venta = $venta.'<div class="logotipo izquierda logoventa"><a class="sinborde" href="lista-lotes.php?subasta='.$rid.'"><img src="'.$log.'" alt="Logo de '.$org.'" /></a></div>';
                 $venta = $venta.'<div class="clear"></div>';
                 $venta = $venta.'<p>Organiza: <strong>'.$org.'</strong></p>';
                 $venta = $venta.'<p>'.$met.'</p>';
