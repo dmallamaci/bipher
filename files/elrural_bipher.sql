@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2012 a las 19:37:58
+-- Tiempo de generación: 29-11-2012 a las 15:47:58
 -- Versión del servidor: 5.5.28
 -- Versión de PHP: 5.3.10-1ubuntu3.4
 
@@ -86,7 +86,19 @@ CREATE TABLE IF NOT EXISTS `controles` (
   `ruta_banner` varchar(255) DEFAULT NULL,
   `enlace_banner` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_banner`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+
+--
+-- Volcado de datos para la tabla `controles`
+--
+
+INSERT INTO `controles` (`id_banner`, `ambito_banner`, `orden_banner`, `visible_banner`, `ruta_banner`, `enlace_banner`) VALUES
+(28, 4, 3, 1, 'images/banners/banner_trafer.gif', 'http://www.google.com'),
+(29, 4, 1, 1, 'images/banners/banner_navarro.gif', 'http://www.github.com'),
+(30, 6, 1, 1, 'images/banners/banner_780x100_7.jpg', 'http://yahoo.com.ar'),
+(33, 3, 1, 1, 'images/banners/banner_780x100_8.jpg', 'http://www.google.com.ar'),
+(32, 5, 1, 1, 'images/banners/banner_780x100_4.jpg', 'http://www.google.com.ar'),
+(34, 4, 2, 1, 'images/banners/banner_elizondo.gif', 'http://yahoo.com.ar');
 
 -- --------------------------------------------------------
 
@@ -101,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `localidades` (
   `longitud` float(10,8) NOT NULL,
   `provincia_id` int(3) NOT NULL,
   PRIMARY KEY (`localidad_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5073 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5075 ;
 
 --
 -- Volcado de datos para la tabla `localidades`
@@ -5167,7 +5179,9 @@ INSERT INTO `localidades` (`localidad_id`, `localidad`, `latitud`, `longitud`, `
 (5057, 'HUMBERTO PRIMO', 30.86515808, 61.35103226, 20),
 (5058, 'SAN CAYETANO', 27.35803795, 58.81384277, 6),
 (5059, '9 DE JULIO', 28.94031525, 61.51360321, 20),
-(5061, 'RIVADAVIA', 30.07077026, 62.35651779, 21);
+(5061, 'RIVADAVIA', 30.07077026, 62.35651779, 21),
+(5073, '', 0.00000000, 0.00000000, 0),
+(5074, '', 0.00000000, 0.00000000, 0);
 
 -- --------------------------------------------------------
 
@@ -5198,7 +5212,26 @@ CREATE TABLE IF NOT EXISTS `lotes` (
   `video` varchar(255) NOT NULL DEFAULT 'images/000.mp4',
   `certificador_id` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`lote_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2876 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2889 ;
+
+--
+-- Volcado de datos para la tabla `lotes`
+--
+
+INSERT INTO `lotes` (`lote_id`, `fecha_lo`, `provincia_lo`, `localidad_lo`, `categoria_lo`, `subcategoria`, `cabezas`, `raza`, `peso`, `precio`, `plazo`, `notas`, `remate_id`, `num_lo`, `orden_lo`, `foto_1`, `foto_2`, `foto_3`, `foto_4`, `video`, `certificador_id`) VALUES
+(2876, '2012-11-30', 1, 21, 4, '', '75', 'Hereford y Caretas', '160', '', 'Contado', 'Con Trazabilidad. Estado muy bueno. Calidad Exportacion. ', 135, 'Lote 1', 1, 'images/135/2876-1.jpg', 'images/135/2876-2.jpg', 'images/135/2876-3.jpg', 'images/135/2876-4.jpg', 'images/135/2876.mp4', 1),
+(2877, '2012-11-30', 1, 365, 4, '', '52', 'A. Angus ', '180', '', '30 dias', 'Con Trazabilidad. Estado bueno. ', 135, 'Lote 2', 2, 'images/135/2877-1.jpg', 'images/135/2877-2.jpg', 'images/135/2877-3.jpg', 'images/135/2877-4.jpg', 'images/135/2877.mp4', 1),
+(2878, '2012-11-30', 1, 2532, 3, '', '30', 'A. Angus y Caretas', '160', '', 'Contado', 'Con Trazabilidad. Estado bueno. Saben comer. Sanidad completa. ', 135, 'Lote 3', 3, 'images/135/2878-1.jpg', 'images/135/2878-2.jpg', 'images/135/2878-3.jpg', 'images/135/2878-4.jpg', 'images/135/2878.mp4', 1),
+(2879, '2012-11-30', 7, 133, 3, '', '19', 'Cruzas Britanicas ', '200', '', 'Contado', 'Con Trazabilidad. Calidad Exportacion. Sanidad completa. ', 135, 'Lote 4', 4, 'images/135/2879-1.jpg', 'images/135/2879-2.jpg', 'images/135/2879-3.jpg', 'images/135/2879-4.jpg', 'images/135/2879.mp4', 1),
+(2880, '2012-11-30', 7, 3671, 5, '', '52', 'Braford y Cuartinos', '100', '', '60 dias', 'Con Trazabilidad. Estado bueno. Saben comer. Sin servicio. ', 135, 'Lote 5', 5, 'images/135/2880-1.jpg', 'images/135/2880-2.jpg', 'images/135/2880-3.jpg', 'images/135/2880-4.jpg', 'images/135/2880.mp4', 1),
+(2881, '2012-11-30', 1, 4827, 5, '', '500', 'Cruzas Continentales y Cruzas Britanicas', '180', '', 'Contado', 'Con Trazabilidad. Lote desparejo. ', 135, 'Lote 6', 6, 'images/135/2881-1.jpg', 'images/000.jpg', 'images/135/2881-3.jpg', 'images/135/2881-4.jpg', 'images/135/2881.mp4', 1),
+(2882, '2012-11-21', 7, 1972, 13, '', '19', 'Red Polled y Shorton', '400', '12.99', 'Contado', 'Con Trazabilidad. Calidad Exportacion. Sanidad completa. ', 128, 'Lote 1', 1, 'images/128/2882-1.jpg', 'images/128/2882-2.jpg', 'images/128/2882-3.jpg', 'images/128/2882-4.jpg', 'images/128/2882.mp4', 1),
+(2883, '2012-11-21', 7, 3373, 13, '', '19', 'Brangus y Braford', '450', '14.58', '30 dias', 'Con Trazabilidad. Estado muy bueno. ', 128, 'Lote 2', 2, 'images/128/2883-1.jpg', 'images/128/2883-2.jpg', 'images/128/2883-3.jpg', 'images/128/2883-4.jpg', 'images/128/2883.mp4', 1),
+(2884, '2012-11-21', 6, 1285, 13, '', '11', 'A. Angus y Brangus', '390', '10.99', '60 dias', 'Con Trazabilidad. Estado bueno. Sanidad completa. ', 128, 'Lote 3', 3, 'images/128/2884-1.jpg', 'images/128/2884-2.jpg', 'images/128/2884-3.jpg', 'images/128/2884-4.jpg', 'images/128/2884.mp4', 1),
+(2885, '2012-11-21', 6, 317, 13, '', '52', 'Shorton y Hereford', '400', '11.90', 'Contado', 'Sin Trazabilidad. Estado bueno. Calidad Exportacion. ', 128, 'Lote 4', 4, 'images/128/2885-1.jpg', 'images/128/2885-2.jpg', 'images/128/2885-3.jpg', 'images/128/2885-4.jpg', 'images/128/2885.mp4', 1),
+(2886, '2012-11-21', 6, 4716, 13, '', '75', 'Braford y Cruza', '390', '10.62', '60 dias', 'Con Trazabilidad. Estado muy bueno. Lote desparejo. ', 128, 'Lote 5', 5, 'images/128/2886-1.jpg', 'images/128/2886-2.jpg', 'images/128/2886-3.jpg', 'images/128/2886-4.jpg', 'images/128/2886.mp4', 1),
+(2887, '2012-11-21', 7, 2115, 13, '', '52', 'Cruzas Britanicas ', '400', '14.58', 'Contado', 'Con Trazabilidad. Lote desparejo. ', 128, 'Lote 6', 6, 'images/128/2887-1.jpg', 'images/128/2887-2.jpg', 'images/128/2887-3.jpg', 'images/128/2887-4.jpg', 'images/128/2887.mp4', 1),
+(2888, '2012-11-21', 5, 36, 8, '', '500', 'Bonsmara y Shorton', '390', '44', '30 dias', 'Con Trazabilidad. Estado muy bueno. Lote desparejo. Saben comer. ', 128, 'Lote 7', 7, 'images/000.jpg', 'images/000.jpg', 'images/000.jpg', 'images/000.jpg', 'images/000.flv', 0);
 
 -- --------------------------------------------------------
 
@@ -5259,7 +5292,20 @@ CREATE TABLE IF NOT EXISTS `remates` (
   `status_re` int(1) NOT NULL DEFAULT '0',
   `cardinal_re` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`remate_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=128 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=136 ;
+
+--
+-- Volcado de datos para la tabla `remates`
+--
+
+INSERT INTO `remates` (`remate_id`, `fecha_re`, `hora_re`, `organizador`, `metodo`, `logo_re`, `nombre_re`, `informes_re`, `status_re`, `cardinal_re`) VALUES
+(128, '2012-11-21', '15:00', 'UMC', 'Remate Televisado', 'images/logos/umc.png', 'Gran subasta del litoral', 'www.umc.com.ar', 0, 7),
+(129, '2012-11-22', '10:00', 'Lartitigoyen', 'Remate Televisado', 'images/logos/lartirigoyen.png', '1500 cabezas a la venta', 'info@lartirigoyen.net', 0, 0),
+(130, '2012-11-22', '14:00', 'Colombo Ganados', 'Remate Televisado', 'images/logos/colombo-ganados.png', 'Gran remate de Invernada y CrÃ­a', '', 0, 0),
+(131, '2012-11-27', '14:00', 'Saenz Valiente Bullrich y Cia', 'Remate Televisado', 'images/logos/saenz-valiente-bullrich.png', '2500 cabezas en subasta Fin de AÃ±o', 'www.elrural.com', 0, 0),
+(132, '2012-11-28', '10:00', 'Rodriguez EgaÃ±a', 'Remate Televisado', 'images/logos/egana.png', 'Remate de Reproductores y Vientres con GarantÃ­a', '', 1, 0),
+(133, '2012-11-28', '14:00', 'Ernesto J. Duarte', 'Remate Televisado', 'images/logos/ernesto-j-duarte.png', '14Âº Subasta especial de Fin de AÃ±o', '(011) 5555-5555', 1, 0),
+(135, '2012-11-30', '14:00', 'Esteban Abelenda', 'Remate Televisado', 'images/logos/abelenda.png', 'Remate de Fin de AÃ±o con 3000 cabezas a la venta', '011 - 4777-4200', 2, 6);
 
 -- --------------------------------------------------------
 

@@ -89,7 +89,6 @@ $ca6 = new BipherPublico($db);
 $ca6->ventaIndex(6);
 ?>
 <!-- Fin de los contenidos -->
-
     </div>
 </body>
 </html>

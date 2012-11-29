@@ -28,7 +28,7 @@ include_once 'inc/class.hacienda.inc.php';
 ?>
 <h2>Agregar o editar lotes en el remate de <?php echo $or; ?> del <?php echo darVueltaFecha($fe); ?></h2>
 			<p>Los campos en verde pueden quedar en blanco cuando se cargan datos solamente para el buscador.</p>
-<br></br>
+<br>
 		<form method="post" action="db-interaccion/hacienda.php" id="agregar-lote-form" name="fvalida">
 			<div>
 				<input type="hidden" name="action" value="agregar-lote" />
@@ -36,39 +36,37 @@ include_once 'inc/class.hacienda.inc.php';
 				<input type="hidden" name="fecha" id="fecha" value="<?php echo $fe; ?>" />
 				<input type="hidden" name="organizador" id="organizador" value="<?php echo $or; ?>" />
 				<input type="hidden" name="metodo" id="metodo" value="<?php echo $met; ?>" />
-			<label for="numerolote" class="catalogo">Designación de Lote o certificado</label>
+			<label for="numerolote" class="catalogo">Designación de Lote o Certificado</label>
 			<input type="text" name="numerolote" id="numerolote" value="Lote <?php echo $nombre_lote; ?>" />
-				<br />
+
 			<label class="selec" for="categoria">Categoría</label>
 			<?php include_once 'comun/categorias-select.php'; ?>
 				<br/><br/>
 			<label for="subcategoria" class="catalogo">Subcategoría (Opcional Catálogo)</label>
 			<input type="text" name="subcategoria"	id="subcategoria" />
-				<br />
 			<label class="selec" for="provincia">Provincia </label>
 		  	<select id="provincia" name="provincia">
 		    	<option>Cargando...</option>
 			</select>
-		  		<br/><br/>
+		  		<br/>
 			<label class="selec" for="municipio">Municipio</label>
 			<select id="municipio" name="municipio">
-		  		<option>- seleccione una provincia -</option>
+		  		<option>- seleccione una Provincia -</option>
 			</select> <span class="juntoacombo"><a href="nuevo-municipio.php" title="Antes verificar que no esta en la lista">Agregar Municipio</a></span>
 				<br /><br />
 			<label for="cabezas">Cabezas</label>
 			<input type="text" name="cabezas" id="cabezas" />
-				<br />
 			<?php include 'comun/razas-select.txt'; ?>
-				<br/><br/>
+				<br /><br />
 			<label for="peso">Peso</label>
 			<input type="text" name="peso" id="peso" />
-				<br />
-			<label for="precio">Precio - Solo números y el punto, ej: 12.99</label>
+
+			<label for="precio" class="catalogo">Precio - Solo números y el punto, ej: 12.99</label>
 			<input type="text" name="precio" id="precio" />
-				<br />
+
 			<label for="plazo">Plazo</label>
 			<input type="text" name="plazo" value="Contado"	id="plazo" />
-				<br />
+
 		<!-- CASILLAS DE VERIFICACION -->
 <table class="opciones">
 	<tr class="non">
@@ -120,11 +118,11 @@ include_once 'inc/class.hacienda.inc.php';
 	<td><input name="nsc" type="radio" value="Para entorar. " /> <span class="box">Para entorar</span></td>
 		</tr>
 </table>
-		<br /><br />
+		<br />
 <!-- FIN CASILLAS DE VERIFICACION -->
 			<label for="notas" class="catalogo">Notas </label>
 			<textarea rows="2" name="notas" id="notas" /></textarea>
-				<br /><br />
+
 			<input type="hidden" name="cardinal_re" id="cardinal_re" value="<?php echo $ca ?>" />
 			<input type="submit" name="agregar-lote" id="agregarlote" value="Agregar Lote" class="button" onclick="return valida()"/>
 			<label class="blanco"><a class="button" href="login.php">Volver a la lista sin agregar</a></label>

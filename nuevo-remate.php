@@ -17,34 +17,35 @@ htmlDoc();
 			id="agrega-remate-form">
 			<div>
 				<label for="status_re">Ámbito de Publicación</label>
-				<select id="status_re" name="status_re" class="desplazado">
+				<select id="status_re" name="status_re">
 					<option value="0" selected="selected"><?php echo ambitoDePublicacion(0)?></option>
 					<option value="1"><?php echo ambitoDePublicacion(1)?></option>
 					<option value="2"><?php echo ambitoDePublicacion(2)?></option>
 				</select>
-					<br /><br /><br />
+					<br /><br />
 				<input type="hidden" name="action" value="agregar-remate" />
 				<label for="fecha_re">Fecha en formato DD-MM-AAAA</label>
 				<input type="text" name="fecha_re" id="nueva-fecha" />
-					<br /><br />
+
 				<label for="horaa_re">Hora en formato HH:MM</label>
 				<input type="text" name="hora_re" id="nueva-hora" value="14:00" />
-					<br /><br />
+
 				<label for="organizador">Organizador del Remate</label>
 				<input type="text" name="organizador" id="organizador" />
-					<br /><br />
+
 				<label for="metodo">Método de Venta</label>
 				<input type="text" name="metodo" id="metodo" />
-					<br />
+
 <?php include_once 'comun/logos-select.php';?>
-					<br /><br />
+					 <br /><br />
 				<label for="nombre_re">Nombre o frase de promoción  </label>
 				<input type="text" name="nombre_re" id="nombre_re" />
-					<br /><br />
+
 				<label for="informes_re">Información  </label>
 				<input type="text" name="informes_re" id="informes_re" />
-					<br /><br />
+
 				<input type="submit" name="nuevoremate" id="nuevoremate" value="Agregar Remate" class="button" />
+				<label class="blanco"><a class="button" href="login.php">Volver a la lista sin agregar</a></label>
 				<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
 			</div>
 		</form>

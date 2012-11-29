@@ -37,7 +37,7 @@
 					<option value="Pampas">Pampas</option>
 				</optgroup>
 			</select>
-				<br/><br/>
+				<br/>
 			<label class="selec catalogo" for="raza2">Raza 2</label>
 			<select id="raza2" name="raza2">
 				<option value=" "> - seleccione (opcional) - </option>

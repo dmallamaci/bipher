@@ -67,7 +67,7 @@ function validar(){
 		<p>Para obtener mejores resultados escriba la localidad a buscar seguida de la provincia y el pais, separados por comas.<br />Por ejemplo, para buscar <em>Pergamino</em> escriba: <em>Pergamino, Buenos Aires, Argentina</em>.</p>
 	<br />
 	<label for="address">Localidad a Buscar </label>
-    <input id="address" type="textbox" value="" />
+    <input id="address" type="textbox" size="38" value="" />
     <input type="button" value="Obtener Coordenadas" onclick="codeAddress()" />
 	<br />
 	<hr />

@@ -5,7 +5,6 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
-	<script src="js/desplegable.js" type="text/javascript"></script>
 	<script src="js/fvalida.js" type="text/javascript"></script>
 </head>
 <body>
@@ -25,31 +24,31 @@ echo '<br /><h2>Editar el lote '.$lid.' de la categoria: '.decirCategoria($cat).
 	<input type="hidden" name="remate_id" id="remate_id" value="<?php echo $rid; ?>" />
 	<label for="num_lo">Designación del Lote</label>
 	<input type="text" name="num_lo" id="num_lo" value="<?php echo $nlo; ?>" />
-		<br />
+
 	<label for="categoria">Categoría</label>
 	<?php include_once 'comun/categorias-select.php'; ?>
 		<br/><br/>
 	<label for="subcategoria">Subcategoría</label>
 	<input type="text" name="subcategoria" id="subcategoria" value="<?php echo $sub; ?>" />
-		<br/>
+
 	<label for="cabezas">Cabezas</label>
 	<input type="text" name="cabezas" id="cabezas" value="<?php echo $cab; ?>" />
-		 <br/>
+
 	<label for="raza">Raza</label>
 	<input type="text" name="raza" id="raza" value="<?php echo $raz; ?>" />
-		 <br/>
+
 	<label for="peso">Peso</label>
 	<input type="text" name="peso" id="peso" value="<?php echo $pes; ?>" />
-		 <br/>
+
 	<label for="precio">Precio</label>
 	<input type="text" name="precio" id="precio" value="<?php echo $pre; ?>" />
-		 <br/>
+
 	<label for="plazo">Plazo</label>
 	<input type="text" name="plazo" id="plazo" value="<?php echo $pla ?>" />
-		 <br/>
+
 	<label for="notas">Notas</label>
 	<textarea rows="2" name="notas" id="notas"><?php echo $nos; ?></textarea>
-		 <br/>
+
 	<input type="submit" name="editar-lote" id="editarlote" value="Editar Lote" class="button" />
 	<input type="button" class="button" value="Volver a la lista" onclick="history.back()"></input>
 	<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />

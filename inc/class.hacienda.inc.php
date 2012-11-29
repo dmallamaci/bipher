@@ -243,7 +243,16 @@ class BipherHacienda
 			$stmt->execute();
 			$linea = $stmt->fetch();
 			$stmt->closeCursor();
-			return array($linea['remate_id'], $linea['fecha_re'], $linea['hora_re'], $linea['organizador'], $linea['metodo'], $linea['logo_re'], $linea['nombre_re'], $linea['informes_re'], $linea['status_re'], $linea['cardinal_re']);
+			return array($linea['remate_id'],
+							$linea['fecha_re'],
+							$linea['hora_re'],
+							$linea['organizador'],
+							$linea['metodo'],
+							$linea['logo_re'],
+							$linea['nombre_re'],
+							$linea['informes_re'],
+							$linea['status_re'],
+							$linea['cardinal_re']);
 		}
 		catch(PDOException $e)
 		{
@@ -454,7 +463,7 @@ class BipherHacienda
 		echo '<table class="ensayo" summary="Lotes cargados" cellspacing="0">';
 		echo '<tbody>';
 		echo '<tr class="principal">';
-		echo '<th>ID</th><th>Lote</th><th>Orden</th><th>Localidad</th><th>Categoría</th><th>Precio</th><th></th><th></th><th></th>';
+		echo '<th>ID</th><th>Lote</th><th>Orden</th><th>Localidad</th><th>Categoría</th><th>Precio</th><th></th><th></th><th></th><th></th>';
 		echo '</tr>';
 		echo '<tr>';
 		$i = 1;
@@ -474,6 +483,7 @@ class BipherHacienda
 			echo '<td>' .$lok. ' - '.$prv.'</td>';
 			echo '<td>' .decirCategoria($kat).'</td>';
 			echo '<td><input id="entabla" type="text" name="precio'.$i.'" value="'.$pre.'"/></td>';
+			echo '<td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
 			echo '<td><a href="editar-lote.php?lote='.$lid.'">Editar</a></td>';
 			echo '<td><a href="ordenar-lotes.php?rid='.$re.'&ord='.$ord.'&lid='.$lid.'">Cat&aacute;logo</a></td>';
 			echo '<td><a href="eliminar-lote.php?subasta='.$re.'&lote='.$lid.'&orden='.$ord.'">Borrar</a></td>';
@@ -488,6 +498,8 @@ class BipherHacienda
 		if($intervalo != NULL)
 		{
 		echo '<input type="submit" name="cambiar-precios" id="cambiar-precios" value="Cambiar precios a todos los lotes" class="button" />';
+		echo '<span> &nbsp; </span>';
+		echo '<input type="button" class="button" value="Volver a la lista" onclick="history.back()"></input>';
 		}
 		echo '</form>';
 		$stmt->closeCursor();
@@ -653,15 +665,16 @@ class BipherHacienda
 //			echo '<p>Para el lote <strong>'.$nombre.'</strong> el Orden de Venta actual es <strong>'.$orden.'</strong></p>';
 //			echo '<p>Escriba el n&uacute;mero de la nueva posici&oacute;n en el Orden de Venta.</p>';
 //			echo '<p>Para este remate, el n&uacute;mero de la nueva posici&oacute;n debe estar entre <strong>1</strong> y <strong>'.$cardinal.'</strong></p><br />';
-			echo '<label for="foto_1">Foto 1</label><input type="text" name="foto_1" id="foto_1" value="'.$f1.'" /> <br />';
-			echo '<label for="foto_2">Foto 2</label><input type="text" name="foto_2" id="foto_2" value="'.$f2.'" /> <br />';
-			echo '<label for="foto_3">Foto 3</label><input type="text" name="foto_3" id="foto_3" value="'.$f3.'" /> <br />';
-			echo '<label for="foto_4">Foto 4</label><input type="text" name="foto_4" id="foto_4" value="'.$f4.'" /> <br />';
-			echo '<label for="video">Video</label><input type="text" name="video" id="video" value="'.$vi.'" /> <br />';
+			echo '<label for="foto_1">Foto 1</label><input type="text" name="foto_1" id="foto_1" value="'.$f1.'" />';
+			echo '<label for="foto_2">Foto 2</label><input type="text" name="foto_2" id="foto_2" value="'.$f2.'" />';
+			echo '<label for="foto_3">Foto 3</label><input type="text" name="foto_3" id="foto_3" value="'.$f3.'" />';
+			echo '<label for="foto_4">Foto 4</label><input type="text" name="foto_4" id="foto_4" value="'.$f4.'" />';
+			echo '<label for="video">Video</label><input type="text" name="video" id="video" value="'.$vi.'" />';
 			//XXX Hacer combo de certificadores
 //			echo '<label for="certificador_id">Certificador</label><input type="text" name="certificador_id" id="certificador_id" value="'.$ci.'" /> <br />';
 			echo '<input type="submit" name="cambiar" id="ordenar" value="Asignar Nuevas Rutas" class="button" />
 	<input type="button" class="button" value="Volver a la lista sin cambiar" onclick="history.back()"></input>
+	<a href="detalleslote.php?lote='.$loteid.'"> Ver el lote </a>
 	<input type="hidden" name="token" value="'.$_SESSION["token"].'" />';
 			echo '</form></div>';
 			$stmt->closeCursor();

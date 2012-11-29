@@ -19,14 +19,13 @@ long_line_column=72
 
 [files]
 current_page=6
-FILE_NAME_0=0;PHP;0;16;1;1;1;/var/www/bipher/login.php;0;4
+FILE_NAME_0=365;PHP;0;16;1;1;1;/var/www/bipher/login.php;0;4
 FILE_NAME_1=350;PHP;0;16;1;1;1;/var/www/bipher/detalleslote.php;0;4
-FILE_NAME_2=286;PHP;0;16;1;1;1;/var/www/bipher/index.php;0;4
-FILE_NAME_3=0;PHP;0;16;1;1;1;/var/www/bipher/lista-lotes.php;0;4
-FILE_NAME_4=18534;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
-FILE_NAME_5=0;PHP;0;16;1;1;1;/var/www/bipher/ordenar-lotes.php;0;4
-FILE_NAME_6=507;PHP;0;16;1;1;1;/var/www/bipher/subir-video.php;0;4
-FILE_NAME_7=501;PHP;0;16;1;1;1;/var/www/bipher/subir-banner.php;0;4
+FILE_NAME_2=2006;PHP;0;16;1;1;1;/var/www/bipher/index.php;0;4
+FILE_NAME_3=591;PHP;0;16;1;1;1;/var/www/bipher/lista-lotes.php;0;4
+FILE_NAME_4=599;PHP;0;16;1;1;1;/var/www/bipher/res-lotes.php;0;4
+FILE_NAME_5=7185;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
+FILE_NAME_6=2112;PHP;0;16;1;1;1;/var/www/bipher/ordenar-lotes.php;0;4
 
 [VTE]
 last_dir=/var/www/bipher
