@@ -480,7 +480,7 @@ class BipherHacienda
 			echo '<td><input type="hidden" name="lote'.$i.'" value="'.$lid.'" />'.$lid. '</td>';
 			echo '<td>'.$nlo.'</td>';
 			echo '<td><strong> &nbsp; &nbsp;' .noMostrarSiEsCero($ord).'</strong></td>';
-			echo '<td>' .$lok. ' - '.$prv.'</td>';
+			echo '<td>' .utf8_encode($lok). ' - '.$prv.'</td>';
 			echo '<td>' .decirCategoria($kat).'</td>';
 			echo '<td><input id="entabla" type="text" name="precio'.$i.'" value="'.$pre.'"/></td>';
 			echo '<td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';

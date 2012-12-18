@@ -85,7 +85,7 @@ class BipherPublico
             foreach ($stmt as $row) {
                 $long = $row['longitud'];
                 $lato = $row['latitud'];
-                echo '<ul class="tabular"><li>Punto de Referencia: <strong>' .$row['localidad'].'</strong></li>';
+                echo '<ul class="tabular"><li>Punto de Referencia: <strong>' .utf8_encode($row['localidad']).'</strong></li>';
                 echo '<li>Categor&iacute;a buscada: <strong>'.$row['categoria'].'</strong></li>';
                 if ($radio == 4000) {
                     echo '<li>Radio de b&uacute;squeda: <strong>Todo el pa&iacute;s</strong></li>';
@@ -138,7 +138,7 @@ class BipherPublico
                 echo '<tr>';
                     foreach ($stmt as $v) {
                         $lid = $v['lote_id'];
-                        echo '<td>'.darVueltaFecha($v['fecha_lo']).'</td><td>'.$v['localidad'].'</td><td>'.$v['organizador'].'</td><td>'.$v['raza'].'</td><td>'.$v['peso'].'</td><th>'.'$ '.$v['precio'].'</th><td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
+                        echo '<td>'.darVueltaFecha($v['fecha_lo']).'</td><td>'.utf8_encode($v['localidad']).'</td><td>'.$v['organizador'].'</td><td>'.$v['raza'].'</td><td>'.$v['peso'].'</td><th>'.'$ '.$v['precio'].'</th><td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
                         echo '</tr>';
                     }
                 echo '</tbody>';
@@ -355,7 +355,7 @@ class BipherPublico
 			echo '<ul>';
 					echo '<li class="lysta">Fecha de comercialización: <strong>'.darVueltaFecha($w['fecha_lo']).'</strong></li>';
 //					echo '<br></br>';
-					echo '<li class="lysta">Origen de la hacienda: <strong>'.$w['localidad'].' - '.$w['provincia'].'</strong></li>';
+					echo '<li class="lysta">Origen de la hacienda: <strong>'.utf8_encode($w['localidad']).' - '.$w['provincia'].'</strong></li>';
 					echo '<li class="lysta">Certificado/Designación: <strong>'.$w['num_lo'].'</strong></li>';
 					echo '<li class="lysta">Categoría: <strong>'.$w['categoria'].'</strong></li>';
 					echo '<li>Detalles: <strong>'.$w['subcategoria'].'</strong></li>';

@@ -5,9 +5,7 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
-	<script src="js/desplegable.js" type="text/javascript"></script>
 	<script src="js/fvalida.js" type="text/javascript"></script>
-	<script src="js/xp_progress.js" type="text/javascript"></script>
 </head>
 <body>
 <?php include_once 'comun/abre-body-usuario.php';?>
@@ -25,7 +23,6 @@ include_once 'inc/class.hacienda.inc.php';
 	$lotes = new BipherHacienda($db);
 	$lotes->cargarOrdenDeVenta($su, $od);
 ?>
-		<br />
 		<hr />
 	<h2>Fotos y videos para este lote</h2>
 	<p>Se pueden subir fotos y videos de dos maneras: En forma Manual o por FTP.</p>
@@ -37,27 +34,23 @@ include_once 'inc/class.hacienda.inc.php';
 			<input type="hidden" name="remate_id" value="<?php echo $su; ?>" />
 			<input type="hidden" name="orden_lo" value="<?php echo $od; ?>" />
 		    <label for="foto_1">Foto 1</label>
-		    <input type="file" name="fotos[1]" />
+		    <input type="file" size="38" name="fotos[1]" />
 		    	<br /><br />
 		    <label for="foto_2">Foto 2</label>
-		    <input type="file" name="fotos[2]" />
+		    <input type="file" size="38" name="fotos[2]" />
 		    	<br /><br />
 		    <label for="foto_3">Foto 3</label>
-		    <input type="file" name="fotos[3]" />
+		    <input type="file" size="38" name="fotos[3]" />
 		    	<br /><br />
 		    <label for="foto_4">Foto 4</label>
-		    <input type="file" name="fotos[4]" />
+		    <input type="file" size="38" name="fotos[4]" />
 		    	<br /><br />
-<script type="text/javascript">
-var bar1= createBar(300,15,'white',1,'black','blue',85,7,3,"");
-</script>
-			<input type="submit" name="subirfotos" value="Subir Fotos" onclick="javascript:bar1.showBar()" class="button" />
+			<input type="submit" name="subirfotos" value="Subir Fotos" class="button" />
 			<input type="button" class="button" value="Volver a la lista sin cambiar" onclick="history.back()"></input>
 			<a href="detalleslote.php?lote=<?php echo $li; ?>"> Ver el lote </a>
 			<input type="hidden" name="token" value="<?php $_SESSION["token"]?>" />
 	</form>
 </div>
-		<br />
 		<hr />
 	<h3>Subir el video en forma MANUAL</h3>
 	<p>El video debe medir 320x240 ó 480x360 y ser MP4</p>
@@ -67,18 +60,14 @@ var bar1= createBar(300,15,'white',1,'black','blue',85,7,3,"");
 			<input type="hidden" name="remate_id" value="<?php echo $su; ?>" />
 			<input type="hidden" name="orden_lo" value="<?php echo $od; ?>" />
 		    <label for="video">Video</label>
-		    <input type="file" name="video" id="video<?php echo $li; ?>" />
+		    <input type="file" name="video" size="38" id="video<?php echo $li; ?>" />
 		    	<br /><br />
-	<script type="text/javascript">
-var bar2= createBar(300,15,'white',1,'black','blue',85,7,3,"");
-	</script>
-			<input type="submit" name="subirvideo" value="Subir Video" onclick="javascript:bar2.showBar()" class="button" />
+			<input type="submit" name="subirvideo" value="Subir Video" class="button" />
 			<input type="button" class="button" value="Volver a la lista sin cambiar" onclick="history.back()"></input>
 			<a href="detalleslote.php?lote=<?php echo $li; ?>"> Ver el lote </a>
 			<input type="hidden" name="token" value="<?php $_SESSION["token"]?>" />
 	</form>
 </div>
-		<br />
 		<hr />
 	<h3>Subir las fotos y el video por FTP</h3>
 	<p>Subir los archivos por FTP a la carpeta <strong>images/<?php echo $su; ?></strong> y usar este formulario para cambiar los nombres de las rutas a los archivos. Se debe escribir la ruta completa y la extension del archivo, por ejemplo: <strong>images/<?php echo $su; ?>/nombre-foto.jpg</strong></p>
