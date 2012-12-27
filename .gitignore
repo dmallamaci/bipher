@@ -1,4 +1,5 @@
-Bipher.geany
+$ cat .gitignore
+*.geany
 inc/constantes.inc.php
 images/1*
 *~

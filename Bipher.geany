@@ -18,19 +18,7 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=7
-FILE_NAME_0=2598;PHP;0;16;1;1;1;/var/www/bipher/index.php;0;4
-FILE_NAME_1=111;PHP;0;16;1;1;1;/var/www/bipher/inc/constantes.inc.php;0;4
-FILE_NAME_2=0;PHP;0;16;1;1;1;/var/www/bipher/comun/funciones.php;0;4
-FILE_NAME_3=1961;PHP;0;16;1;1;1;/var/www/bipher/subir-fotos.php;0;4
-FILE_NAME_4=1316;PHP;0;16;1;1;1;/var/www/bipher/subir-banner.php;0;4
-FILE_NAME_5=1246;PHP;0;16;1;1;1;/var/www/bipher/subir-video.php;0;4
-FILE_NAME_6=0;PHP;0;16;1;1;1;/var/www/bipher/detalleslote.php;0;4
-FILE_NAME_7=3159;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
-FILE_NAME_8=569;PHP;0;16;1;1;1;/var/www/bipher/carga-municipios.php;0;4
-FILE_NAME_9=0;PHP;0;16;1;1;1;/var/www/bipher/nuevo-lote.php;0;4
-FILE_NAME_10=14830;PHP;0;16;1;1;1;/var/www/bipher/inc/class.hacienda.inc.php;0;4
-FILE_NAME_11=0;PHP;0;16;1;1;1;/var/www/bipher/res-lotes.php;0;4
+current_page=0
 
 [VTE]
 last_dir=/var/www/bipher
