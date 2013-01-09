@@ -18,13 +18,6 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-<<<<<<< HEAD
-current_page=2
-FILE_NAME_0=2883;PHP;0;16;1;1;1;/var/www/bipher/index.php;0;4
-FILE_NAME_1=12720;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
-=======
-current_page=0
->>>>>>> 719faf315cd9e46a4a2cd16c9dc41ecded11e6fe
 
 [VTE]
 last_dir=/var/www/bipher
