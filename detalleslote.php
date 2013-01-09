@@ -24,7 +24,7 @@ htmlDoc();
 	$detalles = new BipherPublico($db);
 	$detalles->detallesDelLote($lid);
 ?>
-		<div style="margin-left: 210px;">
+		<div style="margin-left: 21git0px;">
 			<input type="image" src="images/boton_volver.png" onclick="history.back()" />
 			<a href="index.php" class="sinborde"><img src="images/boton_nueva.png" /></a>
 		</div>
