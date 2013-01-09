@@ -22,8 +22,9 @@ htmlDoc();
 $listaLotes = new BipherPublico($db);
 $listaLotes->buscarLotesEnMiRadio($kid, $prv, $cat, $rio);
 ?>
-	<p>&nbsp;</p>
-    <p><a href="index.php" class="button">Nueva búsqueda</a></p>
+	<div id="botonagenda">
+	<a href="index.php" class="sinborde"><img src="images/boton_nueva.png" /></a>
+	</div>
 
         </div>
 </body>

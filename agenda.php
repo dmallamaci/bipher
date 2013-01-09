@@ -6,19 +6,18 @@ htmlDoc();
 <html <?php xm();?>>
 <head>
 <?php headPublico();?>
-	<script src="js/desplegable.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="page-wrap">
         <div class="clear"></div>
+        <div id="agendagrande">
+			<h2 class="barratit blanco">Agenda de futuras subastas</h2>
+		</div>
 <!-- ACCIONES CON HACIENDA -->
 <?php
-$ri = $_GET['subasta'];
-	$remate = new BipherPublico($db);
+	$agenda = new BipherPublico($db);
 	//uso ambito -1 para formatear la salida
-	$remate->cargaDatosRemate($ri, -1);
-$lotes = new BipherPublico($db);
-$lotes->ordenaLotesPorCategoria($ri);
+	$agenda->ventaIndex(1);
 ?>
     </div>
 </body>

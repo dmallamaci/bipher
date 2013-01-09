@@ -12,9 +12,12 @@ htmlDoc();
     <div id="page-wrap">
         <div class="clear"></div>
         <div id="logocartelera">
-            <div id="bipher" class="centrado">
+		<h2>Encuentre lor precios de referencia cerca de su localidad</h2>
+		<p>Seleccione los criterios de su búsqueda indicando la categoría de hacienda de su interés, la localidad o punto de referencia y el área de búsqueda. <strong>ELRURAL.COM</strong> devolverá todos los lotes comercializados en esa zona durante los últimos 60 días.</p>
+		<div id="barrabuscalotes"><h2 class="barratit">Buscar lotes</h2></div>
+            <div id="bipher">
     <form method="post" action="res-lotes.php" id="filtrarlotes">
-                <div>
+                <div id="combos">
         <input type="hidden" name="action" value="ver" />
         <?php include 'comun/categorias-select.php'; ?>
             <br/>
@@ -32,8 +35,9 @@ htmlDoc();
             <option value="350">Buscar en 350 km de radio</option>
             <option value="4000">Buscar en todo el País</option>
         </select>
-            <br/>
-        <input type="submit" name="centrocoord" id="filtrarlotes" value="Buscar Lotes" class="button" />
+            </div>
+            <div id="botonbuscar">
+        <input type="image" src="images/boton_buscalotes.png" name="centrocoord" id="filtrarlotes" />
                 </div>
     </form>
             </div>
@@ -56,18 +60,20 @@ $ca4->ventaIndex(4);
 
 <!-- Comienza la columna de Próximos remates -->
         <div id="proximosremates">
-			<h2>Próximos Remates Destacados</h2>
+			<h2 class="barratit blanco">Próximos Remates Destacados</h2>
 <?php
 $ca2 = new BipherPublico($db);
 $ca2->ventaIndex(2);
 
-	echo '<p>&nbsp;</p>';
-	echo '<h2>Agenda de Futuras Subastas</h2>';
+	echo '<div id="agenda">';
+	echo '<h2 class="barratit blanco">Agenda de futuras subastas</h2>';
+	echo '</div>';
 $ca1 = new BipherPublico($db);
 $ca1->ventaIndex(1);
 ?>
-	<p>&nbsp;</p>
-	<p><a href="http://elrural.com/ganaderia/agenda_de_remate" class="button">Ver Agenda Completa</a></p>
+	<div id="botonagenda">
+	<a href="agenda.php" class="sinborde"><img src="images/boton_veragenda.png" /></a>
+	</div>
         </div>
 <!-- Termina la columna de Próximos remates -->
 </div>
@@ -77,8 +83,8 @@ $ca1->ventaIndex(1);
 $ca5 = new BipherPublico($db);
 $ca5->ventaIndex(5);
 ?>
-<div id="guarda">
-<h2 class="centrado">Últimos remates televisados</h2>
+<div id="ultimosremates">
+<h2 class="barratit blanco">Últimos remates televisados</h2>
 </div>
 <?php
 // Lista de Remates Pasados (Buscador)

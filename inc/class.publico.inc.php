@@ -82,9 +82,11 @@ class BipherPublico
             $stmt->bindParam(':municipio', $municipio, PDO::PARAM_INT);
             $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
             $stmt->execute();
+            echo '<div id="barrabuscalotes"><h2 class="barratit">Resultados de su b&uacute;squeda</h2></div>';
             foreach ($stmt as $row) {
                 $long = $row['longitud'];
                 $lato = $row['latitud'];
+                echo '<div id="resbuscar">';
                 echo '<ul class="tabular"><li>Punto de Referencia: <strong>' .utf8_encode($row['localidad']).'</strong></li>';
                 echo '<li>Categor&iacute;a buscada: <strong>'.$row['categoria'].'</strong></li>';
                 if ($radio == 4000) {
@@ -93,6 +95,9 @@ class BipherPublico
                     echo '<li>Radio de b&uacute;squeda: <strong>'.$radio.' km.</strong></li>';
                 }
                 echo '</ul>';
+                echo '<div id="lupa"></div>';
+                echo '</div>';
+                echo '<div class="clear"></div>';
             }
             $stmt->closeCursor();
         }
@@ -123,8 +128,7 @@ class BipherPublico
             $stmt->execute();
             $recuperarTodos = $stmt->fetchAll();
             $totalRegistros = count($recuperarTodos);
-            echo 'Hay '.$totalRegistros.' registros.';
-            echo '<div><img src="images/guarda.png"></div>';
+            echo '<div><p class="azul">Se hallaron '.$totalRegistros.' registros.</p></div>';
             if($totalRegistros==0) {
                 echo "<h2>No se encontraron lotes</h2>"."<p>Intente de nuevo ampliando los criterios de búsqueda.</p>";
                 $stmt->closeCursor();
@@ -133,12 +137,12 @@ class BipherPublico
                 echo '<table class="ensayo" summary="Lotes de hacienda comercializados durante estos 60 dias" cellspacing="0">';
                 echo '<tbody>';
                 echo '<tr class="principal">';
-                echo '<th>Fecha</th><th>Origen</th><th>Organizador</th><th>Raza</th><th>Peso</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio</th><th></th>';
+                echo '<th>Fecha</th><th>Origen</th><th>Organizador</th><th>Raza</th><th>Peso (kg)</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio</th><th></th>';
                 echo '</tr>';
                 echo '<tr>';
                     foreach ($stmt as $v) {
                         $lid = $v['lote_id'];
-                        echo '<td>'.darVueltaFecha($v['fecha_lo']).'</td><td>'.utf8_encode($v['localidad']).'</td><td>'.$v['organizador'].'</td><td>'.$v['raza'].'</td><td>'.$v['peso'].'</td><th>'.'$ '.$v['precio'].'</th><td><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
+                        echo '<td>'.darVueltaFecha($v['fecha_lo']).'</td><td>'.utf8_encode($v['localidad']).'</td><td>'.$v['organizador'].'</td><td>'.$v['raza'].'</td><td>'.$v['peso'].'</td><th>'.'$ '.$v['precio'].'</th><td style="text-align: center;"><a href="detalleslote.php?lote='.$lid.'">Ver</a></td>';
                         echo '</tr>';
                     }
                 echo '</tbody>';
@@ -251,7 +255,7 @@ class BipherPublico
             // Agenda de Remates
             case 1:
                 $abre = '<div class="buscador">';
-                $venta = '<span><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Informes: '.$inf.'</span>';
+                $venta = '<span><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp;'.$hor.' hs. &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Informes: '.$inf.'</span>';
                 $cierra = '</div>';
             break;
             // Catalogo Publicado
@@ -259,13 +263,14 @@ class BipherPublico
                 $dia = new DateTimeArgento($fec);
                 $diaSemana = $dia->format('l');
                 $abre = '<div class="televisado">';
-                $venta = '<p><strong>'.$nom.'</strong></p>';
-                $venta = $venta.'<div class="fechagrande">'.$diaSemana.'<br />'.darVueltaFecha($fec).'<br />'.$hor.' hs</div>';
-                $venta = $venta.'<div class="verlotes"><a class="sinborde" href="lista-lotes.php?subasta='.$rid.'"><img src="images/verlotes.png" alt="Logo de '.$org.'" /></a></div>';
-                $venta = $venta.'<div class="logotipo izquierda logoventa"><a class="sinborde" href="lista-lotes.php?subasta='.$rid.'"><img src="'.$log.'" alt="Logo de '.$org.'" /></a></div>';
-                $venta = $venta.'<div class="clear"></div>';
+                $venta = '<p class="azul"><strong>'.$nom.'</strong></p>';
+                $venta = $venta.'<div class="cajaventa"><p><strong>'.$diaSemana.' '.darVueltaFecha($fec).' - '.$hor.' hs.</strong></p>';
                 $venta = $venta.'<p>Organiza: <strong>'.$org.'</strong></p>';
                 $venta = $venta.'<p>'.$met.'</p>';
+                $venta = $venta.'</div>';
+                $venta = $venta.'<div class="verlotes"><a class="sinborde" href="lista-lotes.php?subasta='.$rid.'"><img src="images/boton_verlotes.png" alt="Logo de '.$org.'" /></a></div>';
+                $venta = $venta.'<div class="logotipo izquierda logoventa"><a class="sinborde" href="lista-lotes.php?subasta='.$rid.'"><img src="'.$log.'" alt="Logo de '.$org.'" /></a></div>';
+                $venta = $venta.'<div class="clear"></div>';
                 $cierra = '</div>';
             break;
             //Por default solo el buscador
@@ -313,7 +318,8 @@ class BipherPublico
 		$stmt->execute();
 		while($w = $stmt->fetch())
 			{
-			echo '<div id="contenedor-de-lote" class="guarda">';
+			echo '<div id="contenedor-de-lote">';
+			echo '<div id="ultimosremates"><h2 class="barratit blanco">Detalles del lote</h2></div>';
 			echo '<div id="fotos">';
 			echo $this->formatearFotosLote($w['foto_1'],$w['foto_2'],$w['foto_3'],$w['foto_4']);
 
@@ -398,7 +404,7 @@ class BipherPublico
 		<param name="movie" value="files/player.swf" />
 		<param name="allowfullscreen" value="true" />
 		<param name="allowscriptaccess" value="always" />';
-		echo '<param name="flashvars" value="../'.$vid.'&image=images/000.jpg" />';
+		echo '<param name="flashvars" value="../'.$vid.'&image=images/imagen_640x480.png" />';
 		echo '<embed
 			type="application/x-shockwave-flash"
 			id="player2"

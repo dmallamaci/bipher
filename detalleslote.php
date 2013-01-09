@@ -24,10 +24,10 @@ htmlDoc();
 	$detalles = new BipherPublico($db);
 	$detalles->detallesDelLote($lid);
 ?>
-	<p>
-    <input type="button" class="button" value="Volver a la lista" onclick="history.back()"></input>
-    <a href="index.php" class="button">Nueva búsqueda</a>
-	</p>
+		<div style="margin-left: 210px;">
+			<input type="image" src="images/boton_volver.png" onclick="history.back()" />
+			<a href="index.php" class="sinborde"><img src="images/boton_nueva.png" /></a>
+		</div>
 	</div>
 </body>
 </html>
