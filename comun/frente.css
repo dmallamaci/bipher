@@ -139,6 +139,8 @@ input[type="text"], input[type="password"], textarea { width: 512px; border: 3px
 #add-new input[type="text"]:focus { border-color: #73B8BF; }
 #add-new input[type="submit"] { padding: 10px 12px; }
 ul#list li span input[style] { width: 90% !important; }
+#status_re {width: 140px;}
+#logo_re {width: 240px;}
 
 /*
     MESSAGING

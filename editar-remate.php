@@ -40,7 +40,7 @@ htmlDoc();
 				<input type="hidden" name="action" value="editar-remate" />
 				<input type="hidden" name="remate_id" id="remate_id" value="<?php echo $rid; ?>" />
 				<label for="status_re">Ámbito de Publicación</label>
-				<select id="status_re" name="status_re" class="desplazado">
+				<select id="status_re" name="status_re">
 					<option value="0" <?php echo $op0; ?>><?php echo ambitoDePublicacion(0)?></option>
 					<option value="1" <?php echo $op1; ?>><?php echo ambitoDePublicacion(1)?></option>
 					<option value="2" <?php echo $op2; ?>><?php echo ambitoDePublicacion(2)?></option>
