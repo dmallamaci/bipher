@@ -1,9 +1,3 @@
-$ cat .gitignore
-<<<<<<< HEAD
-*.geany
-=======
-Bipher.geany
->>>>>>> 719faf315cd9e46a4a2cd16c9dc41ecded11e6fe
 inc/constantes.inc.php
 images/1*
 *~

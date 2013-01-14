@@ -13,7 +13,7 @@
 // Variables vacías para el atributo "selected" del desplegable
 $opcion = array();
 $i = 1;
-    while($i<17){
+    while($i<18){
         $opcion[$i]='';
         $i++;
     }
@@ -73,9 +73,9 @@ if(isset($logo))
 	case 16:
         $opcion[16] = ' selected="selected"';
         break;
-	//~ case 17:
-        //~ $opcion[17] = ' selected="selected"';
-        //~ break;
+	case 17:
+        $opcion[17] = ' selected="selected"';
+        break;
 	//~ case 18:
         //~ $opcion[18] = ' selected="selected"';
         //~ break;
@@ -118,7 +118,8 @@ if(isset($logo))
 		<option value="images/logos/rosgan.png"<?php echo $opcion[13] ?>>Rosgan</option>
 		<option value="images/logos/saenz-valiente-bullrich.png"<?php echo $opcion[14] ?>>Saenz Valiente Bullrich</option>
 		<option value="images/logos/subastar-colombia.png"<?php echo $opcion[15] ?>>Subastar Colombia</option>
-		<option value="images/logos/umc.png"<?php echo $opcion[16] ?>>UMC</option>
+		<option value="images/logos/logo-talano.png"<?php echo $opcion[16] ?>>Talano</option>
+		<option value="images/logos/umc.png"<?php echo $opcion[17] ?>>UMC</option>
 	</select>
 	<span>&nbsp;</span>
 	<img id="logo-consignataria" src="<?php if(isset($logo)){echo $logo;}else{echo 'images/logos/102x70.png';} ;?>" alt="Logo" />
