@@ -18,7 +18,8 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=0
+FILE_NAME_0=1912;PHP;0;16;1;1;1;/var/www/bipher/comun/logos-select.php;0;4
 
 [VTE]
 last_dir=/var/www/bipher

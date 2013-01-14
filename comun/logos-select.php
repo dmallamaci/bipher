@@ -12,7 +12,7 @@
  */
 // Variables vacías para el atributo "selected" del desplegable
 $opcion = array();
-$i = 1;
+$i = 0;
     while($i<18){
         $opcion[$i]='';
         $i++;
@@ -22,58 +22,58 @@ if(isset($logo))
 {
     switch($logo)
     {
-	case 0:
+	case 'images/logos/102x70.png':
         $opcion[0] = ' selected="selected"';
         break;
-	case 1:
+	case 'images/logos/rural.png':
         $opcion[1] = ' selected="selected"';
         break;
-	case 2:
+	case 'images/logos/abelenda.png':
         $opcion[2] = ' selected="selected"';
         break;
-    case 3:
+    case 'images/logos/afa.png':
         $opcion[3] = ' selected="selected"';
         break;
-    case 4:
+    case 'images/logos/campos-y-ganados.png':
         $opcion[4] = ' selected="selected"';
         break;
-    case 5:
+    case 'images/logos/colombo-ganados.png':
         $opcion[5] = ' selected="selected"';
         break;
-    case 6:
+    case 'images/logos/colombo-y-magliano.png':
         $opcion[6] = ' selected="selected"';
         break;
-    case 7:
+    case 'images/logos/egana.png':
         $opcion[7] = ' selected="selected"';
         break;
-	case 8:
+	case 'images/logos/ernesto-j-duarte.png':
         $opcion[8] = ' selected="selected"';
         break;
-	case 9:
+	case 'images/logos/hasenkamp.png':
         $opcion[9] = ' selected="selected"';
         break;
-	case 10:
+	case 'images/logos/ivan-ofarrell.png':
         $opcion[10] = ' selected="selected"';
         break;
-    case 11:
+    case 'images/logos/lartirigoyen.png':
         $opcion[11] = ' selected="selected"';
         break;
-    case 12:
+    case 'images/logos/llorente.png':
         $opcion[12] = ' selected="selected"';
         break;
-    case 13:
+    case 'images/logos/rosgan.png':
         $opcion[13] = ' selected="selected"';
         break;
-    case 14:
+    case 'images/logos/saenz-valiente-bullrich.png':
         $opcion[14] = ' selected="selected"';
         break;
-    case 15:
+    case 'images/logos/subastar-colombia.png':
         $opcion[15] = ' selected="selected"';
         break;
-	case 16:
+	case 'images/logos/logo-talano.png':
         $opcion[16] = ' selected="selected"';
         break;
-	case 17:
+	case 'images/logos/umc.png':
         $opcion[17] = ' selected="selected"';
         break;
 	//~ case 18:
@@ -94,9 +94,9 @@ if(isset($logo))
     //~ case 23:
         //~ $opcion[24] = ' selected="selected"';
         //~ break;
-    default:
-        return '';
-        break;
+     default:
+		 $opcion[0] = ' selected="selected"';
+		 break;
     }
 }
 ?>

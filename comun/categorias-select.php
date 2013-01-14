@@ -6,7 +6,7 @@
  */
 // Variables vacías para el atributo "selected" del desplegable
 $opcion = array();
-$i = 1;
+$i = 0;
     while($i<15){
         $opcion[$i]='';
         $i++;
@@ -58,13 +58,11 @@ If(isset($cat))
     case 14:
         $opcion[14] = ' selected="selected"';
         break;
-    default:
-        return '';
-        break;
     }
 }
 ?>
 <select id="categoria" name="categoria">
+		<option> Seleccione una Categoria</option>
     <optgroup label="HACIENDA PARA FAENA">
         <option value="2"<?php echo $opcion[2] ?>><?php echo decirCategoria(2)?></option>
         <option value="1"<?php echo $opcion[1] ?>><?php echo decirCategoria(1)?></option>
