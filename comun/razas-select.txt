@@ -4,6 +4,7 @@
 				<optgroup label="CRUZAS">
 					<option value="Cruza" selected="selected">Cruza</option>
 					<option value="Mestizos">Mestizos</option>
+					<option value="Cuartinos">Cuartinos</option>
 					<option value="Cruzas Britanicas">Cruzas Británicas</option>
 					<option value="Cruzas Continentales">Cruzas Continentales</option>
 					<option value="Cruzas Indicas">Cruzas Índicas</option>
