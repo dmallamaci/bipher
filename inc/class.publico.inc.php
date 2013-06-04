@@ -108,19 +108,19 @@ class BipherPublico
         //recuperar localidades en km de radio
         switch($radio) {
             case 150:
-        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE latitud BETWEEN ($lato - 1.3513) AND ($lato + 1.3513) AND longitud BETWEEN ($long - 1.3513) AND ($long + 1.3513) AND localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
+        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE latitud BETWEEN ($lato - 1.3513) AND ($lato + 1.3513) AND longitud BETWEEN ($long - 1.3513) AND ($long + 1.3513) AND localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -90 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
             break;
             case 250:
-        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE latitud BETWEEN ($lato - 2.25225) AND ($lato + 2.25225) AND longitud BETWEEN ($long - 2.25225) AND ($long + 2.25225) AND localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
+        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE latitud BETWEEN ($lato - 2.25225) AND ($lato + 2.25225) AND longitud BETWEEN ($long - 2.25225) AND ($long + 2.25225) AND localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -90 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
             break;
             case 350:
-        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE latitud BETWEEN ($lato - 3.15315) AND ($lato + 3.15315) AND longitud BETWEEN ($long - 3.15315) AND ($long + 3.15315) AND localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
+        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE latitud BETWEEN ($lato - 3.15315) AND ($lato + 3.15315) AND longitud BETWEEN ($long - 3.15315) AND ($long + 3.15315) AND localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -90 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
             break;
             case 4000:
-        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
+        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE localidad_lo = localidad_id AND categoria_lo= :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -90 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
             break;
             default:
-        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE localidad_lo = localidad_id AND categoria_lo = :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -60 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
+        $sql = "SELECT lotes.lote_id, lotes.fecha_lo, lotes.raza, lotes.peso, lotes.precio, lotes.categoria_lo, lotes.localidad_lo, localidades.localidad_id, localidades.localidad, localidades.latitud, localidades.longitud, remates.organizador FROM lotes, localidades, remates WHERE localidad_lo = localidad_id AND categoria_lo = :categoria AND lotes.remate_id = remates.remate_id AND lotes.fecha_lo > DATE_ADD(CURDATE(), INTERVAL -90 DAY) AND lotes.precio > 0 ORDER BY lotes.fecha_lo DESC";
             break;
         }
             $stmt = $this->_db->prepare($sql);
@@ -134,7 +134,7 @@ class BipherPublico
                 $stmt->closeCursor();
             } else {
                 $stmt->execute();
-                echo '<table class="ensayo" summary="Lotes de hacienda comercializados durante estos 60 dias" cellspacing="0">';
+                echo '<table class="ensayo" summary="Lotes de hacienda comercializados durante estos 90 dias" cellspacing="0">';
                 echo '<tbody>';
                 echo '<tr class="principal">';
                 echo '<th>Fecha</th><th>Origen</th><th>Organizador</th><th>Raza</th><th>Peso (kg)</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Precio</th><th></th>';
@@ -161,7 +161,7 @@ class BipherPublico
             // levanta registros donde la fecha del remate es menor a hoy
             // y el ámbito (status_re) == 0
             case 0:
-                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 5";
+                $sql = "SELECT * FROM remates WHERE status_re =:ambito AND fecha_re<CURDATE() ORDER BY fecha_re DESC LIMIT 10";
             break;
             //Agenda de Remates - Sin enlace a lotes.
             // levanta registros donde la fecha de remate es mayor a ayer
@@ -214,6 +214,39 @@ class BipherPublico
         }
     }
 /*
+ *	VENTA PAGINA AGENDA
+*/
+	public function ventaAgenda($ambito)
+	{
+		//Página Agenda de Remates agenda.php - Sin enlace a lotes.
+       // levanta registros donde la fecha de remate es mayor a ayer
+       // y el ámbito es == -2 (Los formatea sin enlace a los lotes)
+      // En realidad el ambito es 1 pero sin el limite de registros devueltos
+        $sql = "SELECT * FROM remates WHERE status_re = 1 AND fecha_re>=CURDATE() ORDER BY fecha_re ASC";
+        try {
+            $stmt = $this->_db->prepare($sql);
+//            $stmt->bindParam(':ambito', $ambito, PDO::PARAM_INT);
+            $stmt->execute();
+        //Cuento los resultados y si no hay cierro el cursor
+            $recuperarTodos = $stmt->fetchAll();
+            $totalRegistros = count($recuperarTodos);
+            if($totalRegistros>0) {
+                $stmt->execute();
+                while($row = $stmt->fetch()) {
+                echo $this->formatearVenta($row, $ambito);
+                }
+            $stmt->closeCursor();
+            } else {
+                $stmt->closeCursor();
+            }
+        }
+        catch(PDOException $e)
+        {
+            return FALSE;
+        }
+	}
+
+/*
 *  FORMATEAR LAS VENTAS DE LA CARTELERA
 */
     private function formatearVenta($row, $ambito)
@@ -233,6 +266,12 @@ class BipherPublico
         $salto = '<br />';
         switch($ambito)
             {
+			 // Página de Agenda de Remates (agenda.php)
+			  case -2:
+                $abre = '<div class="buscador">';
+                $venta = '<span><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp;'.$hor.' hs. &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp;'.$nom.'</span>';
+                $cierra = '</div>';
+			  break;
 			  // Es el encabezado de una lista de lotes
 			  case -1:
 				$dia = new DateTimeArgento($fec);
@@ -249,13 +288,13 @@ class BipherPublico
             //Solo Buscador
             case 0:
                 $abre = '<div class="buscador">';
-                $venta = '<span><a href="lista-lotes.php?subasta='.$rid.'" class="sindecorar"><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; '.$car.' lotes subastados</a></span>';
+                $venta = '<span><a href="lista-lotes.php?subasta='.$rid.'" class="sindecorar"><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp; &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Lotes subastados por televisi&oacute;n</a></span>';
                 $cierra = '</div>';
             break;
             // Agenda de Remates
             case 1:
                 $abre = '<div class="buscador">';
-                $venta = '<span><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp;'.$hor.' hs. &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp; Informes: '.$inf.'</span>';
+                $venta = '<span><img src="'.$log.'" width="50" height="35" class="centradovertical" /> &nbsp;'.darVueltaFecha($fec).' &nbsp;'.$hor.' hs. &nbsp;<strong>'.$org.'</strong>  &nbsp; &nbsp;'.$nom.'</span>';
                 $cierra = '</div>';
             break;
             // Catalogo Publicado
@@ -462,7 +501,7 @@ class BipherPublico
 			echo '<tr>';
 			while($row = $stmt->fetch())
 			{
-				$lok = $row['localidad'];
+				$lok = utf8_encode(trim($row['localidad']));
 				$prv = $row['provincia'];
 				$kat = $row['categoria_lo'];
 				$sbk = $row['subcategoria'];

@@ -30,10 +30,10 @@ htmlDoc();
         </select>
             <br />
         <select id="radio" name="radio">
-            <option value="150">Buscar en 150 km de radio</option>
-            <option value="250">Buscar en 250 km de radio</option>
-            <option value="350">Buscar en 350 km de radio</option>
             <option value="4000">Buscar en todo el País</option>
+            <option value="350">Buscar en 350 km de radio</option>
+            <option value="250">Buscar en 250 km de radio</option>
+            <option value="150">Buscar en 150 km de radio</option>
         </select>
             </div>
             <div id="botonbuscar">
@@ -59,7 +59,7 @@ $ca4->ventaIndex(4);
 <!-- Terminan LOS BANNERS DE LEFT -->
 
 <!-- Comienza la columna de Próximos remates -->
-        <div id="proximosremates">
+		<div id="proximosremates">
 			<h2 class="barratit blanco">Próximos Remates Destacados</h2>
 <?php
 $ca2 = new BipherPublico($db);

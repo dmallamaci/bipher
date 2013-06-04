@@ -18,7 +18,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
+current_page=1
+FILE_NAME_0=6;PHP;0;16;1;1;1;/var/www/bipher/inc/constantes.inc.php;0;4
+FILE_NAME_1=14753;PHP;0;16;1;1;1;/var/www/bipher/inc/class.publico.inc.php;0;4
 
 [VTE]
 last_dir=/var/www/bipher

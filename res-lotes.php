@@ -7,7 +7,7 @@ include_once 'inc/class.publico.inc.php';
     $rio = $_POST['radio'];
 // si se olvidan de marcar la categoria o la provincia
     if ($prv == 0) $kid = 1;
-    if ($cat == 0) $cat = 2;
+    if ($cat == 0) $cat = 13;
 htmlDoc();
 ?>
 <html <?php xm();?>>
